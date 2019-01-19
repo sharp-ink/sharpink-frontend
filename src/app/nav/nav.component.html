@@ -1,0 +1,19 @@
+
+<nav class="navbar navbar-expand-sm">
+
+  <!-- Site navigation menu -->
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/accueil" ><span class="fa fa-fort-awesome"></span>Accueil</a>
+    <a class="nav-item nav-link" routerLink="/histoires"><span class="fa fa-book"></span>Lecture</a>
+    <a class="nav-item nav-link" routerLink="/histoires/creer"><span class="fa fa-pencil"></span>Ecrire une histoire</a>
+    <a class="nav-item nav-link" routerLink="/mon-compte"><span class="fa fa-folder-open"></span>Mon compte</a>
+    <a class="nav-item nav-link" routerLink="/histoires/lire/au-hasard"><span class="fa fa-random"></span>Lire une histoire au hasard</a>
+    <a class="nav-item nav-link" routerLink="/communaute"><span class="fa fa-users"></span>La communauté</a>
+    <a class="nav-item nav-link" routerLink="/contact"><span class="fa fa-question-circle-o"></span>Contacter le support</a>
+  </div>
+
+  <!-- Log-in area (login/logout button + connected member) -->
+  <app-login-status class="ml-auto"></app-login-status> <!-- ml-auto permet d'aligner ce composant à droite -->
+
+</nav>
+

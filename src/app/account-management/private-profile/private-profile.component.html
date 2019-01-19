@@ -1,0 +1,33 @@
+
+<div class="container-fluid">
+
+  <h1>Mon profil</h1>
+
+  <!-- Partie affichée si profil non renseigné -->
+  <div *ngIf="!hasProfileDetails" class="row">
+    <div class="col-12">
+      Vous pouvez renseigner votre profil afin que les autres membres de SharpInk en sachent plus sur vous. Les informations que vous renseignerez seront visibles sur la page de votre profil public. <br>
+      IMPORTANT : n'y indiquez pas de données confidentielles. Votre prénom, ça va, mais pas votre code de carte bancaire par exemple...
+    </div>
+  </div>
+
+  <!-- Partie affichée si profil renseigné (entièrement ou non) -->
+  <div *ngIf="hasProfileDetails" class="row">
+    <div class="col-12">
+      
+      <div class="row">
+        <div class="col-12">
+          Prénom : {{ firstName }}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          Nom : {{ lastName }}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

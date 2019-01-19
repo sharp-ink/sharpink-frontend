@@ -1,0 +1,10 @@
+
+.signin-form {
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 30px 20px;
+}
+
+input {
+  margin-bottom: 14px;
+}

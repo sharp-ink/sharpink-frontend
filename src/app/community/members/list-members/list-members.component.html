@@ -1,0 +1,33 @@
+
+<h2>Liste des membres de la communauté</h2>
+
+<div class="row">
+  <div class="col-12">
+    <p>
+      Cette page liste les membres de la communauté SharpInk. Cliquez sur un des membres pour voir son profil et ses histoires.
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Pseudo</th>
+          <th>Email</th>
+          <th>Nombre d'histoires</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let member of allMembers">
+          <td>
+            <a [routerLink]="[member.id]">{{ member.nickname }}</a>
+          </td>
+          <td>{{ member.email }}</td>
+          <td>{{ member.storiesCount }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+
+<div class="container-fluid">
+
+  <h1>La communauté SharpInk</h1>
+
+  <div class="row">
+
+    <!-- Section principale contenant soit la liste des membres, soit le forum, soit le chat -->
+    <div class="col-7">
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- Section secondaire, contenant quelques éléments d'actualité du site, tels que la liste des membres connectés, le dernier post du forum,... -->
+    <div class="col-5">
+        <app-last-activity></app-last-activity>
+    </div>
+
+  </div>
+
+</div>

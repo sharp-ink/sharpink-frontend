@@ -1,0 +1,43 @@
+
+<div class="container-fluid">
+
+  <h1>Créer une histoire</h1>
+
+  <div class="row">
+    <div class="col-12">
+      <p>Créer immédiatement votre histoire en remplissant les deux champs ci-dessous. Vous pourrez ensuite ajouter des informations si nécessaire, et bien sûr ajouter des chapitres !</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">
+      <form [formGroup]="storyForm" (ngSubmit)="onSubmit()" #f=ngForm>
+
+        <div class="form-group">
+          <label for="storyTitle">Quel est le titre de votre histoire ?</label>
+          <input id="storyTitle" formControlName="storyTitle" type="text" class="form-control"/>
+          <div *ngIf="storyForm.get('storyTitle').invalid && storyForm.get('storyTitle').touched">
+            <div *ngIf="storyForm.get('storyTitle').errors.required" class="error-msg">Renseignez un titre pour votre histoire.</div>
+            <div *ngIf="storyForm.get('storyTitle').errors.minlength" class="error-msg">Le titre doit comporter au moins 3 caractères.</div>
+            <div *ngIf="storyForm.get('storyTitle').errors.maxlength" class="error-msg">Le titre ne doit pas dépasser 100 caractères.</div>
+            <div>{{ storyForm.get('storyTitle').errors | json }}</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="storyIsOriginal">S'agit-il d'une histoire originale ou d'une fanfiction ?</label>
+          <select id="storyIsOriginal" formControlName="storyIsOriginal" class="form-control">
+            <option value="ORIGINAL">Histoire originale</option>
+            <option value="FANFIC">Fanfiction</option>
+          </select>
+        </div>
+
+        <button type="submit" [disabled]="f.invalid" class="btn btn-primary" >
+          Créer mon histoire
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+</div>

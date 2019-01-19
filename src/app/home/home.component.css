@@ -1,0 +1,15 @@
+
+.container-fluid {
+  height: 100%;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.fond_vert {
+  background-color: #002735;
+  color: white;
+}
