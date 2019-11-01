@@ -5,7 +5,7 @@
 
   <div class="row">
     <div class="col-12">
-      <p>Créer immédiatement votre histoire en remplissant les deux champs ci-dessous. Vous pourrez ensuite ajouter des informations si nécessaire, et bien sûr ajouter des chapitres !</p>
+      <p>Créez immédiatement votre histoire en remplissant les deux champs ci-dessous. Vous pourrez ensuite ajouter des informations si nécessaire, et bien sûr ajouter des chapitres !</p>
     </div>
   </div>
 
@@ -20,7 +20,6 @@
             <div *ngIf="storyForm.get('storyTitle').errors.required" class="error-msg">Renseignez un titre pour votre histoire.</div>
             <div *ngIf="storyForm.get('storyTitle').errors.minlength" class="error-msg">Le titre doit comporter au moins 3 caractères.</div>
             <div *ngIf="storyForm.get('storyTitle').errors.maxlength" class="error-msg">Le titre ne doit pas dépasser 100 caractères.</div>
-            <div>{{ storyForm.get('storyTitle').errors | json }}</div>
           </div>
         </div>
 
@@ -35,8 +34,19 @@
         <button type="submit" [disabled]="f.invalid" class="btn btn-primary" >
           Créer mon histoire
         </button>
-
+        
       </form>
+    </div>
+
+    <div class="col-6">
+      <alert *ngIf="f.submitted && creationError === null" type="success">
+        L'histoire a bien été créée.
+      </alert>
+
+      <alert *ngIf="f.submitted && creationError" type="danger">
+        Une erreur s'est produite lors de la création de l'histoire. <br/>
+        {{ creationError.message }}
+      </alert>
     </div>
   </div>
 

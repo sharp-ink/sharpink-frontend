@@ -1,10 +1,8 @@
-
-import { Member } from 'src/app/shared/model/member.model';
 import { Chapter } from 'src/app/shared/model/chapter.model';
+import { Member } from 'src/app/shared/model/member.model';
 
-export class Story {
-
-  id: number;
+export interface Story {
+  id?: number; // optionnel, non renseigné lors de la création
   title: string;
   type: string;
   originalStory: boolean;
@@ -18,7 +16,4 @@ export class Story {
   creationDate: string;             // date au format YYYYMMDD hh:mm:ss
   lastModificationDate: string;     // date au format YYYYMMDD hh:mm:ss
   finalReleaseDate: string;         // date au format YYYYMMDD hh:mm:ss
-
-  constructor() { }
-
 }

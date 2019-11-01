@@ -29,6 +29,7 @@ import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 // locale pour le français
 registerLocaleData(localeFr);
@@ -60,7 +61,8 @@ registerLocaleData(localeFr);
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AlertModule.forRoot()
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

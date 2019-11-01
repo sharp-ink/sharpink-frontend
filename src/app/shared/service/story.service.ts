@@ -4,10 +4,10 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Story } from 'src/app/shared/model/story.model';
 
-
-
 @Injectable()
 export class StoryService {
+
+  readonly endpointStories = 'http://localhost:8081/api/stories';
 
   allStories: Story[] = [];
   allStoriesSubject = new Subject<Story[]>();
@@ -23,7 +23,7 @@ export class StoryService {
    * Remarque : ça ne charge ni l'auteur (seulement son id) ni les chapitres (seulement leur nombre).
    */
   getAllStoriesHttpObservable(): Observable<Story[]> {
-    return this.http.get<Story[]>('http://localhost:8081/api/stories');
+    return this.http.get<Story[]>(this.endpointStories);
   }
 
   /**
@@ -62,28 +62,14 @@ export class StoryService {
    * mais on renvoie tout de même le premier chapitre par commodité.
    */
   getStoryByIdHttpObservable(id: number): Observable<Story> {
-    return this.http.get<Story>('http://localhost:8081/api/stories/' + id);
+    return this.http.get<Story>(this.endpointStories + '/' + id);
   }
 
   /**
    * Requête pour créer une Story. Renvoie l'id de la Story si la création s'est bien passée.
    */
   createStoryHttpObservable(story: Story): Observable<number> {
-    return this.http.post<number>('http://localhost:8081/api/stories', story);
-  }
-
-  createStory(story: Story): number {
-    let storyId: number;
-    this.createStoryHttpObservable(story).subscribe(
-      (response) => {
-        console.log(response);
-        storyId = response;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    return storyId;
+    return this.http.post<number>(this.endpointStories, story);
   }
 
 }

@@ -1,10 +1,6 @@
 
-export class Chapter {
-
+export interface Chapter {
   position: number;
   title: string;
   content: string;
-
-  constructor() { }
-
 }
