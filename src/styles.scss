@@ -1,0 +1,117 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'src/assets/scss/theme';
+@import 'src/assets/scss/functions';
+
+html, body {
+    height: 100%;
+    min-height: 100%;
+    background-color: var(--body-background-color);
+}
+
+.big-text-2 {
+  font-size: 2em;
+}
+
+/* *************************************************
+ * Layout Bootstrap
+ * *************************************************
+ */
+
+.container-fluid {
+  padding-top: 15px;
+}
+
+/* *************************************************
+ * Titres (h1, h2,...)
+ * ************************************************
+ */
+
+h1 {
+  border-left: 4px solid var(--button-primary-background-color);
+  padding-left: 5px;
+}
+
+h2 {
+  border-left: 3px solid var(--button-primary-background-color);
+  padding-left: 5px;
+}
+
+/* *************************************************
+ * Liens
+ * *************************************************
+ */
+
+a {
+  color: var(--button-primary-background-color);
+}
+
+/* *************************************************
+ * Boutons (override les styles de Bootstrap)
+ * ************************************************
+ */
+
+.btn.btn-primary, .btn.btn-primary:not(:disabled):not(.disabled):active {
+  background-color: var(--button-primary-background-color);
+  border: none;
+}
+
+
+
+.btn.btn-secondary {
+  background-color: $light-gray;
+  color: white;
+  border: none;
+}
+
+ /* *************************************************
+ * Onglets (override les styles de Bootstrap)
+ * ************************************************
+ */
+
+.nav-tabs {
+  border-bottom-color: var(--button-primary-background-color);
+}
+
+.nav-tabs .nav-link.active {
+  border-color: var(--button-primary-background-color) var(--button-primary-background-color) var(--body-background-color);
+  background-color: var(--header-background-color);
+  color: var(--body-background-color);
+  opacity: 70%;
+}
+
+.nav-tabs .nav-link:hover:not(.active) {
+  border-color: var(--button-primary-background-color);
+  border-bottom-color: var(--body-background-color);
+  background-color: var(--body-background-color);
+  color: var(--header-background-color);
+}
+
+.nav-tabs .nav-link.active:hover {
+  cursor: default;
+}
+
+/* *************************************************
+ * Formulaires
+ * *************************************************
+ */
+
+// champs en erreur
+input.ng-touched.ng-invalid, select.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+// messages d'erreur en-dessous des champs
+.error-msg {
+  color: red;
+  font-size: 80%;
+}
+
+/* *************************************************
+ * Divers
+ * *************************************************
+ */
+
+.mandatory-indicator {
+  color: var(--header-background-color);
+}

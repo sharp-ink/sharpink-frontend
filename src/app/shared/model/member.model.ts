@@ -1,7 +1,6 @@
 import { MemberDetails } from './member-details.model';
 import { Story } from 'src/app/shared/model/story.model';
 
-
 export interface Member {
   id: number;
   nickname: string;

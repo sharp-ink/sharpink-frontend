@@ -1,11 +1,11 @@
-
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { Member } from 'src/app/shared/model/member.model';
 import { AuthService } from 'src/app/shared/service/auth.service';
-import { AuthGuard } from 'src/app/shared/service/guard/auth-guard.service';
+import { AuthGuard } from 'src/app/shared/service/guard/auth.guard';
+
+
 
 @Component({
   selector: 'app-signin',
@@ -38,9 +38,8 @@ export class SigninComponent implements OnInit {
     this.authService.logIn(formValue.login, formValue.password)
       .subscribe(
         (member: Member) => {
-          console.log(member);
-          this.authService.connectedMember = member;
-          this.authService.connectedMemberSubject.next(member); // notifie tous les observateurs
+          console.log('authentifié en tant que :', member);
+          this.authService.storeConnectedUser(member);
           this.router.navigateByUrl(this.authGuard.requestedUrl);
         },
         (error) => {

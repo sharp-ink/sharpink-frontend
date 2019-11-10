@@ -1,33 +1,76 @@
-
 <div class="container-fluid">
 
-  <h1>Mon profil</h1>
+  <h1>Mon compte</h1>
 
-  <!-- Partie affichée si profil non renseigné -->
+  <h2>Gérer mon profil</h2>
+
   <div *ngIf="!hasProfileDetails" class="row">
     <div class="col-12">
-      Vous pouvez renseigner votre profil afin que les autres membres de SharpInk en sachent plus sur vous. Les informations que vous renseignerez seront visibles sur la page de votre profil public. <br>
-      IMPORTANT : n'y indiquez pas de données confidentielles. Votre prénom, ça va, mais pas votre code de carte bancaire par exemple...
+      Vous pouvez renseigner votre profil afin que les autres membres de SharpInk en sachent plus sur vous.
     </div>
   </div>
 
-  <!-- Partie affichée si profil renseigné (entièrement ou non) -->
-  <div *ngIf="hasProfileDetails" class="row">
+  <div class="row">
     <div class="col-12">
-      
-      <div class="row">
-        <div class="col-12">
-          Prénom : {{ firstName }}
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-12">
-          Nom : {{ lastName }}
-        </div>
-      </div>
-
+      Vous pouvez renseigner ici certaines informations personnelles si vous le souhaitez. Ce sont les informations que les autres membres
+      peuvent voir lorsqu'ils consultent votre profil.
     </div>
   </div>
+
+  <hr>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <button *ngIf="!isEditingProfile" type="button" class="btn btn-primary" (click)="toggleEditingMode()">Éditer mon profil</button>
+      <button *ngIf="isEditingProfile" type="button" class="btn btn-primary btn-sm mr-1" (click)="updateProfile(); toggleEditingMode()">Enregistrer les modifications</button>
+      <button *ngIf="isEditingProfile" type="button" class="btn btn-outline-warning btn-sm" (click)="toggleEditingMode()">Annuler l'édition</button>
+    </div>
+  </div>
+
+  <div *ngIf="isEditingProfile" class="row mb-3">
+    <div class="col-12 text-muted">
+      Les informations marquées d'un astérisque (*) sont obligatoires.
+    </div>
+  </div>
+
+  <form>
+
+    <div class="row form-group">
+      <label class="col-2 col-form-label text-right" for="nickname">Pseudo</label>
+      <label *ngIf="!isEditingProfile" class="col-2 offset-1">{{ member.nickname }}</label>
+      <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" [value]="member.nickname" />
+      <div *ngIf="isEditingProfile" class="col-1 col-form-label mandatory-indicator">*</div>
+    </div>
+
+    <div class="row form-group">
+      <label class="col-2 col-form-label text-right" for="email">Email</label>
+      <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ member.email }}</label>
+      <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" [value]="member.email" id="email" />
+    </div>
+
+    <div class="row form-group">
+      <label class="col-2 col-form-label text-right" for="firstName">Prénom</label>
+      <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ member.memberDetails?.firstName }}</label>
+      <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" [value]="member.memberDetails?.firstName" id="firstName" />
+    </div>
+
+    <div class="row form-group">
+      <label class="col-2 col-form-label text-right" for="lastName">Nom</label>
+      <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ member.memberDetails?.lastName }}</label>
+      <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" [value]="member.memberDetails?.lastName" id="lastName" />
+    </div>
+
+    <div class="row form-group">
+        <label class="col-2 col-form-label text-right" for="picture">Image de profil</label>
+        <img class="col-2 offset-1 profile-picture" src="http://localhost/sharpink/users/test/test.jpg" alt="Image de profil" width="300" />    
+    </div>
+
+  </form>
+
+  <!--<div class="row mt-4">
+      <div class="col-12">
+        <button type="button" class="btn btn-primary" (click)="toggleEditingMode()">Éditer mon profil</button>
+      </div>
+  </div>-->
 
 </div>

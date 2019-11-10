@@ -1,13 +1,13 @@
-
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-
-import { AuthService } from './../auth.service';
 import { Member } from 'src/app/shared/model/member.model';
 
+
+
 /**
- * Guard pour vérifier si l'id de l'utilisaterur et l'id du membre possédant la page coïncident
+ * Guard pour vérifier si l'id de l'utilisateur et l'id du membre possédant la page coïncident
  * (par exemple la page d'édition d'une histoire, il ne suffit pas d'être authentifié, encore faut-il
  * être l'auteur de l'histoire).
  */

@@ -1,0 +1,32 @@
+
+@import 'src/assets/scss/theme';
+
+$navbar-background-color-light-gray: $light-gray;
+
+.navbar {
+  margin-top: 30px;
+  background-color: $navbar-background-color-light-gray;
+}
+
+.navbar, .navbar-nav {
+  padding: 0;
+}
+
+.navbar-nav a {
+  padding: 20px 20px;
+  height: 100%;
+  color: var(--header-foreground-color);
+}
+
+.navbar-nav .nav-item.nav-link.active {
+  background-color: darken($navbar-background-color-light-gray, 10%);
+}
+
+.navbar-nav a:hover {
+  background-color: darken($navbar-background-color-light-gray, 10%);
+  cursor: pointer;
+}
+
+.navbar-nav a span.fa {
+  margin-right: 4px;
+}

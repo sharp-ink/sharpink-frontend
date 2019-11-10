@@ -1,4 +1,22 @@
-
 <div class="container-fluid">
-  <h1>Réglages</h1>
+
+  <h1>Mon compte</h1>
+
+  <h2>Réglages</h2>
+
+  <div class="row">
+    <div class="col-12">
+      Vous pouvez choisir votre thème favori pour le site SharpInk, parmi la sélection disponible.
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <select (change)="changeTheme(+$event.target.value)">
+        <option *ngFor="let theme of availableThemes" [selected]="theme.id === currentUserThemeId" [value]="theme.id">
+          {{ theme.name }}</option>
+      </select>
+    </div>
+  </div>
+
 </div>

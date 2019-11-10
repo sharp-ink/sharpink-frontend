@@ -1,24 +1,21 @@
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from './util/api.service';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Member } from 'src/app/shared/model/member.model';
 
-
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
+  connectedMemberSubject: Subject<Member>;
 
-  // Le membre actuellement connecté (authentifié avec succès)
-  connectedMemberSubject = new Subject<Member>();
-  connectedMember: Member = null;
-
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private apiService: ApiService) {
+    this.connectedMemberSubject = new Subject<Member>();
+  }
 
   logIn(login: string, password: string): Observable<Member> {
-    return this.http.get<Member>('http://localhost:8081/api/accounts/log-in', {
+    return this.apiService.get<Member>('accounts/log-in', {
       params: {
         login: login,
         password: password
@@ -31,6 +28,20 @@ export class AuthService {
           }
         )
     );
+  }
+
+  storeConnectedUser(member: Member) {
+    localStorage.connectedUser = JSON.stringify(member);
+    this.connectedMemberSubject.next(member);
+  }
+
+  getConnectedUser(): Member {
+    return (localStorage.connectedUser) ? JSON.parse(localStorage.connectedUser) : null;
+  }
+
+  clearConnectedUser() {
+    localStorage.removeItem('connectedUser');
+    this.connectedMemberSubject.next(null);
   }
 
 }

@@ -1,18 +1,8 @@
-
-<div >
-  <input
-    *ngIf="!isLogged"
-    type="button" value="Connexion" class="btn btn-primary"
-    (click)="onLogin()"
-  >
-  <span
-    *ngIf="isLogged">
+<div>
+  <button *ngIf="!connectedUser" type="button" class="btn btn-primary" (click)="login()">Connexion</button>
+  <span *ngIf="connectedUser">
     <span class="fa fa-user-o"></span>&nbsp;
-    <strong>{{ connectedMember.nickname }} [{{ connectedMember.id }}]</strong>&nbsp;
-    <input
-      type="button" value="Déconnexion" class="btn btn-primary"
-      (click)="onLogout()"
-    >
+    <strong>{{ connectedUser.nickname }} [{{ connectedUser.id }}]</strong>&nbsp;
+    <button type="button" class="btn btn-primary" (click)="logout()">Déconnexion</button>
   </span>
-
 </div>

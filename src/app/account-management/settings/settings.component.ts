@@ -1,3 +1,5 @@
+import { AuthService } from '../../shared/service/auth.service';
+import { ThemeService } from '../../shared/service/theme.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  readonly availableThemes: any;
+  readonly currentUserThemeId: number;
 
-  ngOnInit() {
+  constructor(
+    private authService: AuthService,
+    private themeService: ThemeService
+  ) {
+    this.availableThemes = themeService.getAllThemes();
+    this.currentUserThemeId = themeService.currentThemeId;
   }
+  ngOnInit() { }
 
+  changeTheme(themeId: number) {
+    this.themeService.loadTheme(themeId);
+  }
 }

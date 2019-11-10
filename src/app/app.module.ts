@@ -1,3 +1,4 @@
+import { AccountManagementComponent } from './account-management/account-management.component';
 import { ManageStoriesComponent } from './account-management/manage-stories/manage-stories.component';
 import { PrivateProfileComponent } from './account-management/private-profile/private-profile.component';
 import { SettingsComponent } from './account-management/settings/settings.component';
@@ -14,8 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginStatusComponent } from './login/login-status.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { NavComponent } from './nav/nav.component';
-import { AuthService } from './shared/service/auth.service';
-import { AuthGuard } from './shared/service/guard/auth-guard.service';
+import { AuthGuard } from './shared/service/guard/auth.guard';
 import { MemberService } from './shared/service/member.service';
 import { StoryService } from './shared/service/story.service';
 import { CreateStoryComponent } from './story/create-story/create-story.component';
@@ -27,11 +27,11 @@ import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AlertModule } from 'ngx-bootstrap/alert';
 
-// locale pour le français
+// locale for french language
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -55,11 +55,13 @@ registerLocaleData(localeFr);
     SigninComponent,
     ForumComponent,
     LastActivityComponent,
-    PrivateProfileComponent
+    PrivateProfileComponent,
+    AccountManagementComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AlertModule.forRoot()
@@ -68,7 +70,6 @@ registerLocaleData(localeFr);
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     StoryService,
     MemberService,
-    AuthService,
     AuthGuard
   ],
   bootstrap: [AppComponent]

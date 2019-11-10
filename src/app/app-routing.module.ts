@@ -1,4 +1,5 @@
 import { AccessForbiddenComponent } from './access-forbidden/access-forbidden.component';
+import { AccountManagementComponent } from './account-management/account-management.component';
 import { ManageStoriesComponent } from './account-management/manage-stories/manage-stories.component';
 import { PrivateProfileComponent } from './account-management/private-profile/private-profile.component';
 import { SettingsComponent } from './account-management/settings/settings.component';
@@ -10,7 +11,7 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AuthGuard } from './shared/service/guard/auth-guard.service';
+import { AuthGuard } from './shared/service/guard/auth.guard';
 import { CreateStoryComponent } from './story/create-story/create-story.component';
 import { ListStoriesComponent } from './story/list-stories/list-stories.component';
 import { PreviewStoryComponent } from './story/list-stories/preview-story/preview-story.component';
@@ -42,7 +43,7 @@ const appRoutes: Routes = [
   ]
   },
 
-  { path: 'mon-compte', canActivate: [AuthGuard], children: [
+  { path: 'mon-compte', canActivate: [AuthGuard], component: AccountManagementComponent, children: [
     { path: '', redirectTo: 'mon-profil', pathMatch: 'full' },
     { path: 'mon-profil', component: PrivateProfileComponent },
     { path: 'reglages', component: SettingsComponent },
