@@ -37,7 +37,7 @@
 
     <div class="row form-group">
       <label class="col-2 col-form-label text-right" for="nickname">Pseudo</label>
-      <label *ngIf="!isEditingProfile" class="col-2 offset-1">{{ member.nickname }}</label>
+      <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ member.nickname }}</label>
       <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" [value]="member.nickname" />
       <div *ngIf="isEditingProfile" class="col-1 col-form-label mandatory-indicator">*</div>
     </div>
@@ -61,8 +61,10 @@
     </div>
 
     <div class="row form-group">
-        <label class="col-2 col-form-label text-right" for="picture">Image de profil</label>
-        <img class="col-2 offset-1 profile-picture" src="http://localhost/sharpink/users/test/test.jpg" alt="Image de profil" width="300" />    
+      <label class="col-2 col-form-label text-right" for="picture">Image de profil</label>
+      <img *ngIf="member.memberDetails?.profilePicture" class="col-2 offset-1 profile-picture" [src]="member.memberDetails.profilePicture" alt="Image non trouvée" width="300" />
+      <div *ngIf="!member.memberDetails?.profilePicture" class="col-2 offset-1 col-form-label">Aucune image de profil</div>
+      <div class="col-1 col-form-label"><button *ngIf="isEditingProfile" class="btn btn-secondary btn-sm"><i class="fa fa-plus"></i></button></div>
     </div>
 
   </form>
