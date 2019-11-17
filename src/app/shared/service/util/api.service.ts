@@ -21,11 +21,19 @@ export class ApiService {
         }
     }
 
-    post(endpoint: string, body: any | null, options?: any): Observable<any> {
+    post<T>(endpoint: string, body: any | null, options?: any): Observable<any> {
         if (options) {
             return this.http.post(`${this.API}/${endpoint}`, body, options);
         } else {
             return this.http.post(`${this.API}/${endpoint}`, body);
+        }
+    }
+
+    put<T>(endpoint: string, body: any | null, options?: any): Observable<any> {
+        if (options) {
+            return this.http.put(`${this.API}/${endpoint}`, body, options);
+        } else {
+            return this.http.put(`${this.API}/${endpoint}`, body);
         }
     }
 }

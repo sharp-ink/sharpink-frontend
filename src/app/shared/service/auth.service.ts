@@ -1,4 +1,5 @@
 import { ApiService } from './util/api.service';
+import { EndpointEnum } from '../constant/endpoint.enum';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -15,7 +16,7 @@ export class AuthService {
   }
 
   logIn(login: string, password: string): Observable<Member> {
-    return this.apiService.get<Member>('accounts/log-in', {
+    return this.apiService.get<Member>(`${EndpointEnum.ENDPOINT_ACCOUNTS}/log-in`, {
       params: {
         login: login,
         password: password

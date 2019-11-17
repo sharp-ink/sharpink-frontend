@@ -1,13 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from './util/api.service';
+import { EndpointEnum } from '../constant/endpoint.enum';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Story } from 'src/app/shared/model/story.model';
 
 @Injectable()
 export class StoryService {
-
-  readonly endpointStories = 'http://localhost:8081/api/stories';
 
   allStories: Story[] = [];
   allStoriesSubject = new Subject<Story[]>();
@@ -15,7 +13,7 @@ export class StoryService {
   currentStorySubject = new Subject<Story>();
 
   constructor(
-    private http: HttpClient
+    private apiService: ApiService
   ) { }
 
   /**
@@ -23,7 +21,7 @@ export class StoryService {
    * Remarque : ça ne charge ni l'auteur (seulement son id) ni les chapitres (seulement leur nombre).
    */
   getAllStoriesHttpObservable(): Observable<Story[]> {
-    return this.http.get<Story[]>(this.endpointStories);
+    return this.apiService.get<Story[]>(EndpointEnum.ENDPOINT_STORIES);
   }
 
   /**
@@ -62,14 +60,14 @@ export class StoryService {
    * mais on renvoie tout de même le premier chapitre par commodité.
    */
   getStoryByIdHttpObservable(id: number): Observable<Story> {
-    return this.http.get<Story>(this.endpointStories + '/' + id);
+    return this.apiService.get<Story>(`${EndpointEnum.ENDPOINT_STORIES}/${id}`);
   }
 
   /**
    * Requête pour créer une Story. Renvoie l'id de la Story si la création s'est bien passée.
    */
   createStoryHttpObservable(story: Story): Observable<number> {
-    return this.http.post<number>(this.endpointStories, story);
+    return this.apiService.post<number>(EndpointEnum.ENDPOINT_STORIES, story);
   }
 
 }
