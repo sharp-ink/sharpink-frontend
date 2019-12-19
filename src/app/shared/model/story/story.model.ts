@@ -1,8 +1,8 @@
 import { Chapter } from 'src/app/shared/model/chapter.model';
-import { Member } from 'src/app/shared/model/member.model';
+import { Member } from 'src/app/shared/model/member/member.model';
 
 export interface Story {
-  id?: number; // optionnel, non renseigné lors de la création
+  id: number;
   title: string;
   type: string;
   originalStory: boolean;

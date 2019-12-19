@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Member } from 'src/app/shared/model/member.model';
+import { Member } from 'src/app/shared/model/member/member.model';
 import { AuthService } from 'src/app/shared/service/auth.service';
 import { AuthGuard } from 'src/app/shared/service/guard/auth.guard';
 

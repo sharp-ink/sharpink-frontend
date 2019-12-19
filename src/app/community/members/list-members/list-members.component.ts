@@ -1,9 +1,9 @@
-
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-
-import { Member } from 'src/app/shared/model/member.model';
+import { Member } from 'src/app/shared/model/member/member.model';
 import { MemberService } from 'src/app/shared/service/member.service';
+
+
 
 @Component({
   selector: 'app-list-members',

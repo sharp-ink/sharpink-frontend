@@ -2,7 +2,7 @@ import { ApiService } from './util/api.service';
 import { EndpointEnum } from '../constant/endpoint.enum';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Story } from 'src/app/shared/model/story.model';
+import { Story } from 'src/app/shared/model/story/story.model';
 
 @Injectable()
 export class StoryService {
@@ -62,12 +62,4 @@ export class StoryService {
   getStoryByIdHttpObservable(id: number): Observable<Story> {
     return this.apiService.get<Story>(`${EndpointEnum.ENDPOINT_STORIES}/${id}`);
   }
-
-  /**
-   * Requête pour créer une Story. Renvoie l'id de la Story si la création s'est bien passée.
-   */
-  createStoryHttpObservable(story: Story): Observable<number> {
-    return this.apiService.post<number>(EndpointEnum.ENDPOINT_STORIES, story);
-  }
-
 }

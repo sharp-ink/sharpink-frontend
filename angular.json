@@ -27,7 +27,9 @@
               "node_modules/font-awesome/css/font-awesome.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@ckeditor/ckeditor5-build-classic/build/translations/fr.js"
+            ]
           },
           "configurations": {
             "production": {

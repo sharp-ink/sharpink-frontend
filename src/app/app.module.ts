@@ -1,4 +1,9 @@
 import { AccountManagementComponent } from './account-management/account-management.component';
+import { CreateStoryButtonsGroupComponent } from './account-management/manage-stories/create-story/create-story-buttons-group/create-story-buttons-group.component';
+import { CreateStoryComponent } from './account-management/manage-stories/create-story/create-story.component';
+import { StepMiscInfoComponent } from './account-management/manage-stories/create-story/step-misc-info/step-misc-info.component';
+import { StepSummaryComponent } from './account-management/manage-stories/create-story/step-summary/step-summary.component';
+import { StepTitleComponent } from './account-management/manage-stories/create-story/step-title/step-title.component';
 import { ManageStoriesComponent } from './account-management/manage-stories/manage-stories.component';
 import { PrivateProfileComponent } from './account-management/private-profile/private-profile.component';
 import { SettingsComponent } from './account-management/settings/settings.component';
@@ -18,7 +23,6 @@ import { NavComponent } from './nav/nav.component';
 import { AuthGuard } from './shared/service/guard/auth.guard';
 import { MemberService } from './shared/service/member.service';
 import { StoryService } from './shared/service/story.service';
-import { CreateStoryComponent } from './story/create-story/create-story.component';
 import { ListStoriesComponent } from './story/list-stories/list-stories.component';
 import { PreviewStoryComponent } from './story/list-stories/preview-story/preview-story.component';
 import { ReadRandomComponent } from './story/read-story/read-random/read-random.component';
@@ -29,7 +33,9 @@ import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { StepThumbnailComponent } from './account-management/manage-stories/create-story/step-thumbnail/step-thumbnail.component';
 
 // locale for french language
 registerLocaleData(localeFr);
@@ -56,7 +62,12 @@ registerLocaleData(localeFr);
     ForumComponent,
     LastActivityComponent,
     PrivateProfileComponent,
-    AccountManagementComponent
+    AccountManagementComponent,
+    StepTitleComponent,
+    CreateStoryButtonsGroupComponent,
+    StepMiscInfoComponent,
+    StepSummaryComponent,
+    StepThumbnailComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +75,7 @@ registerLocaleData(localeFr);
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CKEditorModule,
     AlertModule.forRoot()
   ],
   providers: [

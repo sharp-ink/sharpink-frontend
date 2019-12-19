@@ -1,4 +1,4 @@
-import { Member } from '../shared/model/member.model';
+import { Member } from '../shared/model/member/member.model';
 import { ApiService } from '../shared/service/util/api.service';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';

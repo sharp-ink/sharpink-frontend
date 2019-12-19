@@ -1,5 +1,10 @@
 import { AccessForbiddenComponent } from './access-forbidden/access-forbidden.component';
 import { AccountManagementComponent } from './account-management/account-management.component';
+import { CreateStoryComponent } from './account-management/manage-stories/create-story/create-story.component';
+import { StepMiscInfoComponent } from './account-management/manage-stories/create-story/step-misc-info/step-misc-info.component';
+import { StepSummaryComponent } from './account-management/manage-stories/create-story/step-summary/step-summary.component';
+import { StepThumbnailComponent } from './account-management/manage-stories/create-story/step-thumbnail/step-thumbnail.component';
+import { StepTitleComponent } from './account-management/manage-stories/create-story/step-title/step-title.component';
 import { ManageStoriesComponent } from './account-management/manage-stories/manage-stories.component';
 import { PrivateProfileComponent } from './account-management/private-profile/private-profile.component';
 import { SettingsComponent } from './account-management/settings/settings.component';
@@ -12,7 +17,6 @@ import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './shared/service/guard/auth.guard';
-import { CreateStoryComponent } from './story/create-story/create-story.component';
 import { ListStoriesComponent } from './story/list-stories/list-stories.component';
 import { PreviewStoryComponent } from './story/list-stories/preview-story/preview-story.component';
 import { ReadRandomComponent } from './story/read-story/read-random/read-random.component';
@@ -34,7 +38,6 @@ const appRoutes: Routes = [
       { path: ':id/apercu', component: PreviewStoryComponent }
     ]
     },
-    { path: 'creer', canActivate: [AuthGuard], component: CreateStoryComponent },
     { path: 'lire', children: [
       { path: 'au-hasard', component: ReadRandomComponent },
       { path: ':id', component: ReadStoryComponent }
@@ -47,8 +50,18 @@ const appRoutes: Routes = [
     { path: '', redirectTo: 'mon-profil', pathMatch: 'full' },
     { path: 'mon-profil', component: PrivateProfileComponent },
     { path: 'reglages', component: SettingsComponent },
-    { path: 'mes-histoires', component: ManageStoriesComponent }
+    { path: 'mes-histoires', component: ManageStoriesComponent, children: [
+      { path: 'creer', component: CreateStoryComponent, children: [
+        { path: '', redirectTo: 'etape-1', pathMatch: 'full' },
+        { path: 'etape-1', component: StepTitleComponent },
+        { path: 'etape-2', component: StepMiscInfoComponent },
+        { path: 'etape-3', component: StepSummaryComponent },
+        { path: 'etape-4', component: StepThumbnailComponent }
+      ]
+      }
     ]
+    },
+  ]
   },
 
   { path: 'communaute', component: CommunityComponent, children: [

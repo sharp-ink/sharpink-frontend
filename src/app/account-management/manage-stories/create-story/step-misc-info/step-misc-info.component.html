@@ -1,0 +1,37 @@
+<h4>Étape 2 : informations diverses</h4>
+
+<div class="row">
+    <div class="col-12">
+        <p>
+            Votre histoire {{ createStory.title }} a bien été créée !
+        </p>
+        <p>
+            Vous pouvez maintenant renseigner différentes informations sur votre histoire, mais celles-ci ne sont pas
+            obligatoires. Si vous souhaitez les renseigner plus tard (ou jamais !), vous pouvez cliquer sur 'Terminer'.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <form [formGroup]="stepMiscInfoForm" (ngSubmit)="onSubmit()" #f=ngForm>
+
+            <div class="form-group">
+                <label for="storyType">Quel est le genre de votre histoire ?</label>
+                <select id="storyType" formControlName="storyType" class="form-control">
+                    <option value="">Sélectionnez un genre</option>
+                    <option *ngFor="let type of types" [value]="type.name">{{ type.label }}</option>
+                </select>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <app-create-story-buttons-group [step]="2" [saveButtonsDisabled]="false"
+            (nextStep)="onNextStep()" (finish)="onFinish()">
+        </app-create-story-buttons-group>
+    </div>
+</div>

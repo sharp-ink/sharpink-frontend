@@ -3,7 +3,7 @@ import { EndpointEnum } from '../constant/endpoint.enum';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Member } from 'src/app/shared/model/member.model';
+import { Member } from 'src/app/shared/model/member/member.model';
 
 @Injectable({
   providedIn: 'root'

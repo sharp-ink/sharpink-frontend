@@ -1,7 +1,7 @@
 import { AccountManagementService } from '../account-management.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Member } from 'src/app/shared/model/member.model';
+import { Member } from 'src/app/shared/model/member/member.model';
 import { AuthService } from 'src/app/shared/service/auth.service';
 
 @Component({

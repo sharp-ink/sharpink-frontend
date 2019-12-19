@@ -1,0 +1,25 @@
+<h4>Étape 3 : résumé</h4>
+
+<div class="row">
+    <div class="col-12">
+        Si vous le souhaitez, renseignez un résumé pour votre histoire.
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <form [formGroup]="stepSummaryForm" (ngSubmit)="onSubmit()" #f=ngForm>
+            <div class="form-group">
+                <ckeditor [editor]="ckEditor" [config]="ckEditorConfig" formControlName="storySummary"></ckeditor>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <app-create-story-buttons-group [step]="3" [saveButtonsDisabled]="f.invalid" (nextStep)="onNextStep()"
+            (finish)="onFinish()">
+        </app-create-story-buttons-group>
+    </div>
+</div>

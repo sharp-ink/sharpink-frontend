@@ -1,5 +1,6 @@
+import { ApiErrorCodeEnum } from './api-error-code-enum.model';
 
 export interface ApiError {
-    code: string;
+    code: ApiErrorCodeEnum;
     message?: string;
 }

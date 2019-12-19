@@ -2,7 +2,7 @@ import { ApiService } from './util/api.service';
 import { EndpointEnum } from '../constant/endpoint.enum';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Member } from 'src/app/shared/model/member.model';
+import { Member } from 'src/app/shared/model/member/member.model';
 
 @Injectable()
 export class MemberService {

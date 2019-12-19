@@ -1,10 +1,10 @@
-
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
-import { Story } from 'src/app/shared/model/story.model';
+import { Story } from 'src/app/shared/model/story/story.model';
 import { StoryService } from 'src/app/shared/service/story.service';
+
+
 
 @Component({
   selector: 'app-list-stories',

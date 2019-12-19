@@ -1,0 +1,24 @@
+<h4>Étape 4 : vignette</h4>
+
+<div class="row">
+    <div class="col-12">
+        Vous avez la possibilité d'ajouter une image qui servira de vignette pour votre histoire.
+        Elle sera par exemple présentée dans la liste des histoires, à côté de son titre et son résumé (si vous avez choisi d'en ajouter un).
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col-6">
+        <form [formGroup]="stepThumbnailForm" (ngSubmit)="onSubmit()" #f=ngForm>
+            <div class="form-group">
+                <input type="file" accept="image/*" (change)="onFileChange($event.target.files[0])" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <app-create-story-buttons-group [step]="4" [saveButtonsDisabled]="f.invalid" (finish)="onFinish()"></app-create-story-buttons-group>
+    </div>
+</div>
