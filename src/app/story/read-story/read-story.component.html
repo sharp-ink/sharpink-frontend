@@ -1,9 +1,15 @@
 
 <div class="container-fluid">
-  <h1>Lire l'histoire {{ story.title }}</h1>
-  <div class="row">
-    <div class="col-12">
-      
+  <app-loading *ngIf="isLoading"></app-loading>
+
+  <div *ngIf="!isLoading">
+    <h1>Lire l'histoire {{ story.title }}</h1>
+
+    <div class="row">
+      <div class="col-12">
+        
+      </div>
     </div>
   </div>
+
 </div>

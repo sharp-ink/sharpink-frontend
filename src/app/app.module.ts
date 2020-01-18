@@ -3,6 +3,7 @@ import { CreateStoryButtonsGroupComponent } from './account-management/manage-st
 import { CreateStoryComponent } from './account-management/manage-stories/create-story/create-story.component';
 import { StepMiscInfoComponent } from './account-management/manage-stories/create-story/step-misc-info/step-misc-info.component';
 import { StepSummaryComponent } from './account-management/manage-stories/create-story/step-summary/step-summary.component';
+import { StepThumbnailComponent } from './account-management/manage-stories/create-story/step-thumbnail/step-thumbnail.component';
 import { StepTitleComponent } from './account-management/manage-stories/create-story/step-title/step-title.component';
 import { ManageStoriesComponent } from './account-management/manage-stories/manage-stories.component';
 import { PrivateProfileComponent } from './account-management/private-profile/private-profile.component';
@@ -20,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginStatusComponent } from './login/login-status.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { NavComponent } from './nav/nav.component';
+import { LoadingComponent } from './shared/component/loading/loading.component';
 import { AuthGuard } from './shared/service/guard/auth.guard';
 import { MemberService } from './shared/service/member.service';
 import { StoryService } from './shared/service/story.service';
@@ -35,7 +37,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AlertModule } from 'ngx-bootstrap/alert';
-import { StepThumbnailComponent } from './account-management/manage-stories/create-story/step-thumbnail/step-thumbnail.component';
 
 // locale for french language
 registerLocaleData(localeFr);
@@ -67,7 +68,8 @@ registerLocaleData(localeFr);
     CreateStoryButtonsGroupComponent,
     StepMiscInfoComponent,
     StepSummaryComponent,
-    StepThumbnailComponent
+    StepThumbnailComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

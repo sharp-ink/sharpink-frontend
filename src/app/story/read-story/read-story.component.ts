@@ -14,6 +14,7 @@ import { StoryService } from 'src/app/shared/service/story.service';
 })
 export class ReadStoryComponent implements OnInit, OnDestroy {
 
+  isLoading: boolean;
   story: Story = null;
   storySubscription: Subscription;
 
@@ -23,11 +24,13 @@ export class ReadStoryComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.isLoading = true;
 
     // souscrit à currentStorySubject pour que this.story soit mis à jour à chaque fois que c'est nécessaire
     this.storySubscription = this.storyService.currentStorySubject.subscribe(
       (story: Story) => {
         this.story = story;
+        this.isLoading = false;
       }
     );
 
