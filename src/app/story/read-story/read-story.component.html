@@ -1,15 +1,14 @@
 
 <div class="container-fluid">
+
   <app-loading *ngIf="isLoading"></app-loading>
 
   <div *ngIf="!isLoading">
     <h1>Lire l'histoire {{ story.title }}</h1>
+    
+    <app-select-chapter [chapters]="story.chapters" (chapterChange)="selectedChapter = $event" class="d-block mb-4"></app-select-chapter>
 
-    <div class="row">
-      <div class="col-12">
-        
-      </div>
-    </div>
+    <app-display-paginated-chapter [chapters]="story.chapters" [selectedChapter]="selectedChapter"></app-display-paginated-chapter>
   </div>
 
 </div>

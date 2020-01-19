@@ -37,6 +37,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { DisplayPaginatedChapterComponent } from './story/read-story/display-paginated-chapter/display-paginated-chapter.component';
+import { SelectChapterComponent } from './story/read-story/select-chapter/select-chapter.component';
+import { PaginationComponent } from './shared/component/pagination/pagination.component';
 
 // locale for french language
 registerLocaleData(localeFr);
@@ -69,7 +72,10 @@ registerLocaleData(localeFr);
     StepMiscInfoComponent,
     StepSummaryComponent,
     StepThumbnailComponent,
-    LoadingComponent
+    LoadingComponent,
+    DisplayPaginatedChapterComponent,
+    SelectChapterComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

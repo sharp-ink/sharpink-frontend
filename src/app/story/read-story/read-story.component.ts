@@ -1,10 +1,9 @@
+import { Chapter } from '../../shared/model/chapter.model';
 import { Story } from '../../shared/model/story/story.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StoryService } from 'src/app/shared/service/story.service';
-
-
 
 @Component({
   selector: 'app-read-story',
@@ -17,6 +16,7 @@ export class ReadStoryComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   story: Story = null;
   storySubscription: Subscription;
+  selectedChapter: Chapter;
 
   constructor(
     private storyService: StoryService,
@@ -30,6 +30,7 @@ export class ReadStoryComponent implements OnInit, OnDestroy {
     this.storySubscription = this.storyService.currentStorySubject.subscribe(
       (story: Story) => {
         this.story = story;
+        this.selectedChapter = this.story.chapters[0];
         this.isLoading = false;
       }
     );
