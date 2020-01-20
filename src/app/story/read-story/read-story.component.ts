@@ -8,7 +8,7 @@ import { StoryService } from 'src/app/shared/service/story.service';
 @Component({
   selector: 'app-read-story',
   templateUrl: './read-story.component.html',
-  styleUrls: ['./read-story.component.css'],
+  styleUrls: ['./read-story.component.scss'],
   providers: []
 })
 export class ReadStoryComponent implements OnInit, OnDestroy {
