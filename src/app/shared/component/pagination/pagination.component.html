@@ -1,1 +1,8 @@
-<p>pagination works!</p>
+<div class="row">
+    <div class="col-12">
+        <pagination [ngClass]="{ 'd-flex': true, 'mx-auto': centered }"
+            [totalItems]="collection.length" [itemsPerPage]="itemsPerPage"
+            [previousText]="previousLabel" [nextText]="nextLabel"
+            [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+</div>

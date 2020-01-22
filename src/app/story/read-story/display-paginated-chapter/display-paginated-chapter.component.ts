@@ -15,4 +15,7 @@ export class DisplayPaginatedChapterComponent implements OnInit {
   ngOnInit() {
   }
 
+  goToChapter(chapterSelectedByPagination: number) {
+    this.selectedChapter = this.chapters[chapterSelectedByPagination - 1];
+  }
 }

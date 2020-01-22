@@ -22,13 +22,16 @@ import { LoginStatusComponent } from './login/login-status.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { NavComponent } from './nav/nav.component';
 import { LoadingComponent } from './shared/component/loading/loading.component';
+import { PaginationComponent } from './shared/component/pagination/pagination.component';
 import { AuthGuard } from './shared/service/guard/auth.guard';
 import { MemberService } from './shared/service/member.service';
 import { StoryService } from './shared/service/story.service';
 import { ListStoriesComponent } from './story/list-stories/list-stories.component';
 import { PreviewStoryComponent } from './story/list-stories/preview-story/preview-story.component';
+import { DisplayPaginatedChapterComponent } from './story/read-story/display-paginated-chapter/display-paginated-chapter.component';
 import { ReadRandomComponent } from './story/read-story/read-random/read-random.component';
 import { ReadStoryComponent } from './story/read-story/read-story.component';
+import { SelectChapterComponent } from './story/read-story/select-chapter/select-chapter.component';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
@@ -37,9 +40,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AlertModule } from 'ngx-bootstrap/alert';
-import { DisplayPaginatedChapterComponent } from './story/read-story/display-paginated-chapter/display-paginated-chapter.component';
-import { SelectChapterComponent } from './story/read-story/select-chapter/select-chapter.component';
-import { PaginationComponent } from './shared/component/pagination/pagination.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 // locale for french language
 registerLocaleData(localeFr);
@@ -78,13 +79,17 @@ registerLocaleData(localeFr);
     PaginationComponent
   ],
   imports: [
-    BrowserModule,
+    // main modules
     AppRoutingModule,
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CKEditorModule,
-    AlertModule.forRoot()
+    // ngx-bootstrap
+    AlertModule.forRoot(),
+    PaginationModule.forRoot(),
+    // WYSIWYG editor
+    CKEditorModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
