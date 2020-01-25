@@ -1,5 +1,7 @@
 import { ApiService } from './util/api.service';
 import { EndpointEnum } from '../constant/endpoint.enum';
+import { StoryPublicationStatusEnum } from '../constant/story-publication-status.enum';
+import { StorySearchCriteria } from '../model/story-search-criteria.model';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Story } from 'src/app/shared/model/story/story.model';
@@ -19,9 +21,15 @@ export class StoryService {
   /**
    * Requête pour récupérer toutes les Story depuis le backend.
    * Remarque : ça ne charge ni l'auteur (seulement son id) ni les chapitres (seulement leur nombre).
+   * Remarque 2 : on peut passer des paramètres (des filtres) qui affineront la recherche.
    */
-  getAllStoriesHttpObservable(): Observable<Story[]> {
-    return this.apiService.get<Story[]>(EndpointEnum.ENDPOINT_STORIES);
+  getAllStoriesHttpObservable(storySearchCriteria: StorySearchCriteria): Observable<Story[]> {
+    const params = {
+      count: storySearchCriteria.count,
+      sort: storySearchCriteria.sort,
+      published: StoryPublicationStatusEnum.toOptionalBoolean(storySearchCriteria.publicationStatus)
+    };
+    return this.apiService.get<Story[]>(EndpointEnum.ENDPOINT_STORIES, storySearchCriteria);
   }
 
   /**
@@ -29,9 +37,12 @@ export class StoryService {
    * et transmet les changements à tous ceux ayant souscrit à l'Observable.
    */
   loadAllStories() {
+    const storySearchCriteria: StorySearchCriteria = {
+      publicationStatus: StoryPublicationStatusEnum.PUBLISHED
+    };
 
     if (this.allStories.length === 0) {
-      this.getAllStoriesHttpObservable().subscribe(
+      this.getAllStoriesHttpObservable(storySearchCriteria).subscribe(
         (stories: Story[]) => {
           this.allStories = stories;
           this.allStoriesSubject.next(this.allStories);
@@ -40,7 +51,6 @@ export class StoryService {
     } else {
       this.allStoriesSubject.next(this.allStories);
     }
-
   }
 
   /**
