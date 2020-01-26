@@ -19,20 +19,6 @@ export class StoryService {
   ) { }
 
   /**
-   * Requête pour récupérer toutes les Story depuis le backend.
-   * Remarque : ça ne charge ni l'auteur (seulement son id) ni les chapitres (seulement leur nombre).
-   * Remarque 2 : on peut passer des paramètres (des filtres) qui affineront la recherche.
-   */
-  getAllStoriesHttpObservable(storySearchCriteria: StorySearchCriteria): Observable<Story[]> {
-    const params = {
-      count: storySearchCriteria.count,
-      sort: storySearchCriteria.sort,
-      published: StoryPublicationStatusEnum.toOptionalBoolean(storySearchCriteria.publicationStatus)
-    };
-    return this.apiService.get<Story[]>(EndpointEnum.ENDPOINT_STORIES, storySearchCriteria);
-  }
-
-  /**
    * Force le chargement de la liste des histoires si elle n'avait pas encore été initialisée,
    * et transmet les changements à tous ceux ayant souscrit à l'Observable.
    */
@@ -51,6 +37,25 @@ export class StoryService {
     } else {
       this.allStoriesSubject.next(this.allStories);
     }
+  }
+
+  /**
+   * Requête pour récupérer toutes les Story depuis le backend.
+   * Remarque : ça ne charge ni l'auteur (seulement son id) ni les chapitres (seulement leur nombre).
+   * Remarque 2 : on peut passer des paramètres (des filtres) qui affineront la recherche.
+   */
+  getAllStoriesHttpObservable(storySearchCriteria: StorySearchCriteria): Observable<Story[]> {
+    const queryParams = <any>{};
+
+    if (storySearchCriteria.count) {
+      queryParams.count = storySearchCriteria.count;
+    }
+    if (storySearchCriteria.sort) {
+      queryParams.sort = storySearchCriteria.sort;
+    }
+    queryParams.published = StoryPublicationStatusEnum.toOptionalBoolean(storySearchCriteria.publicationStatus);
+
+    return this.apiService.get<Story[]>(EndpointEnum.ENDPOINT_STORIES, { params: queryParams });
   }
 
   /**
