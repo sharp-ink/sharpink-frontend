@@ -12,7 +12,7 @@ import { StoryService } from 'src/app/shared/service/story.service';
   styleUrls: ['./list-stories.component.css'],
 })
 export class ListStoriesComponent implements OnInit, OnDestroy {
-
+  isLoading: boolean;
   allStories: Story[] = [];
   allStoriesSubscription: Subscription;
 
@@ -22,9 +22,12 @@ export class ListStoriesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.isLoading = true;
+
     this.allStoriesSubscription = this.storyService.allStoriesSubject.subscribe(
       (stories: Story[]) => {
         this.allStories = stories;
+        this.isLoading = false;
       }
     );
     this.loadAllStories();
