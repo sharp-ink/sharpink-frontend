@@ -7,22 +7,22 @@
 
   <div class="row" *ngIf="!isLoading">
 
-    <div class="col-6">
+    <div class="col">
       <h2>
         Liste des histoires
       </h2>
       <div class="row">
-        <div class="col-12">
+        <div class="col">
           <p>
             Cette page liste toutes les histoires. Elles sont classées par ordre décroissant de modification. La première histoire de la liste est celle qui a été modifiée le plus récemment (ajout ou modification de chapitre). Vous pouvez également choisir d'autres critères de tri.
           </p>
           <p>
-            Vous pouvez voir un aperçu d'une histoire en cliquant sur la ligne de celle-ci dans le tableau. Pour en commencer la lecture, cliquer sur le bouton 'Lire'.
+            Pour avoir un bref aperçu d'une histoire, cliquez sur la ligne de celle-ci dans le tableau. Pour en commencer la lecture, cliquer sur le bouton 'Lire'.
           </p>
         </div>
       </div>
       <div class="row">
-        <div class="col-12">
+        <div class="col">
           <table class="table">
             <thead>
               <tr>
@@ -43,10 +43,6 @@
           </table>
         </div>
       </div>
-    </div>
-
-    <div class="col-6">
-      <router-outlet></router-outlet>
     </div>
 
   </div>

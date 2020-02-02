@@ -1,10 +1,10 @@
+import { PreviewStoryComponent } from './preview-story/preview-story.component';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
 import { Story } from 'src/app/shared/model/story/story.model';
 import { StoryService } from 'src/app/shared/service/story.service';
-
-
 
 @Component({
   selector: 'app-list-stories',
@@ -15,10 +15,12 @@ export class ListStoriesComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   allStories: Story[] = [];
   allStoriesSubscription: Subscription;
+  bsModalRef: BsModalRef;
 
   constructor(
     private storyService: StoryService,
-    private router: Router
+    private router: Router,
+    private bsModalService: BsModalService
   ) { }
 
   ngOnInit() {
@@ -41,7 +43,13 @@ export class ListStoriesComponent implements OnInit, OnDestroy {
    * Affiche un apercu de l'histoire
    */
   showPreview(story: Story) {
-    this.router.navigate(['/histoires/liste', story.id, 'apercu']);
+    const modalOptions = {
+      class: 'modal-dialog-centered modal-lg',
+      initialState: {
+        story: story
+      }
+    };
+    this.bsModalRef = this.bsModalService.show(PreviewStoryComponent, modalOptions);
   }
 
   /**

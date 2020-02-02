@@ -5,6 +5,8 @@ import { StepMiscInfoComponent } from './account-management/manage-stories/creat
 import { StepSummaryComponent } from './account-management/manage-stories/create-story/step-summary/step-summary.component';
 import { StepThumbnailComponent } from './account-management/manage-stories/create-story/step-thumbnail/step-thumbnail.component';
 import { StepTitleComponent } from './account-management/manage-stories/create-story/step-title/step-title.component';
+import { EditStoryComponent } from './account-management/manage-stories/edit-story/edit-story.component';
+import { ManageStoriesHomeComponent } from './account-management/manage-stories/manage-stories-home/manage-stories-home.component';
 import { ManageStoriesComponent } from './account-management/manage-stories/manage-stories.component';
 import { PrivateProfileComponent } from './account-management/private-profile/private-profile.component';
 import { SettingsComponent } from './account-management/settings/settings.component';
@@ -18,7 +20,6 @@ import { SigninComponent } from './login/signin/signin.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './shared/service/guard/auth.guard';
 import { ListStoriesComponent } from './story/list-stories/list-stories.component';
-import { PreviewStoryComponent } from './story/list-stories/preview-story/preview-story.component';
 import { ReadRandomComponent } from './story/read-story/read-random/read-random.component';
 import { ReadStoryComponent } from './story/read-story/read-story.component';
 import { NgModule } from '@angular/core';
@@ -34,10 +35,7 @@ const appRoutes: Routes = [
 
   { path: 'histoires', children: [
     { path: '', redirectTo: 'liste', pathMatch: 'full' },
-    { path: 'liste', component: ListStoriesComponent, children: [
-      { path: ':id/apercu', component: PreviewStoryComponent }
-    ]
-    },
+    { path: 'liste', component: ListStoriesComponent },
     { path: 'lire', children: [
       { path: 'au-hasard', component: ReadRandomComponent },
       { path: ':id', component: ReadStoryComponent }
@@ -50,15 +48,19 @@ const appRoutes: Routes = [
     { path: '', redirectTo: 'mon-profil', pathMatch: 'full' },
     { path: 'mon-profil', component: PrivateProfileComponent },
     { path: 'reglages', component: SettingsComponent },
-    { path: 'mes-histoires', component: ManageStoriesComponent, children: [
-      { path: 'creer', component: CreateStoryComponent, children: [
-        { path: '', redirectTo: 'etape-1', pathMatch: 'full' },
-        { path: 'etape-1', component: StepTitleComponent },
-        { path: 'etape-2', component: StepMiscInfoComponent },
-        { path: 'etape-3', component: StepSummaryComponent },
-        { path: 'etape-4', component: StepThumbnailComponent }
+    {
+      path: 'mes-histoires', component: ManageStoriesComponent, children: [
+        { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+        { path: 'accueil', component: ManageStoriesHomeComponent },
+        { path: 'creer', component: CreateStoryComponent, children: [
+          { path: '', redirectTo: 'etape-1', pathMatch: 'full' },
+          { path: 'etape-1', component: StepTitleComponent },
+          { path: 'etape-2', component: StepMiscInfoComponent },
+          { path: 'etape-3', component: StepSummaryComponent },
+          { path: 'etape-4', component: StepThumbnailComponent }
       ]
-      }
+        },
+        { path: 'modifier/:id', component: EditStoryComponent }
     ]
     },
   ]

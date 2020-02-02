@@ -5,6 +5,7 @@ import { StepMiscInfoComponent } from './account-management/manage-stories/creat
 import { StepSummaryComponent } from './account-management/manage-stories/create-story/step-summary/step-summary.component';
 import { StepThumbnailComponent } from './account-management/manage-stories/create-story/step-thumbnail/step-thumbnail.component';
 import { StepTitleComponent } from './account-management/manage-stories/create-story/step-title/step-title.component';
+import { ManageStoriesHomeComponent } from './account-management/manage-stories/manage-stories-home/manage-stories-home.component';
 import { ManageStoriesComponent } from './account-management/manage-stories/manage-stories.component';
 import { PrivateProfileComponent } from './account-management/private-profile/private-profile.component';
 import { SettingsComponent } from './account-management/settings/settings.component';
@@ -40,7 +41,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { EditStoryComponent } from './account-management/manage-stories/edit-story/edit-story.component';
 
 // locale for french language
 registerLocaleData(localeFr);
@@ -76,7 +79,12 @@ registerLocaleData(localeFr);
     LoadingComponent,
     DisplayPaginatedChapterComponent,
     SelectChapterComponent,
-    PaginationComponent
+    PaginationComponent,
+    ManageStoriesHomeComponent,
+    EditStoryComponent
+  ],
+  entryComponents: [
+    PreviewStoryComponent
   ],
   imports: [
     // main modules
@@ -87,6 +95,7 @@ registerLocaleData(localeFr);
     HttpClientModule,
     // ngx-bootstrap
     AlertModule.forRoot(),
+    ModalModule.forRoot(),
     PaginationModule.forRoot(),
     // WYSIWYG editor
     CKEditorModule

@@ -1,6 +1,6 @@
 import { StoryTypeEnum } from '../../../../shared/constant/story-type.enum';
 import { CreateStory } from '../../../../shared/model/story/create-story.model';
-import { CreateStoryService } from '../../create-story.service';
+import { CreateStoryService } from '../create-story.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';

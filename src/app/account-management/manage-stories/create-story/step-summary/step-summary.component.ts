@@ -1,4 +1,4 @@
-import { CreateStoryService } from '../../create-story.service';
+import { CreateStoryService } from '../create-story.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';

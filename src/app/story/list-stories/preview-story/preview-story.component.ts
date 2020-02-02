@@ -1,8 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Story } from 'src/app/shared/model/story/story.model';
-import { StoryService } from 'src/app/shared/service/story.service';
 
 
 
@@ -11,19 +9,16 @@ import { StoryService } from 'src/app/shared/service/story.service';
   templateUrl: './preview-story.component.html',
   styleUrls: ['./preview-story.component.css']
 })
-export class PreviewStoryComponent implements OnInit, OnDestroy {
+export class PreviewStoryComponent implements OnInit {
 
-  story: Story = null;
-  storySubscription: Subscription;
+  @Input() story: Story;
 
-  constructor(
-    private route: ActivatedRoute,
-    private storyService: StoryService
-  ) { }
+  constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit() {
 
     // souscrit à currentStorySubject pour que this.story soit mis à jour à chaque fois que c'est nécessaire
+    /*
     this.storySubscription = this.storyService.currentStorySubject.subscribe(
       (story: Story) => {
         console.log(story);
@@ -38,10 +33,7 @@ export class PreviewStoryComponent implements OnInit, OnDestroy {
         // storyService nous notifiera en retour, via currentStorySuject.next(), dès qu'il aura récupéré l'histoire (opération asynchrone)
       }
     );
+    */
 
-  }
-
-  ngOnDestroy() {
-    this.storySubscription.unsubscribe();
   }
 }

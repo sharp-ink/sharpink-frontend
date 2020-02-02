@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   logIn(login: string, password: string): Observable<Member> {
-    return this.apiService.get<Member>(`${EndpointEnum.ENDPOINT_ACCOUNTS}/log-in`, {
+    return this.apiService.get<Member>(`${EndpointEnum.ACCOUNTS}/log-in`, {
       params: {
         login: login,
         password: password

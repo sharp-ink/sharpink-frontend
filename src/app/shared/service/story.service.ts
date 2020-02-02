@@ -55,7 +55,7 @@ export class StoryService {
     }
     queryParams.published = StoryPublicationStatusEnum.toOptionalBoolean(storySearchCriteria.publicationStatus);
 
-    return this.apiService.get<Story[]>(EndpointEnum.ENDPOINT_STORIES, { params: queryParams });
+    return this.apiService.get<Story[]>(EndpointEnum.STORIES, { params: queryParams });
   }
 
   /**
@@ -75,6 +75,6 @@ export class StoryService {
    * mais on renvoie tout de même le premier chapitre par commodité.
    */
   getStoryByIdHttpObservable(id: number): Observable<Story> {
-    return this.apiService.get<Story>(`${EndpointEnum.ENDPOINT_STORIES}/${id}`);
+    return this.apiService.get<Story>(`${EndpointEnum.STORIES}/${id}`);
   }
 }

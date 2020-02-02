@@ -1,8 +1,8 @@
-import { EndpointEnum } from '../../shared/constant/endpoint.enum';
-import { StoryStatusEnum } from '../../shared/constant/story-status.enum';
-import { CreateStory } from '../../shared/model/story/create-story.model';
-import { AuthService } from '../../shared/service/auth.service';
-import { ApiService } from '../../shared/service/util/api.service';
+import { EndpointEnum } from '../../../shared/constant/endpoint.enum';
+import { StoryStatusEnum } from '../../../shared/constant/story-status.enum';
+import { CreateStory } from '../../../shared/model/story/create-story.model';
+import { AuthService } from '../../../shared/service/auth.service';
+import { ApiService } from '../../../shared/service/util/api.service';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -62,13 +62,13 @@ export class CreateStoryService {
    * Requête pour créer une Story avec les infos minimales (titre + type). Renvoie l'id de la Story si la création s'est bien passée.
    */
   createStoryObservable(story: CreateStory): Observable<number> {
-    return this.apiService.post<number>(EndpointEnum.ENDPOINT_STORIES, story);
+    return this.apiService.post<number>(EndpointEnum.STORIES, story);
   }
 
   /**
    * Requête pour mettre à jour certains éléments d'une Story. Renvoie la Story mise à jour.
    */
   updateStoryObservable(storyId: number, storyPatch: CreateStory) {
-    return this.apiService.patch(`${EndpointEnum.ENDPOINT_STORIES}/${storyId}`, storyPatch);
+    return this.apiService.patch(`${EndpointEnum.STORIES}/${storyId}`, storyPatch);
   }
 }

@@ -1,0 +1,31 @@
+<div class="row mb-2">
+    <div class="col-12">
+        Ici vous pouvez gérer vos histoires. Créez-en de nouvelles, ajoutez des chapitres,...
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-sm">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-5">Titre</th>
+                    <th class="col-5">Résumé</th>
+                    <th class="col-2"></th> <!-- actions -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let story of myStories" class="d-flex">
+                    <td class="col-5">{{ story.title }}</td>
+                    <td class="col-5">{{ story.summary != null ? story.summary : 'Aucun résumé' }}</td>
+                    <td class="col-2 btn-toolbar">
+                        <a [routerLink]="['../modifier', story.id]" class="btn btn-primary mr-1"><span class="fa fa-edit"></span></a>
+                        <button type="button" (click)="updateStoryStatus(story)" [ngClass]="{ 'btn': true, 'btn-primary': !story.published, 'btn-outline-secondary': story.published }">
+                            <span [ngClass]="{ 'fa': true, 'fa-lock': story.published, 'fa-unlock': !story.published }"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

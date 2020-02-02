@@ -1,5 +1,6 @@
 import { ApiService } from './util/api.service';
 import { EndpointEnum } from '../constant/endpoint.enum';
+import { Story } from '../model/story/story.model';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Member } from 'src/app/shared/model/member/member.model';
@@ -20,7 +21,7 @@ export class MemberService {
    * Remarque : pour chaque Member, ça ne charge pas ses Story, seulement leur nombre.
    */
   getAllMembersHttpObservable(): Observable<Member[]> {
-    return this.apiService.get<Member[]>(EndpointEnum.ENDPOINT_MEMBERS);
+    return this.apiService.get<Member[]>(EndpointEnum.MEMBERS);
   }
 
   /**
@@ -47,7 +48,14 @@ export class MemberService {
    * Remarque : ça ne charge pas ses Story, seulement leur nombre.
    */
   getMemberObservable(memberId: number): Observable<Member> {
-    return this.apiService.get<Member>(`${EndpointEnum.ENDPOINT_MEMBERS}/${memberId}`);
+    return this.apiService.get<Member>(`${EndpointEnum.MEMBERS}/${memberId}`);
+  }
+
+  /**
+   * Load stories of the given member
+   */
+  loadStoriesOfAuthor(memberId: number): Observable<Story[]> {
+    return this.apiService.get<Story[]>(`${EndpointEnum.MEMBERS}/${memberId}/stories`);
   }
 
 }

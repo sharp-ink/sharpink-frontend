@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class ApiService {
-    readonly API = 'http://sharpink.io:8081/api';
+    readonly API = 'http://sharpink.io:8888/api';
 
     constructor(private http: HttpClient) { }
 
