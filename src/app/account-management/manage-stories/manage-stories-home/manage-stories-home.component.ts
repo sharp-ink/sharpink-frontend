@@ -3,6 +3,7 @@ import { Story } from '../../../shared/model/story/story.model';
 import { AuthService } from '../../../shared/service/auth.service';
 import { MemberService } from '../../../shared/service/member.service';
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-stories-home',
@@ -15,6 +16,8 @@ export class ManageStoriesHomeComponent implements OnInit {
   myStories: Story[] = [];
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private memberService: MemberService,
     private authService: AuthService,
     private manageStoriesHomeService: ManageStoriesHomeService
@@ -29,6 +32,10 @@ export class ManageStoriesHomeComponent implements OnInit {
         this.myStories = stories;
         this.isLoading = false;
       });
+  }
+
+  goToCreation() {
+    this.router.navigate(['../creer'], { relativeTo: this.route });
   }
 
   updateStoryStatus(story: Story) {
