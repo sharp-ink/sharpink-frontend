@@ -62,7 +62,7 @@ const appRoutes: Routes = [
         },
       { path: ':id', component: EditStoryComponent },
       { path: ':id/ajouter-chapitre', component: EditChapterComponent },
-      { path: ':id/modifier-chapitre', component: EditChapterComponent }
+      { path: ':id/modifier-chapitre/:chapterPosition', component: EditChapterComponent }
     ]
     },
   ]

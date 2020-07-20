@@ -1,14 +1,23 @@
 
 <app-loading *ngIf="isLoading"></app-loading>
 
-<div class="row mb-5" *ngIf="!isLoading">
+<div class="row mb-3" *ngIf="!isLoading">
     <div class="col-12">
         <h3>Modifier l'histoire <span class="story-title">{{ story.title }}</span></h3>
     </div>
 </div>
 
+<div class="row" *ngIf="!isLoading">
+    <div class="col-12 mb-2">Ci-dessous la liste des chapitres que vous avez écrits (vous pouvez toujours les modifier...) :</div>
+    <ol>
+        <li *ngFor="let chapter of story.chapters">
+            <a [routerLink]="['modifier-chapitre', chapter.position]">{{ chapter.title }}</a>
+        </li>
+    </ol>
+</div>
+
 <div class="row">
     <div class="col-12 text-center">
-        <a [routerLink]="['modifier-chapitre']" class="btn btn-primary btn-lg">Ajouter un chapitre</a>
+        <a [routerLink]="['ajouter-chapitre']" class="btn btn-primary btn-lg">Ajouter un chapitre</a>
     </div>
 </div>

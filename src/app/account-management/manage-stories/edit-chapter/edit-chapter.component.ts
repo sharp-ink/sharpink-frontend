@@ -1,7 +1,8 @@
 import { ChapterStats } from '../../../shared/model/chapter/chapter-stats.model';
+import { Chapter } from '../../../shared/model/chapter/chapter.model';
 import { Story } from '../../../shared/model/story/story.model';
 import { StoryService } from '../../../shared/service/story.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
@@ -17,6 +18,7 @@ export class EditChapterComponent implements OnInit {
   isLoading: boolean;
   storySubscription: Subscription;
   story: Story;
+  chapter: Chapter; // only set if we are editing an existing chapter, null if it is a creation
   chapterContentForm: FormGroup;
   ckEditor = ChapterEditor;
   ckEditorConfig: any;
@@ -35,6 +37,17 @@ export class EditChapterComponent implements OnInit {
     this.storySubscription = this.storyService.currentStorySubject.subscribe(
       (story: Story) => {
         this.story = story;
+        const chapterPosition = this.route.snapshot.params['chapterPosition'];
+        if (chapterPosition) {
+          this.chapter = this.story.chapters[chapterPosition - 1];
+          this.chapterContentForm.patchValue({
+            chapterTitle: this.chapter.title,
+            chapterContent: this.chapter.content
+          });
+        } else {
+          this.chapter = null;
+        }
+
         this.isLoading = false;
       }
     );
@@ -72,7 +85,7 @@ export class EditChapterComponent implements OnInit {
 
   private initCkEditor() {
     this.ckEditorConfig = this.ckEditor.defaultConfig;
-    this.ckEditorConfig.placeholder = 'Écrivez ou collez le contenu de votre chapitre ici...';
+    this.ckEditorConfig.placeholder = 'Écrivez ou copiez/collez le contenu de votre chapitre ici...';
     this.ckEditorConfig.wordCount = {
       onUpdate: (stats: ChapterStats) => this.onUpdateStats(stats)
     };
