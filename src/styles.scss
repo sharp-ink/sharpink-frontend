@@ -69,6 +69,17 @@ a {
   border: none;
 }
 
+/* *************************************************
+ * Badges (override les styles de Bootstrap)
+ * ************************************************
+ */
+
+ .badge-primary {
+   border: 1px solid black;
+   background-color: var(--button-primary-background-color);
+   opacity: 80%
+ }
+
  /* *************************************************
  * Onglets (override les styles de Bootstrap)
  * ************************************************
@@ -106,10 +117,25 @@ input.ng-touched.ng-invalid, select.ng-touched.ng-invalid, textarea.ng-touched.n
   border: 1px solid red;
 }
 
+ckeditor.ng-touched.ng-invalid .ck.ck-editor {
+  border: 1px solid red;
+  border-radius: 0.25rem;
+}
+
 // messages d'erreur en-dessous des champs
 .error-msg {
   color: red;
   font-size: 80%;
+}
+
+/* *************************************************
+ * Wysiwyg editor (CKEditor)
+ * *************************************************
+ */
+
+.ck-editor__editable_inline {
+  min-height: 200px;
+  max-height: 700px;
 }
 
 /* *************************************************
@@ -119,4 +145,11 @@ input.ng-touched.ng-invalid, select.ng-touched.ng-invalid, textarea.ng-touched.n
 
 .mandatory-indicator {
   color: var(--header-background-color);
+}
+
+.story-title {
+  color: plum;
+  font-family: fantasy;
+  font-style: italic;
+  text-decoration: underline;
 }

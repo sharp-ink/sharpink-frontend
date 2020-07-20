@@ -5,6 +5,8 @@ import { StepMiscInfoComponent } from './account-management/manage-stories/creat
 import { StepSummaryComponent } from './account-management/manage-stories/create-story/step-summary/step-summary.component';
 import { StepThumbnailComponent } from './account-management/manage-stories/create-story/step-thumbnail/step-thumbnail.component';
 import { StepTitleComponent } from './account-management/manage-stories/create-story/step-title/step-title.component';
+import { EditChapterComponent } from './account-management/manage-stories/edit-chapter/edit-chapter.component';
+import { EditStoryComponent } from './account-management/manage-stories/edit-story/edit-story.component';
 import { ManageStoriesHomeComponent } from './account-management/manage-stories/manage-stories-home/manage-stories-home.component';
 import { ManageStoriesComponent } from './account-management/manage-stories/manage-stories.component';
 import { PrivateProfileComponent } from './account-management/private-profile/private-profile.component';
@@ -43,7 +45,6 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { EditStoryComponent } from './account-management/manage-stories/edit-story/edit-story.component';
 
 // locale for french language
 registerLocaleData(localeFr);
@@ -81,7 +82,8 @@ registerLocaleData(localeFr);
     SelectChapterComponent,
     PaginationComponent,
     ManageStoriesHomeComponent,
-    EditStoryComponent
+    EditStoryComponent,
+    EditChapterComponent
   ],
   entryComponents: [
     PreviewStoryComponent

@@ -1,0 +1,1 @@
+(function(d){d['zh-cn']=Object.assign(d['zh-cn']||{},{a:"字数：%0",b:"字符数：%0",c:"正在保存更改",d:"块引用",e:"增加缩进",f:"减少缩进",g:"左对齐",h:"右对齐",i:"居中",j:"两端对齐",k:"对齐",l:"对齐工具栏",m:"倾斜",n:"加粗",o:"下划线",p:"分割线",q:"下拉工具栏",r:"富文本编辑器",s:"编辑器工具栏",t:"显示更多",u:"富文本编辑器， %0",v:"撤销",w:"重做"})})(window.CKEDITOR_TRANSLATIONS||(window.CKEDITOR_TRANSLATIONS={}));

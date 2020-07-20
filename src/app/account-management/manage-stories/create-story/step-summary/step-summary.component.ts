@@ -2,8 +2,6 @@ import { CreateStoryService } from '../create-story.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
   selector: 'app-step-summary',
@@ -12,7 +10,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 })
 export class StepSummaryComponent implements OnInit {
   stepSummaryForm: FormGroup;
-  ckEditor = ClassicEditor;
+  // ckEditor = ClassicEditor;
   ckEditorConfig: any;
 
   constructor(

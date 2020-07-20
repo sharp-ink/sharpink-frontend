@@ -1,4 +1,4 @@
-import { Chapter } from 'src/app/shared/model/chapter.model';
+import { Chapter } from 'src/app/shared/model/chapter/chapter.model';
 import { Member } from 'src/app/shared/model/member/member.model';
 
 export interface Story {

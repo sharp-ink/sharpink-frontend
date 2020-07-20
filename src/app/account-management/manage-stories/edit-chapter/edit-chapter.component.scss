@@ -1,0 +1,12 @@
+
+.badge {
+    font-weight: normal;
+}
+
+.badge:first-child {
+    margin-right: 5px;
+}
+
+.badge span {
+    font-weight: bold;
+}

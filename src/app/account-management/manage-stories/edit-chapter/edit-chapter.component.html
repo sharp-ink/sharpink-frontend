@@ -1,0 +1,51 @@
+
+<app-loading *ngIf="isLoading"></app-loading>
+
+<div class="row" *ngIf="!isLoading">
+    <div class="col-12">
+        <h3>Modifier l'histoire <span class="story-title">{{ story.title }}</span> : ajout de chapitre</h3>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-12">
+        Choisissez un titre pour votre chapitre, puis écrivez son contenu ou copiez-le depuis un document (Office ou autre).
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <form [formGroup]="chapterContentForm" (ngSubmit)="onSubmit()" #f=ngForm>
+            <div class="row">
+                <div class="form-group col-12">
+                    <input class="form-control" formControlName="chapterTitle" placeholder="Titre du chapitre" />
+                    <small class="form-text text-muted">Note : vous n'avez pas besoin d'indiquer de numéro, car celui-ci sera automatiquement affiché.</small>
+                    <small class="form-text text-muted">Ainsi, préférez simplement "Mon premier chapitre" à "1 - Mon premier chapitre"</small>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12">
+                    <ckeditor #editor [editor]="ckEditor" [config]="ckEditorConfig" (ready)="onEditorReady($event)" formControlName="chapterContent"></ckeditor>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12">
+                    <div class="badge badge-light">
+                        <span>{{ chapterStats.words }}</span> mots
+                    </div>
+                    <div class="badge badge-light">
+                        <span>{{ chapterStats.characters }}</span> caractères
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-12">
+                    <input type="submit" value="Enregistrer" class="btn btn-primary" [disabled]="f.invalid"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

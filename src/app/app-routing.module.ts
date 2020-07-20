@@ -5,6 +5,7 @@ import { StepMiscInfoComponent } from './account-management/manage-stories/creat
 import { StepSummaryComponent } from './account-management/manage-stories/create-story/step-summary/step-summary.component';
 import { StepThumbnailComponent } from './account-management/manage-stories/create-story/step-thumbnail/step-thumbnail.component';
 import { StepTitleComponent } from './account-management/manage-stories/create-story/step-title/step-title.component';
+import { EditChapterComponent } from './account-management/manage-stories/edit-chapter/edit-chapter.component';
 import { EditStoryComponent } from './account-management/manage-stories/edit-story/edit-story.component';
 import { ManageStoriesHomeComponent } from './account-management/manage-stories/manage-stories-home/manage-stories-home.component';
 import { ManageStoriesComponent } from './account-management/manage-stories/manage-stories.component';
@@ -45,11 +46,10 @@ const appRoutes: Routes = [
   },
 
   { path: 'mon-compte', canActivate: [AuthGuard], component: AccountManagementComponent, children: [
-    { path: '', redirectTo: 'mon-profil', pathMatch: 'full' },
+    { path: '', redirectTo: 'mes-histoires', pathMatch: 'full' },
     { path: 'mon-profil', component: PrivateProfileComponent },
     { path: 'reglages', component: SettingsComponent },
-    {
-      path: 'mes-histoires', component: ManageStoriesComponent, children: [
+    { path: 'mes-histoires', component: ManageStoriesComponent, children: [
         { path: '', redirectTo: 'accueil', pathMatch: 'full' },
         { path: 'accueil', component: ManageStoriesHomeComponent },
         { path: 'creer', component: CreateStoryComponent, children: [
@@ -58,9 +58,11 @@ const appRoutes: Routes = [
           { path: 'etape-2', component: StepMiscInfoComponent },
           { path: 'etape-3', component: StepSummaryComponent },
           { path: 'etape-4', component: StepThumbnailComponent }
-      ]
+        ]
         },
-        { path: 'modifier/:id', component: EditStoryComponent }
+      { path: ':id', component: EditStoryComponent },
+      { path: ':id/ajouter-chapitre', component: EditChapterComponent },
+      { path: ':id/modifier-chapitre', component: EditChapterComponent }
     ]
     },
   ]

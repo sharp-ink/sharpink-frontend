@@ -8,7 +8,7 @@
     <div class="col-12 text-center">
         <button type="button" class="btn btn-primary btn-lg" (click)="goToCreation()">
             <div class="fa fa-plus"></div>
-            <div>Créer une nouvelle histoire</div>
+            <div>Créer une histoire</div>
         </button>
     </div>
 </div>
@@ -25,10 +25,10 @@
             </thead>
             <tbody>
                 <tr *ngFor="let story of myStories" class="d-flex">
-                    <td class="col-5">{{ story.title }}</td>
+                    <td class="col-5">{{ story.title }} <span class="badge badge-light">({{ story.chaptersNumber }} chap.)</span></td>
                     <td class="col-5">{{ story.summary != null ? story.summary : 'Aucun résumé' }}</td>
                     <td class="col-2 btn-toolbar">
-                        <a [routerLink]="['../modifier', story.id]" class="btn btn-primary mr-1"><span class="fa fa-edit"></span></a>
+                        <a [routerLink]="['..', story.id]" class="btn btn-primary mr-1"><span class="fa fa-edit"></span></a>
                         <button type="button" (click)="updateStoryStatus(story)" [ngClass]="{ 'btn': true, 'btn-primary': !story.published, 'btn-outline-secondary': story.published }">
                             <span [ngClass]="{ 'fa': true, 'fa-lock': story.published, 'fa-unlock': !story.published }"></span>
                         </button>

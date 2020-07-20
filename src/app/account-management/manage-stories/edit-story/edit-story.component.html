@@ -1,1 +1,14 @@
-<p>edit-story works!</p>
+
+<app-loading *ngIf="isLoading"></app-loading>
+
+<div class="row mb-5" *ngIf="!isLoading">
+    <div class="col-12">
+        <h3>Modifier l'histoire <span class="story-title">{{ story.title }}</span></h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 text-center">
+        <a [routerLink]="['modifier-chapitre']" class="btn btn-primary btn-lg">Ajouter un chapitre</a>
+    </div>
+</div>
