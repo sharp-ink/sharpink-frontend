@@ -6,14 +6,12 @@
 </div>
 
 <div class="row mb-2">
-    <div class="col-12 text-justify">
-        {{ selectedChapter.content }}
-    </div>
+    <div class="col-12 text-justify" [innerHTML]="selectedChapter.content"></div>
 </div>
 
 <div class="row">
     <div class="col-4 mx-auto">
-        <app-pagination [centered]="true" 
+        <app-pagination [centered]="true"
             [collection]="chapters"
             [itemsPerPage]="1"
             [previousLabel]="'Précédent'" [nextLabel]="'Suivant'"

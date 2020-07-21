@@ -1,14 +1,8 @@
 
-<div class="row mt-4 mb-2">
-    <div class="col-12 text-center">
-        Choisissez le chapitre que vous souhaitez lire.
-    </div>
-</div>
-
-<div class="row">
+<div class="row mt-4">
     <div class="col-12 text-center">
         <select [ngModel]="selectedChapter" (ngModelChange)="onChangeChapter($event)">
-            <option *ngFor="let chapter of chapters" [ngValue]="chapter">{{ chapter.position }} - {{ chapter.title }}</option>
+            <option *ngFor="let chapter of chapters" [ngValue]="chapter">Chapitre {{ chapter.position }}<span *ngIf="chapter.title"> - {{ chapter.title }}</span></option>
         </select>
     </div>
 </div>

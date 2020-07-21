@@ -59,7 +59,7 @@ export class EditChapterComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         this.storyService.getStoryById(+params['id']);
-        // storyService nous notifiera en retour, via currentStorySuject.next(), dès qu'il aura récupéré l'histoire  (opération asynchrone)
+        // storyService nous notifiera en retour, via currentStorySuject.next(), dès qu'il aura récupéré l'histoire (opération asynchrone)
       }
     );
 
