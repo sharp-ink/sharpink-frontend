@@ -1,8 +1,10 @@
+import { EndpointEnum } from '../../../shared/constant/endpoint.enum';
 import { ChapterStats } from '../../../shared/model/chapter/chapter-stats.model';
 import { Chapter } from '../../../shared/model/chapter/chapter.model';
 import { Story } from '../../../shared/model/story/story.model';
 import { StoryService } from '../../../shared/service/story.service';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ApiService } from '../../../shared/service/util/api.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
@@ -27,7 +29,8 @@ export class EditChapterComponent implements OnInit {
 
   constructor(
     private storyService: StoryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private apiService: ApiService
   ) { }
 
   ngOnInit() {
@@ -69,7 +72,7 @@ export class EditChapterComponent implements OnInit {
       // console.log(Array.from(this.editorComponent.editorInstance.ui.componentFactory.names()));
       // console.log(this.editorComponent.editorInstance.plugins.get('WordCount'));
     },
-    1000);
+      1000);
   }
 
   private initForm() {
@@ -102,10 +105,19 @@ export class EditChapterComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.chapterContentForm);
-    let chapterContent = this.chapterContentForm.value.chapterContent;
-    chapterContent = this.clean(chapterContent);
-    console.log(chapterContent);
+    const fv = this.chapterContentForm.value;
+    const title = fv.chapterTitle;
+    const content = this.clean(fv.chapterContent);
+
+    if (this.chapter) {
+      this.apiService
+        .put(`${EndpointEnum.STORIES}/${this.story.id}/chapters/${this.chapter.position}`, { title, content })
+        .subscribe(response => { console.log(response); });
+    } else {
+      this.apiService
+        .post(`${EndpointEnum.STORIES}/${this.story.id}/chapters/`, { title, content })
+        .subscribe(response => { console.log(response); });
+    }
   }
 
   /**
