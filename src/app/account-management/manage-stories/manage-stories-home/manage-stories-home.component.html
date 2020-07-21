@@ -25,9 +25,9 @@
             </thead>
             <tbody>
                 <tr *ngFor="let story of myStories" class="d-flex">
-                    <td class="col-5">{{ story.title }} <span class="badge badge-light">({{ story.chaptersNumber }} chap.)</span></td>
-                    <td class="col-5">{{ story.summary != null ? story.summary : 'Aucun résumé' }}</td>
-                    <td class="col-2 btn-toolbar">
+                    <td class="col-5 d-flex align-items-center">{{ story.title }} <span class="badge badge-light">({{ story.chaptersNumber }} chap.)</span></td>
+                    <td class="col-5 d-flex align-items-center">{{ story.summary != null ? story.summary : 'Aucun résumé' }}</td>
+                    <td class="col-2 btn-toolbar d-flex align-items-center">
                         <a [routerLink]="['..', story.id]" class="btn btn-outline-primary mr-1" title="Éditer l'histoire">
                             <span class="fa fa-edit"></span>
                         </a>
