@@ -31,9 +31,12 @@
                         <a [routerLink]="['..', story.id]" class="btn btn-outline-primary mr-1" title="Éditer l'histoire">
                             <span class="fa fa-edit"></span>
                         </a>
-                        <button type="button" (click)="updateStoryStatus(story)" [ngClass]="{ 'btn': true, 'btn-outline-primary': !story.published, 'btn-outline-secondary': story.published }"
+                        <button type="button" (click)="updateStoryStatus(story)" [ngClass]="{ 'btn': true, 'btn-outline-primary': !story.published, 'btn-outline-secondary': story.published, 'mr-1': true }"
                             [title]="story.published ? 'Cacher l\'histoire' : 'Publier l\'histoire'">
                             <span [ngClass]="{ 'fa': true, 'fa-lock': story.published, 'fa-unlock': !story.published }"></span>
+                        </button>
+                        <button type="button" (click)="removeStory(story)" class="btn btn-outline-primary" title="Supprimer l'histoire">
+                            <span class="fa fa-trash"></span>
                         </button>
                     </td>
                 </tr>

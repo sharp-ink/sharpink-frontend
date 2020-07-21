@@ -45,4 +45,12 @@ export class ManageStoriesHomeComponent implements OnInit {
 
     });
   }
+
+  removeStory(story: Story) {
+    if (confirm(`Êtes-vous sûr de vouloir supprimer l\'histoire [${story.title}] ? ATTENTION, CETTE OPÉRATION EST IRRÉVERSIBLE !`)) {
+      this.manageStoriesHomeService.removeStory(story.id).subscribe(response => {
+        console.log(response);
+      });
+    }
+  }
 }

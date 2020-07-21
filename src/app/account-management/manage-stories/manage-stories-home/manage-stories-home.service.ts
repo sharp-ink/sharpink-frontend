@@ -8,14 +8,16 @@ import { Injectable } from '@angular/core';
 })
 export class ManageStoriesHomeService {
 
-    constructor(
-        private apiService: ApiService
-    ) { }
+    constructor(private apiService: ApiService) { }
 
     changeStoryStatus(story: Story) {
         return this.apiService.patch(`${EndpointEnum.STORIES}/${story.id}`, {
             published: !story.published
         });
+    }
+
+    removeStory(storyId: number) {
+        return this.apiService.delete(`${EndpointEnum.STORIES}/${storyId}`);
     }
 
 }

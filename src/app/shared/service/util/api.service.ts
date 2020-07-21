@@ -13,6 +13,14 @@ export class ApiService {
 
     constructor(private http: HttpClient) { }
 
+    delete(endpoint: string, options?: any): Observable<any> {
+        if (options) {
+            return this.http.delete(`${this.API}/${endpoint}`, options);
+        } else {
+            return this.http.delete(`${this.API}/${endpoint}`);
+        }
+    }
+
     get<T>(endpoint: string, options?: any): Observable<any> {
         if (options) {
             return this.http.get<T>(`${this.API}/${endpoint}`, options);
