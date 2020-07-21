@@ -56,17 +56,26 @@ a {
  * ************************************************
  */
 
-.btn.btn-primary, .btn.btn-primary:not(:disabled):not(.disabled):active {
+.btn.btn-primary, .btn.btn-primary:not(:disabled):active {
   background-color: var(--button-primary-background-color);
   border: none;
 }
-
-
 
 .btn.btn-secondary {
   background-color: $light-gray;
   color: white;
   border: none;
+}
+
+.btn.btn-outline-primary, .btn.btn-outline-primary:not(:disabled):active {
+  background-color: white;
+  color: var(--button-primary-background-color);
+  border-color: var(--button-primary-background-color);
+}
+
+.btn.btn-outline-primary:hover {
+  background-color: var(--button-primary-background-color);
+  color: white;
 }
 
 /* *************************************************

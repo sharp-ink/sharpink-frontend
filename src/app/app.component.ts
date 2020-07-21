@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   constructor(private themeService: ThemeService) { }
 
   ngOnInit() {
-    const initialThemeId = 0; // all available themes in ThemeService
+    const initialThemeId = 3; // all available themes in ThemeService
     this.themeService.initTheme(initialThemeId);
   }
 

@@ -28,8 +28,11 @@
                     <td class="col-5">{{ story.title }} <span class="badge badge-light">({{ story.chaptersNumber }} chap.)</span></td>
                     <td class="col-5">{{ story.summary != null ? story.summary : 'Aucun résumé' }}</td>
                     <td class="col-2 btn-toolbar">
-                        <a [routerLink]="['..', story.id]" class="btn btn-primary mr-1"><span class="fa fa-edit"></span></a>
-                        <button type="button" (click)="updateStoryStatus(story)" [ngClass]="{ 'btn': true, 'btn-primary': !story.published, 'btn-outline-secondary': story.published }">
+                        <a [routerLink]="['..', story.id]" class="btn btn-outline-primary mr-1" title="Éditer l'histoire">
+                            <span class="fa fa-edit"></span>
+                        </a>
+                        <button type="button" (click)="updateStoryStatus(story)" [ngClass]="{ 'btn': true, 'btn-outline-primary': !story.published, 'btn-outline-secondary': story.published }"
+                            [title]="story.published ? 'Cacher l\'histoire' : 'Publier l\'histoire'">
                             <span [ngClass]="{ 'fa': true, 'fa-lock': story.published, 'fa-unlock': !story.published }"></span>
                         </button>
                     </td>

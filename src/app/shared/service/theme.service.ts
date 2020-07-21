@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class ThemeService {
   private readonly DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS = 'white';
   private readonly COLOR_BLUE           = '#0045c0';
-  private readonly COLOR_BLUE_NIGHT     = '#002735';
+  private readonly COLOR_BLUE_NIGHT     = '#002750';
   private readonly COLOR_PINK_FANCY     = '#f81faa';
   private readonly COLOR_RED_DARK       = '#d11c1c';
   private readonly COLOR_GREY_DARK      = '#303030';
