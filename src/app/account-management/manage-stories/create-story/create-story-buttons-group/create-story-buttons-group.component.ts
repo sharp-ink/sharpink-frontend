@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-story-buttons-group',
@@ -12,12 +12,15 @@ export class CreateStoryButtonsGroupComponent implements OnInit {
   @Output() nextStep: EventEmitter<void> = new EventEmitter();
   @Output() finish: EventEmitter<void> = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() { }
 
   onPreviousStep() {
-    this.router.navigate([`/mon-compte/mes-histoires/creer/etape-${this.step - 1}`]);
+    this.router.navigate([`../etape-${this.step - 1}`], { relativeTo: this.route });
   }
 
   onNextStep() {

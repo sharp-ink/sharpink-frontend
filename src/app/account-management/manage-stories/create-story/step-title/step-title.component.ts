@@ -70,8 +70,22 @@ export class StepTitleComponent implements OnInit {
   }
 
   onFinish(): void {
-    this.createStoryService.initStoryStepTitle(this.stepTitleForm);
-    // TODO : rediriger vers la bonne page
+    this.createStoryService.initStoryStepTitle(this.stepTitleForm).subscribe(
+      (storyId: number) => {
+        this.creationError = null;
+        this.storyId = storyId;
+        this.router.navigate(['../../accueil'], { relativeTo: this.route });
+      },
+      (error: ApiError) => {
+        console.log(error);
+        this.creationError = error;
+        if (error.code === ApiErrorCodeEnum.TITLE_ALREADY_USED) {
+          this.creationError.message =
+            `Une histoire existe déjà avec ce titre : '${this.stepTitleForm.value.storyTitle}'. Veuillez réessayer avec un autre titre.`;
+        }
+        this.backendOperationInProgress = false;
+      }
+    );
   }
 
 }
