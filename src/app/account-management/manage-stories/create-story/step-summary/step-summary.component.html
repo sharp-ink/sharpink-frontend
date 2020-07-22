@@ -8,9 +8,9 @@
 
 <div class="row">
     <div class="col-6">
-        <form [formGroup]="stepSummaryForm" (ngSubmit)="onSubmit()" #f=ngForm>
+        <form [formGroup]="stepSummaryForm" #f=ngForm>
             <div class="form-group">
-                <ckeditor [editor]="ckEditor" [config]="ckEditorConfig" formControlName="storySummary"></ckeditor>
+                <!--<ckeditor [editor]="ckEditor" [config]="ckEditorConfig" formControlName="storySummary"></ckeditor>-->
             </div>
         </form>
     </div>

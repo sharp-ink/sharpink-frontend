@@ -24,7 +24,7 @@ export class EditChapterComponent implements OnInit {
   chapterContentForm: FormGroup;
   ckEditor = ChapterEditor;
   ckEditorConfig: any;
-  @ViewChild('editor', { static: false }) editorComponent: CKEditorComponent;
+  @ViewChild('editor') editorComponent: CKEditorComponent;
   chapterStats: ChapterStats = { words: 0, characters: 0 };
 
   constructor(

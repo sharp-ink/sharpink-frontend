@@ -9,7 +9,7 @@
 
 <div class="row mt-2">
     <div class="col-6">
-        <form [formGroup]="stepThumbnailForm" (ngSubmit)="onSubmit()" #f=ngForm>
+        <form [formGroup]="stepThumbnailForm" #f=ngForm>
             <div class="form-group">
                 <input type="file" accept="image/*" (change)="onFileChange($event.target.files[0])" />
             </div>
