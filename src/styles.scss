@@ -51,7 +51,7 @@ a {
   color: var(--button-primary-background-color);
 }
 
-/* *************************************************
+/* ************************************************
  * Boutons (override les styles de Bootstrap)
  * ************************************************
  */
@@ -73,7 +73,7 @@ a {
   border-color: var(--button-primary-background-color);
 }
 
-.btn.btn-outline-primary:hover {
+.btn.btn-outline-primary:not(:disabled):hover {
   background-color: var(--button-primary-background-color);
   color: white;
 }
@@ -145,6 +145,36 @@ ckeditor.ng-touched.ng-invalid .ck.ck-editor {
 .ck-editor__editable_inline {
   min-height: 200px;
   max-height: 700px;
+}
+
+/* ******************************************
+ * Notifications (override les styles de
+ * ngx-toaster en bootstrap-like)
+ * ******************************************
+ */
+
+.ngx-toastr.toast-success {
+  border: 1px solid #c3e6cb;
+  background-color: #d4edda;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Cpath fill='rgb(21,87,36)' d='M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z'/%3E%3C/svg%3E");
+  color: #155724;
+}
+
+.ngx-toastr.toast-error {
+  border: 1px solid #f5c6cb;
+  background-color: #f8d7da;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Cpath fill='rgb(114,28,26)' d='M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z'/%3E%3C/svg%3E");
+  color: #721C1A;
+}
+.toast-info {
+  // TODO
+}
+.toast-warning {
+  // TODO
+}
+
+.toast-close-button {
+  color: inherit;
 }
 
 /* *************************************************

@@ -108,7 +108,13 @@ registerLocaleData(localeFr);
     // WYSIWYG editor
     CKEditorModule,
     // Toastr notifications
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      closeButton: true,
+      enableHtml: true,
+      newestOnTop: false,
+      timeOut: 5000,
+      disableTimeOut: true
+    })
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

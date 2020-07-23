@@ -1,9 +1,11 @@
 import { ApiErrorCodeEnum } from '../../../../shared/model/error/api-error-code-enum.model';
 import { ApiError } from '../../../../shared/model/error/api-error.model';
 import { CreateStoryService } from '../create-story.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-step-title',
@@ -13,13 +15,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class StepTitleComponent implements OnInit {
   stepTitleForm: FormGroup;
   storyId: number; // si la création a réussi, contient l'id de l'histoire nouvellement créée
-  creationError: ApiError;
   backendOperationInProgress: boolean;
 
   constructor(
     private createStoryService: CreateStoryService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -51,7 +53,6 @@ export class StepTitleComponent implements OnInit {
     this.backendOperationInProgress = true;
     this.createStoryService.initStoryStepTitle(this.stepTitleForm).subscribe(
       (storyId: number) => {
-        this.creationError = null;
         this.storyId = storyId;
         this.createStoryService.storyId = storyId;
         this.router.navigate(['../etape-2'], { relativeTo: this.route });
@@ -59,10 +60,11 @@ export class StepTitleComponent implements OnInit {
       },
       (error: ApiError) => {
         console.log(error);
-        this.creationError = error;
         if (error.code === ApiErrorCodeEnum.TITLE_ALREADY_USED) {
-          this.creationError.message =
-            `Une histoire existe déjà avec ce titre : '${this.stepTitleForm.value.storyTitle}'. Veuillez réessayer avec un autre titre.`;
+          this.toastrService.error(`Une histoire existe déjà avec ce titre : <b><u>${this.stepTitleForm.value.storyTitle}</u></b>.`);
+        } else {
+          this.toastrService.error('Une erreur s\'est produite! Merci de réessayer plus tard ou de contacter le support',
+            'Erreur technique');
         }
         this.backendOperationInProgress = false;
       }
@@ -70,18 +72,21 @@ export class StepTitleComponent implements OnInit {
   }
 
   onFinish(): void {
+    const storyTitle = this.stepTitleForm.value.storyTitle;
+
     this.createStoryService.initStoryStepTitle(this.stepTitleForm).subscribe(
       (storyId: number) => {
-        this.creationError = null;
         this.storyId = storyId;
+        this.toastrService.success(`L'histoire <b><u>${storyTitle}</b></u> a bien été créée.`);
         this.router.navigate(['../../accueil'], { relativeTo: this.route });
       },
-      (error: ApiError) => {
-        console.log(error);
-        this.creationError = error;
-        if (error.code === ApiErrorCodeEnum.TITLE_ALREADY_USED) {
-          this.creationError.message =
-            `Une histoire existe déjà avec ce titre : '${this.stepTitleForm.value.storyTitle}'. Veuillez réessayer avec un autre titre.`;
+      (errorResponse: HttpErrorResponse) => {
+        const apiError: ApiError = errorResponse.error;
+        if (apiError.code === ApiErrorCodeEnum.TITLE_ALREADY_USED) {
+          this.toastrService.error(`Une histoire existe déjà avec ce titre : <b><u>${this.stepTitleForm.value.storyTitle}</u></b>.`);
+        } else {
+          this.toastrService.error('Une erreur s\'est produite! Merci de réessayer plus tard ou de contacter le support',
+            'Erreur technique');
         }
         this.backendOperationInProgress = false;
       }
