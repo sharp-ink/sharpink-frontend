@@ -2,6 +2,7 @@ import { CreateStoryService } from '../create-story.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as CKEDITOR from 'src/ckeditor-custom-builds/ckeditor5-super-build-editor/build/ckeditor';
 
 @Component({
   selector: 'app-step-summary',
@@ -10,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class StepSummaryComponent implements OnInit {
   stepSummaryForm: FormGroup;
-  // ckEditor = ClassicEditor;
+  ckEditor = CKEDITOR.TotoClassicEditor;
   ckEditorConfig: any;
 
   constructor(

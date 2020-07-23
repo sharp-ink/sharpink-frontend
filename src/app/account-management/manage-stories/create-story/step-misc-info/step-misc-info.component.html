@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-12">
         <p>
-            Votre histoire {{ createStory.title }} a bien été créée !
+            Votre histoire <strong><u>{{ createStory.title }}</u></strong> a bien été créée !
         </p>
         <p>
             Vous pouvez maintenant renseigner différentes informations sur votre histoire, mais celles-ci ne sont pas
@@ -30,7 +30,7 @@
 
 <div class="row">
     <div class="col-12">
-        <app-create-story-buttons-group [step]="2" [saveButtonsDisabled]="false"
+        <app-create-story-buttons-group [step]="2" [saveButtonsDisabled]="f.invalid"
             (nextStep)="onNextStep()" (finish)="onFinish()">
         </app-create-story-buttons-group>
     </div>

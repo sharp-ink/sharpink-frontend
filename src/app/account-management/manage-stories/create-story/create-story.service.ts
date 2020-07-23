@@ -3,6 +3,7 @@ import { StoryStatusEnum } from '../../../shared/constant/story-status.enum';
 import { CreateStory } from '../../../shared/model/story/create-story.model';
 import { AuthService } from '../../../shared/service/auth.service';
 import { ApiService } from '../../../shared/service/util/api.service';
+import { NotificationService } from '../../../shared/service/util/notification.service';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -16,7 +17,8 @@ export class CreateStoryService {
 
   constructor(
     private apiService: ApiService,
-    private authService: AuthService
+    private authService: AuthService,
+    private notificationService: NotificationService
   ) { }
 
   initStoryStepTitle(stepTitleForm: FormGroup): Observable<any> {
@@ -35,6 +37,7 @@ export class CreateStoryService {
     }
     this.updateStoryObservable(this.storyId, this.createStory).subscribe(response => {
       console.log(response);
+      this.notificationService.success('Les informations de l\'histoire ont bien été mises à jour.');
     });
   }
 
@@ -45,6 +48,7 @@ export class CreateStoryService {
     }
     this.updateStoryObservable(this.storyId, this.createStory).subscribe(response => {
       console.log(response);
+      this.notificationService.success('Les informations de l\'histoire ont bien été mises à jour.');
     });
   }
 
@@ -55,6 +59,7 @@ export class CreateStoryService {
     }
     this.updateStoryObservable(this.storyId, this.createStory).subscribe(response => {
       console.log(response);
+      this.notificationService.success('Les informations de l\'histoire ont bien été mises à jour.');
     });
   }
 

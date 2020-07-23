@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 import { Subscription } from 'rxjs';
-import * as ChapterEditor from 'src/ckeditor-custom-builds/ckeditor5-build-chapter-editor/build/ckeditor';
+import * as ChapterEditor from 'src/ckeditor-custom-builds/ckeditor5-super-build-editor/build/ckeditor';
 
 @Component({
   selector: 'app-edit-chapter',

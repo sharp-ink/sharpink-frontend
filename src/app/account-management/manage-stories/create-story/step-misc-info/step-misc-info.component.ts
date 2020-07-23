@@ -2,7 +2,7 @@ import { StoryTypeEnum } from '../../../../shared/constant/story-type.enum';
 import { CreateStory } from '../../../../shared/model/story/create-story.model';
 import { CreateStoryService } from '../create-story.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -28,7 +28,7 @@ export class StepMiscInfoComponent implements OnInit {
 
   initForm() {
     this.stepMiscInfoForm = new FormGroup({
-      'storyType': new FormControl(null, [])
+      'storyType': new FormControl(null, [ Validators.required ])
     });
   }
 
@@ -43,6 +43,6 @@ export class StepMiscInfoComponent implements OnInit {
 
   onFinish() {
     this.createStoryService.completeStoryStepMiscInfo(this.stepMiscInfoForm);
-    // TODO : rediriger vers la bonne page
+    this.router.navigate(['../../accueil'], { relativeTo: this.route });
   }
 }

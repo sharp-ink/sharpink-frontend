@@ -52,6 +52,13 @@ import { ToastrModule } from 'ngx-toastr';
 // locale for french language
 registerLocaleData(localeFr);
 
+const toastrConfig = {
+  closeButton: true,
+  enableHtml: true,
+  newestOnTop: false,
+  timeOut: 3000
+};
+
 @NgModule({
   declarations: [
     // main component
@@ -108,13 +115,7 @@ registerLocaleData(localeFr);
     // WYSIWYG editor
     CKEditorModule,
     // Toastr notifications
-    ToastrModule.forRoot({
-      closeButton: true,
-      enableHtml: true,
-      newestOnTop: false,
-      timeOut: 5000,
-      disableTimeOut: true
-    })
+    ToastrModule.forRoot(toastrConfig)
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
