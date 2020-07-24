@@ -4,12 +4,12 @@ import { Chapter } from '../../../shared/model/chapter/chapter.model';
 import { Story } from '../../../shared/model/story/story.model';
 import { StoryService } from '../../../shared/service/story.service';
 import { ApiService } from '../../../shared/service/util/api.service';
+import { HtmlUtilService } from '../../../shared/service/util/html-util.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 import { Subscription } from 'rxjs';
-import * as ChapterEditor from 'src/ckeditor-custom-builds/ckeditor5-super-build-editor/build/ckeditor';
+import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
 
 @Component({
   selector: 'app-edit-chapter',
@@ -22,15 +22,15 @@ export class EditChapterComponent implements OnInit {
   story: Story;
   chapter: Chapter; // only set if we are editing an existing chapter, null if it is a creation
   chapterContentForm: FormGroup;
-  ckEditor = ChapterEditor;
+  ckEditor = CustomEditor;
   ckEditorConfig: any;
-  @ViewChild('editor') editorComponent: CKEditorComponent;
   chapterStats: ChapterStats = { words: 0, characters: 0 };
 
   constructor(
     private storyService: StoryService,
     private route: ActivatedRoute,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private htmlUtilService: HtmlUtilService
   ) { }
 
   ngOnInit() {
@@ -107,27 +107,17 @@ export class EditChapterComponent implements OnInit {
   onSubmit() {
     const fv = this.chapterContentForm.value;
     const title = fv.chapterTitle;
-    const content = this.clean(fv.chapterContent);
+    const content = this.htmlUtilService.cleanEmptyParagraphs(fv.chapterContent);
 
     if (this.chapter) {
       this.apiService
-        .put(`${EndpointEnum.STORIES}/${this.story.id}/chapters/${this.chapter.position}`, { title, content })
+        .put(`${EndpointEnum.STORIES}/${this.story.id}/chapters/${this.chapter.position}`, {  title, content })
         .subscribe(response => { console.log(response); });
     } else {
       this.apiService
         .post(`${EndpointEnum.STORIES}/${this.story.id}/chapters/`, { title, content })
         .subscribe(response => { console.log(response); });
     }
-  }
-
-  /**
-   * Cleans the HTML input string to remove nbsp in empty paragraphs, etc...
-   * @param chapterContent the HTML string representing the chapter content
-   * @returns the cleaned string
-   */
-  clean(chapterContent: string): string {
-    chapterContent = chapterContent.replace('<p>&nbsp;</p>', '<p></p>'); // cleans empty paragraphs
-    return chapterContent;
   }
 
 }

@@ -18,10 +18,10 @@ import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalli
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials.js';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph.js';
 
-export default class ChapterEditor extends ClassicEditor {}
+export default class CustomEditor extends ClassicEditor {}
 
 // Plugins to include in the build.
-ChapterEditor.builtinPlugins = [
+CustomEditor.builtinPlugins = [
 	Essentials,
 	Alignment,
 	Autoformat,
@@ -38,7 +38,7 @@ ChapterEditor.builtinPlugins = [
 	WordCount
 ];
 
-ChapterEditor.defaultConfig = {
+CustomEditor.defaultConfig = {
 	locale: 'fr',
 	toolbar: ['bold', 'italic', 'underline', '|', 'alignment:left', 'alignment:center', 'alignment:right', '|', 'indent', 'outdent', '|', 'undo', 'redo' ]
 };

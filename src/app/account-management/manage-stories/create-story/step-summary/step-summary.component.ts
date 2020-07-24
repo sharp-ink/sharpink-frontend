@@ -2,7 +2,7 @@ import { CreateStoryService } from '../create-story.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as CKEDITOR from 'src/ckeditor-custom-builds/ckeditor5-super-build-editor/build/ckeditor';
+import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
 
 @Component({
   selector: 'app-step-summary',
@@ -11,7 +11,7 @@ import * as CKEDITOR from 'src/ckeditor-custom-builds/ckeditor5-super-build-edit
 })
 export class StepSummaryComponent implements OnInit {
   stepSummaryForm: FormGroup;
-  ckEditor = CKEDITOR.TotoClassicEditor;
+  ckEditor = CustomEditor;
   ckEditorConfig: any;
 
   constructor(
@@ -27,15 +27,15 @@ export class StepSummaryComponent implements OnInit {
 
   private initForm() {
     this.stepSummaryForm = new FormGroup({
-      'storySummary': new FormControl(null, [Validators.maxLength(2000)])
+      'storySummary': new FormControl(null, [ Validators.required, Validators.maxLength(2000) ])
     });
   }
 
   private initCkEditor() {
     this.ckEditorConfig = {
-      placeholder: 'Écrire un résumé...',
+      placeholder: 'Il était une fois...',
       language: 'fr',
-      toolbar: ['bold', 'italic', '|', 'undo', 'redo']
+      toolbar: ['bold', 'italic', 'underline', '|', 'indent', 'outdent', '|', 'undo', 'redo']
     };
   }
 
@@ -46,6 +46,6 @@ export class StepSummaryComponent implements OnInit {
 
   onFinish() {
     this.createStoryService.completeStoryStepMiscInfo(this.stepSummaryForm);
-    // TODO : rediriger vers la bonne page
+    this.router.navigate(['../../accueil'], { relativeTo: this.route });
   }
 }
