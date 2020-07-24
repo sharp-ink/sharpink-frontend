@@ -15,14 +15,15 @@ Ce site permet, entre autres choses :
 ### Détails techniques sur le projet
 
 Ce site est séparé en deux parties :
-* Un front-end en Angular 8
+* Un front-end en Angular 9
 * Un back-end en Java (API REST)
 #### Technologies et frameworks utilisés :
 * Front-end :
-  * Angular 8
+  * Angular 9
   * RxJS
-  * CSS 5 + Bootstrap 4
+  * CSS 5 + Bootstrap 4.4 + ngx-bootstrap
   * Icônes : Font Awesome (https://fontawesome.com/)
+  * Notification 'flottantes' : ngx-toastr
 * Back-end :
   * Spring Boot : mise à disposition d'une API REST pour exposer les différents services nécessaires au front-end
     * Format entrée/sortie : JSON
