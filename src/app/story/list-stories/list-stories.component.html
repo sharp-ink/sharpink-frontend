@@ -3,25 +3,21 @@
 
   <h1>Les histoires de la communauté</h1>
 
-  <app-loading *ngIf="isLoading"></app-loading>
-
-  <div class="row" *ngIf="!isLoading">
-
+  <div class="row">
     <div class="col">
-      <h2>
-        Liste des histoires
-      </h2>
-      <div class="row">
+
+      <h2>Liste des histoires</h2>
+      
+      <div class="row mb-2">
         <div class="col">
-          <p>
-            Cette page liste toutes les histoires. Elles sont classées par ordre décroissant de modification. La première histoire de la liste est celle qui a été modifiée le plus récemment (ajout ou modification de chapitre). Vous pouvez également choisir d'autres critères de tri.
-          </p>
-          <p>
-            Pour avoir un bref aperçu d'une histoire, cliquez sur la ligne de celle-ci dans le tableau. Pour en commencer la lecture, cliquer sur le bouton 'Lire'.
-          </p>
+          <p>Cette page liste toutes les histoires. Elles sont classées par ordre décroissant de modification. La première histoire de la liste est celle qui a été modifiée le plus récemment (ajout ou modification de chapitre). Vous pouvez également choisir d'autres critères de tri.</p>
+          <p>Pour avoir un bref aperçu d'une histoire, cliquez sur la ligne de celle-ci dans le tableau. Pour en commencer la lecture, cliquer sur le bouton 'Lire'.</p>
         </div>
       </div>
-      <div class="row">
+      
+      <app-loading *ngIf="isLoading"></app-loading>
+
+      <div class="row" *ngIf="!isLoading">
         <div class="col">
           <table class="table">
             <thead>
@@ -36,7 +32,7 @@
               <tr *ngFor="let story of allStories" (click)="showPreview(story)">
                 <td>{{ story.title }}</td>
                 <td>{{ story.author.nickname }}</td>
-                <td>{{ story.summary != null ? story.summary : 'Aucun résumé' }}</td>
+                <td [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></td>
                 <td><a [routerLink]="['../lire', story.id]" class="btn btn-primary">Lire</a></td>
               </tr>
             </tbody>

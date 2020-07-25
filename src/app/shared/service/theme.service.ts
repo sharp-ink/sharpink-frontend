@@ -5,66 +5,73 @@ import { Injectable } from '@angular/core';
 })
 export class ThemeService {
   private readonly DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS = 'white';
-  private readonly COLOR_BLUE           = '#0045c0';
-  private readonly COLOR_BLUE_NIGHT     = '#002750';
-  private readonly COLOR_PINK_FANCY     = '#f81faa';
-  private readonly COLOR_RED_DARK       = '#d11c1c';
-  private readonly COLOR_GREY_DARK      = '#303030';
-  private readonly COLOR_ORANGE         = '#f49026';
-  private readonly COLOR_ANNA           = '#00CED1';
+  private readonly THEME_BLUE_PRIMARY_COLOR       = '#0045C0';
+  private readonly THEME_MARINE_PRIMARY_COLOR      = '#00304F';
+  private readonly THEME_FANCY_PRIMARY_COLOR      = '#F81FAA';
+  private readonly THEME_BRICK_PRIMARY_COLOR      = '#B22222';
+  private readonly THEME_GREY_PRIMARY_COLOR       = '#303030';
+  private readonly THEME_PUMPKIN_PRIMARY_COLOR    = '#FF8C00';
+  private readonly THEME_DARLING_PRIMARY_COLOR    = '#00CED1';
   private readonly THEMES = [
     {
       id: 0,
-      name: 'Thème par défaut',
-      headerBackgroundColor: this.COLOR_BLUE,
+      name: 'Bleu',
+      themePrimaryColor: this.THEME_BLUE_PRIMARY_COLOR,
+      themeSecondaryColor: '#00BFFF',
       headerForegroundColor: this.DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS,
-      buttonPrimaryBackgroundColor: this.COLOR_BLUE
+      buttonPrimaryBackgroundColor: this.THEME_BLUE_PRIMARY_COLOR
     },
     {
       id: 1,
-      name: 'Bleu nuit',
-      headerBackgroundColor: this.COLOR_BLUE_NIGHT,
+      name: 'Marine',
+      themePrimaryColor: this.THEME_MARINE_PRIMARY_COLOR,
+      themeSecondaryColor: '#16A085',
       headerForegroundColor: this.DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS,
-      buttonPrimaryBackgroundColor: this.COLOR_BLUE_NIGHT
+      buttonPrimaryBackgroundColor: this.THEME_MARINE_PRIMARY_COLOR
     },
     {
       id: 2,
-      name: 'Rose pimpant',
-      headerBackgroundColor: this.COLOR_PINK_FANCY,
+      name: 'Candy',
+      themePrimaryColor: this.THEME_FANCY_PRIMARY_COLOR,
+      themeSecondaryColor: '#C71585',
       headerForegroundColor: this.DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS,
-      buttonPrimaryBackgroundColor: this.COLOR_PINK_FANCY
+      buttonPrimaryBackgroundColor: this.THEME_FANCY_PRIMARY_COLOR
     },
     {
       id: 3,
-      name: 'Rouge sombre',
-      headerBackgroundColor: this.COLOR_RED_DARK,
+      name: 'Brick',
+      themePrimaryColor: this.THEME_BRICK_PRIMARY_COLOR,
+      themeSecondaryColor: '#A04030',
       headerForegroundColor: this.DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS,
-      buttonPrimaryBackgroundColor: this.COLOR_RED_DARK
+      buttonPrimaryBackgroundColor: this.THEME_BRICK_PRIMARY_COLOR
     },
     {
       id: 4,
-      name: 'Gris sombre',
-      headerBackgroundColor: this.COLOR_GREY_DARK,
+      name: 'Gris',
+      themePrimaryColor: this.THEME_GREY_PRIMARY_COLOR,
+      themeSecondaryColor: 'black',
       headerForegroundColor: this.DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS,
-      buttonPrimaryBackgroundColor: this.COLOR_GREY_DARK
+      buttonPrimaryBackgroundColor: this.THEME_GREY_PRIMARY_COLOR
     },
     {
       id: 5,
-      name: 'Orange',
-      headerBackgroundColor: this.COLOR_ORANGE,
+      name: 'Pumkin',
+      themePrimaryColor: this.THEME_PUMPKIN_PRIMARY_COLOR,
+      themeSecondaryColor: '#228B22',
       headerForegroundColor: this.DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS,
-      buttonPrimaryBackgroundColor: this.COLOR_ORANGE
+      buttonPrimaryBackgroundColor: this.THEME_PUMPKIN_PRIMARY_COLOR
     },
     {
       id: 6,
-      name: 'Anna',
-      headerBackgroundColor: this.COLOR_ANNA,
+      name: 'Turquoise',
+      themePrimaryColor: this.THEME_DARLING_PRIMARY_COLOR,
+      themeSecondaryColor: '#0090D0',
       headerForegroundColor: this.DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS,
-      buttonPrimaryBackgroundColor: this.COLOR_ANNA
+      buttonPrimaryBackgroundColor: this.THEME_DARLING_PRIMARY_COLOR
     }
   ];
 
-  currentThemeId = 0;
+  currentThemeId: number;
 
   constructor() { }
 
@@ -77,9 +84,10 @@ export class ThemeService {
   loadTheme(newThemeId: number) {
     const themeWrapper = document.querySelector('body');
     const theme = this.getThemeById(newThemeId);
-    themeWrapper.style.setProperty('--header-background-color', theme.headerBackgroundColor);
+    themeWrapper.style.setProperty('--theme-primary-color', theme.themePrimaryColor);
     themeWrapper.style.setProperty('--header-foreground-color', theme.headerForegroundColor);
     themeWrapper.style.setProperty('--button-primary-background-color', theme.buttonPrimaryBackgroundColor);
+    themeWrapper.style.setProperty('--theme-secondary-color', theme.themeSecondaryColor);
     this.currentThemeId = newThemeId;
   }
 

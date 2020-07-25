@@ -1,16 +1,17 @@
 // default colors
 :root {
-  // main background color (for body element)
-  --body-background-color: white;
-  --header-background-color: null; // defined in themes
-  --header-foreground-color: null; // defined in themes
-  --button-primary-background-color: var(--header-background-color);
+  // all null values will be defined programatically in themeService
+  --body-background-color: white; // main background color (for body element)
+  --theme-primary-color: null;
+  --theme-secondary-color: null;
+  --header-foreground-color: null;
+  --button-primary-background-color: var(--theme-primary-color);
 }
 
 // pass variables into a sass map
 $theme-colors: (
   --body-background-color: var(--body-background-color),
-  --header-background-color: var(--header-background-color),
+  --theme-primary-color: var(--theme-primary-color),
   --header-foreground-color: var(--header-foreground-color),
   --button-primary-background-color: var(--button-primary-background-color)
 );

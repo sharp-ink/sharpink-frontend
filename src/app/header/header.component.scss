@@ -1,8 +1,8 @@
 
 header {
-  border-bottom: 3px solid var(--header-background-color);
+  border-bottom: 3px solid var(--theme-primary-color);
   padding-top: 20px;
-  background-color: var(--header-background-color);
+  background-color: var(--theme-primary-color);
   color: var(--header-foreground-color);
   text-align: center;
 }
@@ -19,6 +19,6 @@ header h2 {
 
 header .fa {
   margin-right: 10px;
-  color: var(--header-background-color);
+  color: var(--theme-primary-color);
   filter: brightness(2);
 }

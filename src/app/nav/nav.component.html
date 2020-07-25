@@ -1,15 +1,18 @@
 
-<nav class="navbar navbar-expand-sm">
+<nav class="navbar navbar-expand">
 
   <!-- Site navigation menu -->
-  <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="/accueil" routerLinkActive="active"><span class="fa fa-fort-awesome"></span>Accueil</a>
-    <a class="nav-item nav-link" routerLink="/histoires" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><span class="fa fa-book"></span>Lecture</a>
-    <a class="nav-item nav-link" routerLink="/mon-compte/mes-histoires/creer" routerLinkActive="active"><span class="fa fa-pencil"></span>Ecrire une histoire</a>
-    <a class="nav-item nav-link" routerLink="/mon-compte" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><span class="fa fa-folder-open"></span>Mon compte</a>
-    <a class="nav-item nav-link" routerLink="/histoires/lire/au-hasard" routerLinkActive="active"><span class="fa fa-random"></span>Lire une histoire au hasard</a>
-    <a class="nav-item nav-link" routerLink="/communaute" routerLinkActive="active"><span class="fa fa-users"></span>La communauté</a>
-    <a class="nav-item nav-link" routerLink="/contact" routerLinkActive="active"><span class="fa fa-question-circle-o"></span>Contacter le support</a>
+  <div class="navbar-nav nav-justified w-100 align-items-baseline">
+    <a class="nav-item nav-link" routerLink="/accueil" routerLinkActive="active">
+      <span class="fa-stack fa-2x">
+        <i class="far fa-circle fa-stack-2x"></i>
+        <i class="fab fa-fort-awesome fa-stack-1x"></i>
+      </span>Accueil
+    </a>
+    <a class="nav-item nav-link" routerLink="/histoires" routerLinkActive="active"><i class="fa fa-book"></i>Lecture</a>
+    <a class="nav-item nav-link" routerLink="/mon-compte" routerLinkActive="active"><i class="fa fa-folder-open"></i>Mon compte</a>
+    <a class="nav-item nav-link" routerLink="/communaute" routerLinkActive="active"><i class="fa fa-users"></i>Communauté</a>
+    <a class="nav-item nav-link" routerLink="/contact" routerLinkActive="active"><i class="fa fa-question-circle"></i>Support</a>
   </div>
 
   <!-- Log-in area (login/logout button + connected member) -->

@@ -6,6 +6,7 @@
 html, body {
     height: 100%;
     min-height: 100%;
+    background-image: url('assets/images/cool-background-white-transparent-2.png');
     background-color: var(--body-background-color);
 }
 
@@ -100,7 +101,7 @@ a {
 
 .nav-tabs .nav-link.active {
   border-color: var(--button-primary-background-color) var(--button-primary-background-color) var(--body-background-color);
-  background-color: var(--header-background-color);
+  background-color: var(--theme-primary-color);
   color: var(--body-background-color);
   opacity: 70%;
 }
@@ -109,7 +110,7 @@ a {
   border-color: var(--button-primary-background-color);
   border-bottom-color: var(--body-background-color);
   background-color: var(--body-background-color);
-  color: var(--header-background-color);
+  color: var(--theme-primary-color);
 }
 
 .nav-tabs .nav-link.active:hover {
@@ -183,7 +184,7 @@ ckeditor.ng-touched.ng-invalid .ck.ck-editor {
  */
 
 .mandatory-indicator {
-  color: var(--header-background-color);
+  color: var(--theme-primary-color);
 }
 
 .story-title {
