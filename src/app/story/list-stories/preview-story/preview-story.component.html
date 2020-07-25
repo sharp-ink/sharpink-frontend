@@ -2,28 +2,28 @@
 
     <div *ngIf="story">
 
-        <div class="row">
-            <div class="col-12">
-                <h2>Aperçu de l'histoire {{ story.title }}</h2>
-            </div>
+        <div class="modal-header">
+            <h4 class="modal-title">Aperçu de l'histoire <span class="story-title">{{ story.title }}</span></h4>
+            <button type="button" aria-label="Close" class="close" (click)="bsModalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+              </button>
         </div>
 
-        <div *ngIf="story.chapters && story.chapters[0]; else noChapters" class="row">
-            <div *ngIf="story.chapters[0].content.length <= 500; else contentTooLong" class="col-12">
-                {{ story.chapters[0].content }}</div>
-            <ng-template #contentTooLong>
-                <div class="col-12">{{ story.chapters[0].content.substring(0, 500).trim() + '[...]' }}</div>
+        <div class="modal-body">
+            <div *ngIf="story.chapters && story.chapters[0]; else noChapters" class="row">
+                <div class="col-12" [innerHTML]="story.chapters[0].content"></div>
+            </div>
+            <ng-template #noChapters>
+                <div class="row mt-3 mb-3">
+                    <div class="col-12">Aucun aperçu n'est disponible car il n'y a pas encore de chapitre pour cette
+                        histoire.</div>
+                </div>
             </ng-template>
-        </div>
-        <ng-template #noChapters>
-            <div class="row mt-3 mb-3">
-                <div class="col-12">Aucun aperçu n'est disponible car il n'y a pas encore de chapitre pour cette histoire.</div>
-            </div>
-        </ng-template>
 
-        <div class="row">
-            <div class="col-12">
-                <a [routerLink]="['/histoires/lire', story.id]">Lire la suite</a>
+            <div class="row">
+                <div class="col-12">
+                    <a routerLink="" (click)="closeAndRedirectToStoryReading(story.id)">Lire la suite</a>
+                </div>
             </div>
         </div>
 

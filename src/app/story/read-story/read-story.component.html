@@ -4,7 +4,7 @@
   <app-loading *ngIf="isLoading"></app-loading>
 
   <div *ngIf="!isLoading">
-    <h1>Lire l'histoire {{ story.title }}</h1>
+    <h1>Lire l'histoire <span class="story-title">{{ story.title }}</span></h1>
     
     <app-select-chapter [chapters]="story.chapters" (chapterChange)="selectedChapter = $event" class="d-block mb-4"></app-select-chapter>
 

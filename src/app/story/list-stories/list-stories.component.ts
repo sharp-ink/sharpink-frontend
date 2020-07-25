@@ -40,10 +40,11 @@ export class ListStoriesComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Affiche un apercu de l'histoire
+   * Displays a preview of the story
    */
   showPreview(story: Story) {
     const modalOptions = {
+      backdrop: false,
       class: 'modal-dialog-centered modal-lg',
       initialState: {
         story: story

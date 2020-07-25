@@ -25,7 +25,7 @@ html, body {
 
 /* *************************************************
  * Titres (h1, h2,...)
- * ************************************************
+ * *************************************************
  */
 
 h1 {
@@ -188,8 +188,7 @@ ckeditor.ng-touched.ng-invalid .ck.ck-editor {
 }
 
 .story-title {
-  color: plum;
   font-family: fantasy;
-  font-style: italic;
   text-decoration: underline;
+  color: var(--theme-secondary-color);
 }
