@@ -6,12 +6,12 @@
             <h4 class="modal-title">Aperçu de l'histoire <span class="story-title">{{ story.title }}</span></h4>
             <button type="button" aria-label="Close" class="close" (click)="bsModalRef.hide()">
                 <span aria-hidden="true">&times;</span>
-              </button>
+            </button>
         </div>
 
         <div class="modal-body">
             <div *ngIf="story.chapters && story.chapters[0]; else noChapters" class="row">
-                <div class="col-12" [innerHTML]="story.chapters[0].content"></div>
+                <div class="col-12 text-justify chapter-content" [innerHTML]="story.chapters[0].content"></div>
             </div>
             <ng-template #noChapters>
                 <div class="row mt-3 mb-3">

@@ -192,3 +192,8 @@ ckeditor.ng-touched.ng-invalid .ck.ck-editor {
   text-decoration: underline;
   color: var(--theme-secondary-color);
 }
+
+.chapter-content p {
+  margin-bottom: 0.25em;
+  text-indent: 20px;
+}
