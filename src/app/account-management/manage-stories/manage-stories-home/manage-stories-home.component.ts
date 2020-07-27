@@ -2,6 +2,7 @@ import { ManageStoriesHomeService } from './manage-stories-home.service';
 import { Story } from '../../../shared/model/story/story.model';
 import { AuthService } from '../../../shared/service/auth.service';
 import { MemberService } from '../../../shared/service/member.service';
+import { NotificationService } from '../../../shared/service/util/notification.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -20,7 +21,8 @@ export class ManageStoriesHomeComponent implements OnInit {
     private route: ActivatedRoute,
     private memberService: MemberService,
     private authService: AuthService,
-    private manageStoriesHomeService: ManageStoriesHomeService
+    private manageStoriesHomeService: ManageStoriesHomeService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
@@ -42,6 +44,9 @@ export class ManageStoriesHomeComponent implements OnInit {
     this.manageStoriesHomeService.changeStoryStatus(story).subscribe(updatedStory => {
       console.log(updatedStory);
       story.published = updatedStory.published; // reflect the new status on the page
+      this.notificationService.success(
+        `L'histoire est désormais <b>${story.published ? 'visible publiquement' : 'masquée'}</b>.`
+      );
 
     });
   }
@@ -51,6 +56,7 @@ export class ManageStoriesHomeComponent implements OnInit {
       this.myStories = this.myStories.filter(s => s.id !== story.id);
       this.manageStoriesHomeService.removeStory(story.id).subscribe(response => {
         console.log(response);
+        this.notificationService.warning(`L'histoire <b><u>${story.title}</u></b> a bien été supprimée.`);
       });
     }
   }

@@ -40,6 +40,6 @@ CustomEditor.builtinPlugins = [
 
 CustomEditor.defaultConfig = {
 	locale: 'fr',
-	toolbar: ['bold', 'italic', 'underline', '|', 'alignment:left', 'alignment:center', 'alignment:right', '|', 'indent', 'outdent', '|', 'undo', 'redo' ]
+	toolbar: ['bold', 'italic', 'underline', '|', 'alignment:left', 'alignment:center', 'alignment:right', '|', 'undo', 'redo' ]
 };
 

@@ -56,7 +56,7 @@ const toastrConfig = {
   closeButton: true,
   enableHtml: true,
   newestOnTop: false,
-  timeOut: 3000
+  timeOut: 4000
 };
 
 @NgModule({

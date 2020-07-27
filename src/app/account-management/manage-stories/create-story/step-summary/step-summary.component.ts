@@ -35,7 +35,14 @@ export class StepSummaryComponent implements OnInit {
     this.ckEditorConfig = {
       placeholder: 'Il était une fois...',
       language: 'fr',
-      toolbar: ['bold', 'italic', 'underline', '|', 'indent', 'outdent', '|', 'undo', 'redo']
+      toolbar: [
+        'bold',
+        'italic',
+        'underline',
+        '|',
+        'undo',
+        'redo'
+      ]
     };
   }
 

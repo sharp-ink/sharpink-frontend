@@ -4,9 +4,12 @@
 $navbar-background-color-light-gray: $light-gray;
 
 .navbar {
-  margin-top: 30px;
   padding: 0;
   background-color: $navbar-background-color-light-gray;
+}
+
+.navbar .navbar-nav {
+  width: 75%;
 }
 
 .navbar-nav a {

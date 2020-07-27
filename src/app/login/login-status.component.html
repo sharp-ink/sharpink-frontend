@@ -1,8 +1,14 @@
-<div>
-  <button *ngIf="!connectedUser" type="button" class="btn btn-primary" (click)="login()">Connexion</button>
-  <span *ngIf="connectedUser">
+
+<div class="ml-auto px-2">
+  <button *ngIf="!connectedUser" type="button" class="btn btn-primary btn-sm" (click)="login()">
+    <i class="fas fa-sign-in-alt"></i>
+  </button>
+
+  <div *ngIf="connectedUser">
     <span class="fa fa-user"></span>&nbsp;
     <strong>{{ connectedUser.nickname }} [{{ connectedUser.id }}]</strong>&nbsp;
-    <button type="button" class="btn btn-primary" (click)="logout()">Déconnexion</button>
-  </span>
+    <button type="button" class="btn btn-primary btn-sm" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+  </div>
 </div>
