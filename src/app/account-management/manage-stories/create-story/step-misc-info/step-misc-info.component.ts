@@ -1,5 +1,5 @@
 import { StoryTypeEnum } from '../../../../shared/constant/story-type.enum';
-import { CreateStory } from '../../../../shared/model/story/create-story.model';
+import { StoryPatchRequest } from '../../../../shared/model/story/story-patch-request.model';
 import { CreateStoryService } from '../create-story.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./step-misc-info.component.scss']
 })
 export class StepMiscInfoComponent implements OnInit {
-  createStory: CreateStory;
+  createStory: StoryPatchRequest;
   stepMiscInfoForm: FormGroup;
   types = new Array<{ name: string, label: string }>();
 
@@ -23,17 +23,13 @@ export class StepMiscInfoComponent implements OnInit {
   ngOnInit() {
     this.createStory = this.createStoryService.createStory;
     this.initForm();
-    this.initTypes();
+    this.types = StoryTypeEnum.getTypesForDropdown();
   }
 
   initForm() {
     this.stepMiscInfoForm = new FormGroup({
-      'storyType': new FormControl(null, [ Validators.required ])
+      'storyType': new FormControl('')
     });
-  }
-
-  initTypes() {
-    Object.keys(StoryTypeEnum).forEach(type => this.types.push({ name: type, label: StoryTypeEnum[type] }));
   }
 
   onNextStep() {

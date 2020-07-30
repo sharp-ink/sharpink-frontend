@@ -1,7 +1,7 @@
 
 <div class="row mt-4">
     <div class="col-12 text-center">
-        <select [ngModel]="selectedChapter" (ngModelChange)="onChangeChapter($event)">
+        <select class="col-2 mx-auto form-control" [ngModel]="selectedChapter" (ngModelChange)="onChangeChapter($event)">
             <option *ngFor="let chapter of chapters" [ngValue]="chapter">Chapitre {{ chapter.position }}<span *ngIf="chapter.title"> - {{ chapter.title }}</span></option>
         </select>
     </div>

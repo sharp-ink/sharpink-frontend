@@ -19,21 +19,21 @@
 
       <div class="row" *ngIf="!isLoading">
         <div class="col">
-          <table class="table">
+          <table class="table table-sm">
             <thead>
-              <tr>
-                <th>Titre</th>
-                <th>Auteur</th>
-                <th>Résumé</th>
-                <th></th>
+              <tr class="d-flex">
+                <th class="col-3">Titre</th>
+                <th class="col-2">Auteur</th>
+                <th class="col-6">Résumé</th>
+                <th class="col-1"></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let story of allStories" (click)="showPreview(story)">
-                <td>{{ story.title }}</td>
-                <td>{{ story.author.nickname }}</td>
-                <td [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></td>
-                <td><a [routerLink]="['../lire', story.id]" class="btn btn-primary">Lire</a></td>
+              <tr *ngFor="let story of allStories" (click)="showPreview(story)" class="d-flex">
+                <td class="col-3 d-flex align-items-center story-title">{{ story.title }}</td>
+                <td class="col-2 d-flex align-items-center">{{ story.author.nickname }}</td>
+                <td class="col-6 d-flex align-items-center text-justify" [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></td>
+                <td class="col-1 d-flex align-items-center"><a [routerLink]="['../lire', story.id]" class="btn btn-primary">Lire</a></td>
               </tr>
             </tbody>
           </table>

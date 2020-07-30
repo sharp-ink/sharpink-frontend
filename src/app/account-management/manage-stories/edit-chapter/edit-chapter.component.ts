@@ -1,10 +1,11 @@
 import { EndpointEnum } from '../../../shared/constant/endpoint.enum';
-import { ChapterStats } from '../../../shared/model/chapter/chapter-stats.model';
-import { Chapter } from '../../../shared/model/chapter/chapter.model';
+import { ChapterStats } from '../../../shared/model/story/chapter/chapter-stats.model';
+import { Chapter } from '../../../shared/model/story/chapter/chapter.model';
 import { Story } from '../../../shared/model/story/story.model';
 import { StoryService } from '../../../shared/service/story.service';
 import { ApiService } from '../../../shared/service/util/api.service';
-import { HtmlUtilService } from '../../../shared/service/util/html-util.service';
+import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
+import { HtmlUtil } from '../../../shared/service/util/html-util.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -30,7 +31,7 @@ export class EditChapterComponent implements OnInit {
     private storyService: StoryService,
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private htmlUtilService: HtmlUtilService
+    private htmlUtilService: HtmlUtil
   ) { }
 
   ngOnInit() {
@@ -87,8 +88,7 @@ export class EditChapterComponent implements OnInit {
   }
 
   private initCkEditor() {
-    this.ckEditorConfig = this.ckEditor.defaultConfig;
-    this.ckEditorConfig.placeholder = 'Écrivez ou copiez/collez le contenu de votre chapitre ici...';
+    this.ckEditorConfig = CkeditorConfigUtil.getCkeditorConfig(EditorType.CHAPTER);
     this.ckEditorConfig.wordCount = {
       onUpdate: (stats: ChapterStats) => this.onUpdateStats(stats)
     };

@@ -150,6 +150,10 @@ ckeditor.ng-touched.ng-invalid .ck.ck-editor {
  * *************************************************
  */
 
+.ck.ck-toolbar, .ck.ck-editor__editable {
+  border-color: #CED4DA;
+}
+
 .ck-editor__editable_inline {
   min-height: 200px;
   max-height: 700px;
@@ -202,8 +206,17 @@ ckeditor.ng-touched.ng-invalid .ck.ck-editor {
   text-decoration: underline;
   color: var(--theme-secondary-color);
 }
+span.story-title {
+  display: inline-block; // if displayed normally (inline) ::first-letter does not work
+}
+.story-title::first-letter {
+  text-transform: uppercase;
+}
 
 .chapter-content p {
-  margin-bottom: 0.25em;
+  margin-bottom: 0.4em;
   text-indent: 20px;
+}
+.summary-content p {
+  margin-bottom: 0.4em;
 }

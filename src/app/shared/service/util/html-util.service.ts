@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-export class HtmlUtilService {
+export class HtmlUtil {
 
     /**
    * Cleans an HTML string to remove nbsp in empty paragraphs

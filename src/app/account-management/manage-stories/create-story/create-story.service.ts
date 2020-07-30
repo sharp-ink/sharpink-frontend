@@ -1,6 +1,6 @@
 import { EndpointEnum } from '../../../shared/constant/endpoint.enum';
 import { StoryStatusEnum } from '../../../shared/constant/story-status.enum';
-import { CreateStory } from '../../../shared/model/story/create-story.model';
+import { StoryPatchRequest } from '../../../shared/model/story/story-patch-request.model';
 import { AuthService } from '../../../shared/service/auth.service';
 import { ApiService } from '../../../shared/service/util/api.service';
 import { NotificationService } from '../../../shared/service/util/notification.service';
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CreateStoryService {
-  createStory: CreateStory; // une histoire complétée au fur et à mesure des étapes du formulaire de création
+  createStory: StoryPatchRequest; // une histoire complétée au fur et à mesure des étapes du formulaire de création
   storyId: number;
 
   constructor(
@@ -24,7 +24,7 @@ export class CreateStoryService {
   initStoryStepTitle(stepTitleForm: FormGroup): Observable<any> {
     const fv = stepTitleForm.value;
     this.createStory.title = fv.storyTitle;
-    this.createStory.isOriginal = fv.storyIsOriginal;
+    this.createStory.originalStory = fv.storyIsOriginal;
     this.createStory.status = StoryStatusEnum.PROGRESS;
     this.createStory.authorId = this.authService.getConnectedUser().id;
     return this.createStoryObservable(this.createStory);
@@ -66,14 +66,14 @@ export class CreateStoryService {
   /**
    * Requête pour créer une Story avec les infos minimales (titre + type). Renvoie l'id de la Story si la création s'est bien passée.
    */
-  createStoryObservable(story: CreateStory): Observable<number> {
+  createStoryObservable(story: StoryPatchRequest): Observable<number> {
     return this.apiService.post<number>(EndpointEnum.STORIES, story);
   }
 
   /**
    * Requête pour mettre à jour certains éléments d'une Story. Renvoie la Story mise à jour.
    */
-  updateStoryObservable(storyId: number, storyPatch: CreateStory) {
+  updateStoryObservable(storyId: number, storyPatch: StoryPatchRequest) {
     return this.apiService.patch(`${EndpointEnum.STORIES}/${storyId}`, storyPatch);
   }
 }

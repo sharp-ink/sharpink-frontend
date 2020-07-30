@@ -1,4 +1,4 @@
-import { Chapter } from '../../shared/model/chapter/chapter.model';
+import { Chapter } from '../../shared/model/story/chapter/chapter.model';
 import { Story } from '../../shared/model/story/story.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';

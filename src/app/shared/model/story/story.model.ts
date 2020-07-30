@@ -1,13 +1,14 @@
-import { Chapter } from 'src/app/shared/model/chapter/chapter.model';
 import { Member } from 'src/app/shared/model/member/member.model';
+import { Chapter } from 'src/app/shared/model/story/chapter/chapter.model';
 
 export interface Story {
   id: number;
   title: string;
   type: string;
   originalStory: boolean;
-  summary: string;
   status: string;
+  summary: string;
+  thumbnail: string;
   published: boolean;
   authorId: number;                 // toujours rempli, même si on ne charge pas les données de l'auteur
   author: Member;                   // ne sera pas toujours rempli (parfois pas besoin de charger l'auteur', son id suffit)

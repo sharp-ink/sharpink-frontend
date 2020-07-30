@@ -1,10 +1,10 @@
 import { StoryStatusEnum } from '../../constant/story-status.enum';
 import { StoryTypeEnum } from '../../constant/story-type.enum';
 
-export interface CreateStory {
+export interface StoryPatchRequest {
     title?: string;
+    originalStory?: boolean;
     type?: StoryTypeEnum;
-    isOriginal?: boolean;
     status?: StoryStatusEnum;
     authorId?: number;
     summary?: string; // html string

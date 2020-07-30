@@ -1,3 +1,4 @@
+import { CkeditorConfigUtil, EditorType } from '../../../../shared/service/util/ckeditor-config-util.service';
 import { CreateStoryService } from '../create-story.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -27,23 +28,12 @@ export class StepSummaryComponent implements OnInit {
 
   private initForm() {
     this.stepSummaryForm = new FormGroup({
-      'storySummary': new FormControl(null, [ Validators.required, Validators.maxLength(2000) ])
+      'storySummary': new FormControl(null, [ Validators.maxLength(2000) ])
     });
   }
 
   private initCkEditor() {
-    this.ckEditorConfig = {
-      placeholder: 'Il était une fois...',
-      language: 'fr',
-      toolbar: [
-        'bold',
-        'italic',
-        'underline',
-        '|',
-        'undo',
-        'redo'
-      ]
-    };
+    this.ckEditorConfig = CkeditorConfigUtil.getCkeditorConfig(EditorType.SUMMARY);
   }
 
   onNextStep() {

@@ -9,7 +9,7 @@ import { StoryService } from 'src/app/shared/service/story.service';
 @Component({
   selector: 'app-list-stories',
   templateUrl: './list-stories.component.html',
-  styleUrls: ['./list-stories.component.css'],
+  styleUrls: ['./list-stories.component.scss'],
 })
 export class ListStoriesComponent implements OnInit, OnDestroy {
   isLoading: boolean;

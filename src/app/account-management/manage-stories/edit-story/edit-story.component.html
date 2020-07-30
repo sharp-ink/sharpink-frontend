@@ -1,23 +1,80 @@
-
 <app-loading *ngIf="isLoading"></app-loading>
 
-<div class="row mb-3" *ngIf="!isLoading">
-    <div class="col-12">
-        <h3>Modifier l'histoire <span class="story-title">{{ story.title }}</span></h3>
-    </div>
-</div>
+<h3 *ngIf="!isLoading">Modifier l'histoire <span class="story-title">{{ story.title }}</span></h3>
 
-<div class="row" *ngIf="!isLoading">
-    <div class="col-12 mb-2">Ci-dessous la liste des chapitres que vous avez écrits (vous pouvez toujours les modifier...) :</div>
-    <ol>
-        <li *ngFor="let chapter of story.chapters">
-            <a [routerLink]="['modifier-chapitre', chapter.position]">{{ chapter.title }}</a>
-        </li>
-    </ol>
-</div>
+<div *ngIf="!isLoading">
 
-<div class="row">
-    <div class="col-12 text-center">
-        <a [routerLink]="['ajouter-chapitre']" class="btn btn-primary btn-lg">Ajouter un chapitre</a>
+    <div class="row mb-3">
+        <div class="col-12">Ci-dessous les informations de votre histoire (vous pouvez toujours les modifier...) :</div>
     </div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <form [formGroup]="storyInformationsForm" #f=ngForm (ngSubmit)="onSubmit()">
+                <div class="form-group row align-items-center">
+                    <label class="col-2 col-form-label col-form-label-sm" for="storyTitle">Titre :</label>
+                    <input class="col-4 form-control form-control-sm" id="storyTitle" formControlName="storyTitle" type="text" autocomplete="off" />
+                </div>
+                <div class="form-group row align-items-center">
+                    <label class="col-2 col-form-label col-form-label-sm" for="storyIsOriginal">Histoire originale ou fanfiction&nbsp;:</label>
+                    <select class="col-2 form-control form-control-sm" id="storyIsOriginal" formControlName="storyIsOriginal">
+                        <option value="true">Histoire originale</option>
+                        <option value="false">Fanfiction</option>
+                    </select>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label class="col-2 col-form-label col-form-label-sm" for="storyType">Genre :</label>
+                    <select class="col-2 form-control form-control-sm" id="storyType" formControlName="storyType">
+                        <option value="">Sélectionnez un genre</option>
+                        <option *ngFor="let type of types" [value]="type.name">{{ type.label }}</option>
+                    </select>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label class="col-2 col-form-label col-form-label-sm" for="storySummary">Résumé :</label>
+                    <ckeditor class="col-6 px-0 py-2 summary-content" [editor]="ckEditor" [config]="ckEditorConfig" formControlName="storySummary"></ckeditor>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label class="col-2 col-form-label col-form-label-sm" for="storyThumbnail">Vignette :</label>
+                    <img class="mr-2" id="thumbnail" [src]="croppedImage || story.thumbnail" alt="Aucune image définie" />
+                    <input class="col-3 pl-0 form-control-file form-control-sm" id="storyThumbnail" type="file" accept="image/*" (change)="fileChangeEvent($event)" />
+                    <image-cropper [ngClass]="{ 'd-none': !isCropperVisible }"
+                        [imageChangedEvent]="imageChangedEvent"
+                        [aspectRatio]="1"
+                        [maintainAspectRatio]="true"
+                        [containWithinAspectRatio]="true"
+                        [format]="png"
+                        (imageCropped)="imageCropped($event)"
+                        (imageLoaded)="imageLoaded()"
+                        (cropperReady)="cropperReady()"
+                        (loadImageFailed)="loadImageFailed()">
+                    </image-cropper>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">
+                            Enregistrer
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+        <div class="col-12 mb-3">Ci-dessous la liste des chapitres que vous avez écrits (vous pouvez toujours les modifier...) :</div>
+        <ol>
+            <li *ngFor="let chapter of story.chapters">
+                <a [routerLink]="['modifier-chapitre', chapter.position]">{{ chapter.title }}</a>
+            </li>
+        </ol>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12 text-center">
+            <a [routerLink]="['ajouter-chapitre']" class="btn btn-primary btn-lg">Ajouter un chapitre</a>
+        </div>
+    </div>
+
 </div>

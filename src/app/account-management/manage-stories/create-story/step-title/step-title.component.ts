@@ -45,7 +45,7 @@ export class StepTitleComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(100)]
       ),
-      'storyIsOriginal': new FormControl(createStory.isOriginal === false ? 'FANFIC' : 'ORIGINAL', Validators.required)
+      'storyIsOriginal': new FormControl(createStory.originalStory === false ? 'FANFIC' : 'ORIGINAL', Validators.required)
     });
   }
 

@@ -1,4 +1,17 @@
 
-h3 span {
-    
+form label {
+    font-weight: bold;
+}
+
+image-cropper {
+    border: 1px solid #CED4DA;
+    border-radius: 0.2rem;
+    width: 400px;
+    height: 400px;
+}
+
+#thumbnail {
+    border: 1px solid #CED4DA;
+    width: 150px;
+    height: 150px;
 }

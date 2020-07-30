@@ -3,3 +3,8 @@ tbody tr:hover {
   background-color: lightgrey;
   cursor: pointer;
 }
+
+// thirs column (summary)
+td:nth-child(3) {
+  font-size: 0.85rem;
+}

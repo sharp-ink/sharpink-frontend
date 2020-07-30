@@ -44,9 +44,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { AlertModule } from 'ngx-bootstrap/alert';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ImageCropperModule } from 'ngx-image-cropper';
 import { ToastrModule } from 'ngx-toastr';
 
 // locale for french language
@@ -108,14 +108,12 @@ const toastrConfig = {
     CommonModule,
     FormsModule, ReactiveFormsModule,
     HttpClientModule,
-    // ngx-bootstrap
-    AlertModule.forRoot(),
-    ModalModule.forRoot(),
-    PaginationModule.forRoot(),
-    // WYSIWYG editor
-    CKEditorModule,
-    // Toastr notifications
-    ToastrModule.forRoot(toastrConfig)
+    // vendor modules
+    ModalModule.forRoot(), // ngx-bootstrap
+    PaginationModule.forRoot(), // ngx-bootstrap
+    CKEditorModule, // WYSIWYG editor
+    ToastrModule.forRoot(toastrConfig), // ngx-toastr (Toastr notifications)
+    ImageCropperModule // ngx-image-cropper (image cropper)
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
