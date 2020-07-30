@@ -30,7 +30,10 @@
             </thead>
             <tbody>
               <tr *ngFor="let story of allStories" (click)="showPreview(story)" class="d-flex">
-                <td class="col-3 d-flex align-items-center story-title">{{ story.title }}</td>
+                <td class="col-3 d-flex align-items-center">
+                  <span class="story-title">{{ story.title }}</span>
+                  <img *ngIf="story.thumbnail" class="ml-auto" [src]="story.thumbnail" />
+                </td>
                 <td class="col-2 d-flex align-items-center">{{ story.author.nickname }}</td>
                 <td class="col-6 d-flex align-items-center text-justify" [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></td>
                 <td class="col-1 d-flex align-items-center"><a [routerLink]="['../lire', story.id]" class="btn btn-primary">Lire</a></td>

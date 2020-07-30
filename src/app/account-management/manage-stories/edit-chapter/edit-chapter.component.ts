@@ -8,7 +8,7 @@ import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/cke
 import { HtmlUtil } from '../../../shared/service/util/html-util.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
 
@@ -29,9 +29,10 @@ export class EditChapterComponent implements OnInit {
 
   constructor(
     private storyService: StoryService,
-    private route: ActivatedRoute,
     private apiService: ApiService,
-    private htmlUtilService: HtmlUtil
+    private htmlUtilService: HtmlUtil,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -112,11 +113,15 @@ export class EditChapterComponent implements OnInit {
     if (this.chapter) {
       this.apiService
         .put(`${EndpointEnum.STORIES}/${this.story.id}/chapters/${this.chapter.position}`, {  title, content })
-        .subscribe(response => { console.log(response); });
+        .subscribe(response => {
+          this.router.navigate(['../'], { relativeTo: this.route });
+        });
     } else {
       this.apiService
         .post(`${EndpointEnum.STORIES}/${this.story.id}/chapters/`, { title, content })
-        .subscribe(response => { console.log(response); });
+        .subscribe(response => {
+          this.router.navigate(['../'], { relativeTo: this.route });
+        });
     }
   }
 

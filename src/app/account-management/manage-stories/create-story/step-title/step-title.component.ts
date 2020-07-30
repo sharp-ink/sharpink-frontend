@@ -40,12 +40,14 @@ export class StepTitleComponent implements OnInit {
     // si une histoire était déjà en cours de création on reprend ses infos (par exemple si on revient de l'étape 2)
     const createStory = this.createStoryService.createStory;
     this.stepTitleForm = new FormGroup({
-      'storyTitle': new FormControl(createStory.title, [
+      'storyTitle': new FormControl(createStory && createStory.title ? createStory.title : '', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(100)]
       ),
-      'storyIsOriginal': new FormControl(createStory.originalStory === false ? 'FANFIC' : 'ORIGINAL', Validators.required)
+      'storyIsOriginal': new FormControl(
+        createStory && createStory.originalStory !== undefined ? createStory.originalStory : true,
+        Validators.required)
     });
   }
 
