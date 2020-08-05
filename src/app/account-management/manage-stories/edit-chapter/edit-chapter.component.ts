@@ -9,8 +9,10 @@ import { HtmlUtil } from '../../../shared/service/util/html-util.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 import { Subscription } from 'rxjs';
 import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
+import GFMDataProcessor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/src/ckeditor5-markdown-gfm/gfmdataprocessor';
 
 @Component({
   selector: 'app-edit-chapter',
@@ -25,6 +27,7 @@ export class EditChapterComponent implements OnInit {
   chapterContentForm: FormGroup;
   ckEditor = CustomEditor;
   ckEditorConfig: any;
+  @ViewChild('editor', { static: false }) editorComponent: CKEditorComponent;
   chapterStats: ChapterStats = { words: 0, characters: 0 };
 
   constructor(
@@ -67,23 +70,12 @@ export class EditChapterComponent implements OnInit {
 
     this.initForm();
     this.initCkEditor();
-
-    // because the 'ready' event doesn't seem to work, we use this workaround with an arbitrary timeout... :-(
-    setTimeout(() => {
-      // console.log(this.editorComponent.editorInstance);
-      // console.log(Array.from(this.editorComponent.editorInstance.ui.componentFactory.names()));
-      // console.log(this.editorComponent.editorInstance.plugins.get('WordCount'));
-    },
-      1000);
+  
   }
 
   private initForm() {
     this.chapterContentForm = new FormGroup({
-      'chapterTitle': new FormControl(null, [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(100)
-      ]),
+      'chapterTitle': new FormControl(null, Validators.maxLength(100)),
       'chapterContent': new FormControl(null, [Validators.required])
     });
   }
@@ -95,10 +87,11 @@ export class EditChapterComponent implements OnInit {
     };
   }
 
-  // NOT WORKING... :-(
-  onEditorReady(event: any) {
-    // console.log(ChapterEditor.builtinPlugins.map(plugin => plugin.pluginName));
+  onEditorReady($event: any) {
+    console.log('editorInstance:', $event);
+    // console.log(CustomEditor.builtinPlugins.map(plugin => plugin.pluginName));
     // console.log(this.editorComponent);
+    $event.data.processor = new GFMDataProcessor($event.editing.view.document);
   }
 
   onUpdateStats(stats: ChapterStats) {
@@ -112,7 +105,7 @@ export class EditChapterComponent implements OnInit {
 
     if (this.chapter) {
       this.apiService
-        .put(`${EndpointEnum.STORIES}/${this.story.id}/chapters/${this.chapter.position}`, {  title, content })
+        .put(`${EndpointEnum.STORIES}/${this.story.id}/chapters/${this.chapter.position}`, { title, content })
         .subscribe(response => {
           this.router.navigate(['../'], { relativeTo: this.route });
         });

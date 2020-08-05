@@ -66,7 +66,7 @@
         <div class="col-12 mb-3">Ci-dessous la liste des chapitres que vous avez écrits (vous pouvez toujours les modifier...) :</div>
         <ol>
             <li *ngFor="let chapter of story.chapters">
-                <a [routerLink]="['modifier-chapitre', chapter.position]">{{ chapter.title }}</a>
+                <a [routerLink]="['modifier-chapitre', chapter.position]">{{ chapter.title || '-' }}</a>
             </li>
         </ol>
     </div>

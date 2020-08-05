@@ -10,7 +10,7 @@
       
       <div class="row mb-2">
         <div class="col">
-          <p>Cette page liste toutes les histoires. Elles sont classées par ordre décroissant de modification. La première histoire de la liste est celle qui a été modifiée le plus récemment (ajout ou modification de chapitre). Vous pouvez également choisir d'autres critères de tri.</p>
+          <p>Cette page liste toutes les histoires. Elles sont classées par ordre décroissant de modification (comptent uniquement la création de l'histoire ou l'ajout d'un chapitre). Vous pouvez également choisir d'autres critères de tri.</p>
           <p>Pour avoir un bref aperçu d'une histoire, cliquez sur la ligne de celle-ci dans le tableau. Pour en commencer la lecture, cliquer sur le bouton 'Lire'.</p>
         </div>
       </div>
@@ -23,7 +23,8 @@
             <thead>
               <tr class="d-flex">
                 <th class="col-3">Titre</th>
-                <th class="col-2">Auteur</th>
+                <th class="col-1">Auteur</th>
+                <th class="col-1">Mise à jour</th>
                 <th class="col-6">Résumé</th>
                 <th class="col-1"></th>
               </tr>
@@ -34,9 +35,10 @@
                   <span class="story-title">{{ story.title }}</span>
                   <img *ngIf="story.thumbnail" class="ml-auto" [src]="story.thumbnail" />
                 </td>
-                <td class="col-2 d-flex align-items-center">{{ story.author.nickname }}</td>
-                <td class="col-6 d-flex align-items-center text-justify" [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></td>
-                <td class="col-1 d-flex align-items-center"><a [routerLink]="['../lire', story.id]" class="btn btn-primary">Lire</a></td>
+                <td class="col-1 d-flex align-items-center">{{ story.author.nickname }}</td>
+                <td class="col-1 d-flex align-items-center">{{ lastUpdateDate(story) }}</td>
+                <td class="col-6 d-flex align-items-center text-justify" [innerHTML]="story.summary != null ? replaceParagraphsWithDiv(story.summary) : 'Pas de résumé'"></td>
+                <td class="col-1 d-flex align-items-center"><a [routerLink]="['../lire', story.id]" class="btn btn-primary btn-sm">Lire</a></td>
               </tr>
             </tbody>
           </table>

@@ -11,7 +11,7 @@ td:nth-child(1) img {
   height: 50px;
 }
 
-// third column (summary)
-td:nth-child(3) {
+// all column except the first
+td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5) {
   font-size: 0.85rem;
 }

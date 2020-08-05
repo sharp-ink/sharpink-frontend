@@ -5,6 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
 import { Story } from 'src/app/shared/model/story/story.model';
 import { StoryService } from 'src/app/shared/service/story.service';
+declare const moment: any;
 
 @Component({
   selector: 'app-list-stories',
@@ -29,6 +30,9 @@ export class ListStoriesComponent implements OnInit, OnDestroy {
     this.allStoriesSubscription = this.storyService.allStoriesSubject.subscribe(
       (stories: Story[]) => {
         this.allStories = stories;
+        this.allStories.sort((s1: Story, s2: Story) => {
+          return s1.lastModificationDate.localeCompare(s2.lastModificationDate) * -1;
+        });
         this.isLoading = false;
       }
     );
@@ -39,18 +43,26 @@ export class ListStoriesComponent implements OnInit, OnDestroy {
     this.storyService.loadAllStories();
   }
 
+  lastUpdateDate(story: Story): string {
+    return moment(story.lastModificationDate, 'YYYYMMDD hh:mm:ss').fromNow();
+  }
+
+  replaceParagraphsWithDiv(summary: string) {
+    return summary.replace(/<p>/gi, '<div>')
+      .replace(/<\/p>/gi, '</div>');
+  }
+
   /**
    * Displays a preview of the story
    */
   showPreview(story: Story) {
-    const modalOptions = {
+    this.bsModalRef = this.bsModalService.show(PreviewStoryComponent, {
       backdrop: false,
       class: 'modal-dialog-centered modal-lg',
       initialState: {
         story: story
       }
-    };
-    this.bsModalRef = this.bsModalService.show(PreviewStoryComponent, modalOptions);
+    });
   }
 
   /**
