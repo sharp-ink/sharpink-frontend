@@ -19,7 +19,7 @@
 
 <div class="row">
     <div class="col-12">
-        <form [formGroup]="chapterContentForm" (ngSubmit)="onSubmit()" #f=ngForm>
+        <form [formGroup]="chapterContentForm" (ngSubmit)="onSubmit()" #f=ngForm (keydown)="onKeyDown($event)">
             <div class="row">
                 <div class="form-group col-12">
                     <input class="form-control" formControlName="chapterTitle" placeholder="Titre du chapitre" />
@@ -47,7 +47,7 @@
 
             <div class="row">
                 <div class="form-group col-12">
-                    <input type="submit" value="Enregistrer" class="btn btn-primary" [disabled]="f.invalid"/>
+                    <input type="submit" value="Enregistrer" class="btn btn-primary" [disabled]="f.invalid || f.pristine"/>
                 </div>
             </div>
         </form>

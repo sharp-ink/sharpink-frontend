@@ -6,6 +6,7 @@ import { StoryService } from '../../../shared/service/story.service';
 import { ApiService } from '../../../shared/service/util/api.service';
 import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
 import { HtmlUtil } from '../../../shared/service/util/html-util.service';
+import { NotificationService } from '../../../shared/service/util/notification.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -34,6 +35,7 @@ export class EditChapterComponent implements OnInit {
     private storyService: StoryService,
     private apiService: ApiService,
     private htmlUtilService: HtmlUtil,
+    private notificationService: NotificationService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -70,7 +72,7 @@ export class EditChapterComponent implements OnInit {
 
     this.initForm();
     this.initCkEditor();
-  
+
   }
 
   private initForm() {
@@ -99,6 +101,7 @@ export class EditChapterComponent implements OnInit {
   }
 
   onSubmit() {
+    this.chapterContentForm.markAsPristine();
     const fv = this.chapterContentForm.value;
     const title = fv.chapterTitle;
     const content = this.htmlUtilService.cleanEmptyParagraphs(fv.chapterContent);
@@ -107,14 +110,23 @@ export class EditChapterComponent implements OnInit {
       this.apiService
         .put(`${EndpointEnum.STORIES}/${this.story.id}/chapters/${this.chapter.position}`, { title, content })
         .subscribe(response => {
-          this.router.navigate(['../'], { relativeTo: this.route });
+          this.notificationService.success('Le chapitre a bien été mis à jour.');
         });
     } else {
       this.apiService
         .post(`${EndpointEnum.STORIES}/${this.story.id}/chapters/`, { title, content })
         .subscribe(response => {
-          this.router.navigate(['../'], { relativeTo: this.route });
+          this.notificationService.success('Le chapitre a bien été créé.');
         });
+    }
+  }
+
+  onKeyDown(event: KeyboardEvent) {
+    if ((event.metaKey || event.ctrlKey) && event.key === 's') { // binds Ctrl|Cmd|Windows + S to submit
+      event.preventDefault();
+      if (this.chapterContentForm.valid && !this.chapterContentForm.pristine) {
+        this.onSubmit();
+      }
     }
   }
 
