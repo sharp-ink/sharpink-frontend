@@ -109,15 +109,25 @@ export class EditChapterComponent implements OnInit {
     if (this.chapter) {
       this.apiService
         .put(`${EndpointEnum.STORIES}/${this.story.id}/chapters/${this.chapter.position}`, { title, content })
-        .subscribe(response => {
-          this.notificationService.success('Le chapitre a bien été mis à jour.');
-        });
+        .subscribe(
+          response => {
+            this.notificationService.success('Le chapitre a bien été mis à jour.');
+          },
+          error => {
+            this.notificationService.error('Une erreur est survenue lors de l\'enregistrement du chapitre');
+          }
+        );
     } else {
       this.apiService
         .post(`${EndpointEnum.STORIES}/${this.story.id}/chapters/`, { title, content })
-        .subscribe(response => {
-          this.notificationService.success('Le chapitre a bien été créé.');
-        });
+        .subscribe(
+          response => {
+            this.notificationService.success('Le chapitre a bien été créé.');
+          },
+          error => {
+            this.notificationService.error('Une erreur est survenue lors de l\'enregistrement du chapitre');
+          }
+        );
     }
   }
 
