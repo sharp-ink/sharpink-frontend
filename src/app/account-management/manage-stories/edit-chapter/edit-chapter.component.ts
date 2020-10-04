@@ -75,18 +75,8 @@ export class EditChapterComponent implements OnInit {
 
   }
 
-  private initForm() {
-    this.chapterContentForm = new FormGroup({
-      'chapterTitle': new FormControl(null, Validators.maxLength(100)),
-      'chapterContent': new FormControl(null, [Validators.required])
-    });
-  }
-
-  private initCkEditor() {
-    this.ckEditorConfig = CkeditorConfigUtil.getCkeditorConfig(EditorType.CHAPTER);
-    this.ckEditorConfig.wordCount = {
-      onUpdate: (stats: ChapterStats) => this.onUpdateStats(stats)
-    };
+  goBackToStory() {
+    this.router.navigate(['../..'], { relativeTo: this.route });
   }
 
   onEditorReady($event: any) {
@@ -138,6 +128,20 @@ export class EditChapterComponent implements OnInit {
         this.onSubmit();
       }
     }
+  }
+
+  private initForm() {
+    this.chapterContentForm = new FormGroup({
+      'chapterTitle': new FormControl(null, Validators.maxLength(100)),
+      'chapterContent': new FormControl(null, [Validators.required])
+    });
+  }
+
+  private initCkEditor() {
+    this.ckEditorConfig = CkeditorConfigUtil.getCkeditorConfig(EditorType.CHAPTER);
+    this.ckEditorConfig.wordCount = {
+      onUpdate: (stats: ChapterStats) => this.onUpdateStats(stats)
+    };
   }
 
 }

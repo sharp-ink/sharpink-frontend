@@ -2,12 +2,17 @@
 <app-loading *ngIf="isLoading"></app-loading>
 
 <div class="row mb-3" *ngIf="!isLoading">
-    <div class="col-12">
+    <div class="col-6">
         <h3>
             Modifier l'histoire <span class="story-title">{{ story.title }}</span> :
             <span *ngIf="chapter === null">ajouter un chapitre</span>
             <span *ngIf="chapter !== null">modifier le chapitre {{ chapter.position }}</span>
         </h3>
+    </div>
+    <div class="col-2">
+        <button type="button" class="btn btn-outline-primary btn-sm" (click)="goBackToStory();" title="Retour à l'histoire">
+            <span class="fa fa-arrow-left"></span>
+        </button>
     </div>
 </div>
 
