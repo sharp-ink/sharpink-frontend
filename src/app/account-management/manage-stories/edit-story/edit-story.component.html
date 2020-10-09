@@ -67,6 +67,9 @@
         <ol>
             <li *ngFor="let chapter of story.chapters">
                 <a [routerLink]="['modifier-chapitre', chapter.position]">{{ chapter.title || '-' }}</a>
+                <button type="button" class="btn btn-outline-primary btn-sm ml-1" (click)="removeChapter(chapter)" title="Supprimer le chapitre">
+                    <span class="fa fa-trash"></span>
+                </button>
             </li>
         </ol>
     </div>

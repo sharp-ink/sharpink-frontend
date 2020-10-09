@@ -1,4 +1,5 @@
 import { EndpointEnum } from '../../../shared/constant/endpoint.enum';
+import { Chapter } from '../../../shared/model/story/chapter/chapter.model';
 import { StoryPatchRequest } from '../../../shared/model/story/story-patch-request.model';
 import { Story } from '../../../shared/model/story/story.model';
 import { ApiService } from '../../../shared/service/util/api.service';
@@ -31,14 +32,18 @@ export class EditStoryService {
             thumbnail: fv.storyThumbnail
         };
         this.updateStoryObservable(story.id, storyPatchRequest).subscribe(response => {
-          console.log(response);
+            console.log(response);
             this.notificationService.success('Les informations de l\'histoire ont bien été mises à jour.');
             this.router.navigate(['/mon-compte/mes-histoires'], { relativeTo: this.route }); // we are on route 'mon-compte'
         });
     }
 
+    removeChapter(storyId: number, chapterPosition: number) {
+        return this.apiService.delete(`${EndpointEnum.STORIES}/${storyId}/chapters/${chapterPosition}`);
+    }
+
     private updateStoryObservable(storyId: number, storyPatchRequest: StoryPatchRequest) {
         return this.apiService.patch(`${EndpointEnum.STORIES}/${storyId}`, storyPatchRequest);
-      }
+    }
 
 }

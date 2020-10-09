@@ -76,7 +76,7 @@ export class EditChapterComponent implements OnInit {
   }
 
   goBackToStory() {
-    this.router.navigate(['../..'], { relativeTo: this.route });
+    this.router.navigate(['/mon-compte/mes-histoires', this.story.id]);
   }
 
   onEditorReady($event: any) {
@@ -104,7 +104,7 @@ export class EditChapterComponent implements OnInit {
             this.notificationService.success('Le chapitre a bien été mis à jour.');
           },
           error => {
-            this.notificationService.error('Une erreur est survenue lors de l\'enregistrement du chapitre');
+            this.notificationService.error('Une erreur est survenue lors de l\'enregistrement du chapitre.');
           }
         );
     } else {
@@ -113,9 +113,10 @@ export class EditChapterComponent implements OnInit {
         .subscribe(
           response => {
             this.notificationService.success('Le chapitre a bien été créé.');
+            this.goBackToStory();
           },
           error => {
-            this.notificationService.error('Une erreur est survenue lors de l\'enregistrement du chapitre');
+            this.notificationService.error('Une erreur est survenue lors de l\'enregistrement du chapitre.');
           }
         );
     }

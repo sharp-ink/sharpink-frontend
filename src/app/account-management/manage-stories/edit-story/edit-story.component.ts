@@ -1,8 +1,10 @@
 import { EditStoryService } from './edit-story.service';
 import { StoryTypeEnum } from '../../../shared/constant/story-type.enum';
+import { Chapter } from '../../../shared/model/story/chapter/chapter.model';
 import { Story } from '../../../shared/model/story/story.model';
 import { StoryService } from '../../../shared/service/story.service';
 import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
+import { NotificationService } from '../../../shared/service/util/notification.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -30,6 +32,7 @@ export class EditStoryComponent implements OnInit {
   constructor(
     private storyService: StoryService,
     private editStoryService: EditStoryService,
+    private notificationService: NotificationService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -54,26 +57,6 @@ export class EditStoryComponent implements OnInit {
         // storyService nous notifiera en retour, via currentStorySuject.next(), dès qu'il aura récupéré l'histoire  (opération asynchrone)
       }
     );
-  }
-
-  private initForm() {
-    this.storyInformationsForm = new FormGroup({
-      'storyTitle': new FormControl(this.story.title, [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(100)]
-      ),
-      'storyIsOriginal': new FormControl(this.story.originalStory, Validators.required),
-      'storyType': new FormControl(this.story.type || ''),
-      'storySummary': new FormControl(this.story.summary),
-      'storyThumbnail': new FormControl('')
-    });
-
-    this.types = StoryTypeEnum.getTypesForDropdown();
-  }
-
-  private initCkEditor() {
-    this.ckEditorConfig = CkeditorConfigUtil.getCkeditorConfig(EditorType.SUMMARY);
   }
 
   goToNewChapter() {
@@ -105,4 +88,38 @@ export class EditStoryComponent implements OnInit {
     this.editStoryService.updateStoryInfo(this.story, this.storyInformationsForm);
   }
 
+  removeChapter(chapter: Chapter) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer le chapitre ' + chapter.position + ' - ' + chapter.title + ' ?'
+      + ' ATTENTION, CETTE OPÉRATION EST IRRÉVERSIBLE!')
+    ) {
+      this.editStoryService.removeChapter(this.story.id, chapter.position).subscribe(
+        response => {
+          this.notificationService.warning(`Le chapitre a bien été supprimé.`);
+          this.ngOnInit();
+        }, error => {
+          this.notificationService.error('Une erreur est survenue lors de la suppression du chapitre.');
+        }
+      );
+    }
+  }
+
+  private initForm() {
+    this.storyInformationsForm = new FormGroup({
+      'storyTitle': new FormControl(this.story.title, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(100)]
+      ),
+      'storyIsOriginal': new FormControl(this.story.originalStory, Validators.required),
+      'storyType': new FormControl(this.story.type || ''),
+      'storySummary': new FormControl(this.story.summary),
+      'storyThumbnail': new FormControl('')
+    });
+
+    this.types = StoryTypeEnum.getTypesForDropdown();
+  }
+
+  private initCkEditor() {
+    this.ckEditorConfig = CkeditorConfigUtil.getCkeditorConfig(EditorType.SUMMARY);
+  }
 }
