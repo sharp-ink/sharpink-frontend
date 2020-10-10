@@ -11,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./step-misc-info.component.scss']
 })
 export class StepMiscInfoComponent implements OnInit {
-  createStory: StoryPatchRequest;
   stepMiscInfoForm: FormGroup;
   types = new Array<{ name: string, label: string }>();
 
@@ -21,14 +20,14 @@ export class StepMiscInfoComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.createStory = this.createStoryService.createStory;
     this.initForm();
     this.types = StoryTypeEnum.getTypesForDropdown();
   }
 
   initForm() {
+    const createStory = this.createStoryService.story;
     this.stepMiscInfoForm = new FormGroup({
-      'storyType': new FormControl('')
+      'storyType': new FormControl(createStory.type ? createStory.type : '')
     });
   }
 

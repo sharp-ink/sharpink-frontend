@@ -20,6 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './shared/service/guard/auth.guard';
+import { CreateStoryStepsFormGuard } from './shared/service/guard/create-story-steps-form.guard';
 import { ListStoriesComponent } from './story/list-stories/list-stories.component';
 import { ReadRandomComponent } from './story/read-story/read-random/read-random.component';
 import { ReadStoryComponent } from './story/read-story/read-story.component';
@@ -34,48 +35,55 @@ const appRoutes: Routes = [
 
   { path: 'connexion', component: SigninComponent },
 
-  { path: 'histoires', children: [
-    { path: '', redirectTo: 'liste', pathMatch: 'full' },
-    { path: 'liste', component: ListStoriesComponent },
-    { path: 'lire', children: [
-      { path: 'au-hasard', component: ReadRandomComponent },
-      { path: ':id', component: ReadStoryComponent }
-    ]
-    }
-  ]
-  },
-
-  { path: 'mon-compte', canActivate: [AuthGuard], component: AccountManagementComponent, children: [
-    { path: '', redirectTo: 'mes-histoires', pathMatch: 'full' },
-    { path: 'mon-profil', component: PrivateProfileComponent },
-    { path: 'reglages', component: SettingsComponent },
-    { path: 'mes-histoires', component: ManageStoriesComponent, children: [
-        { path: '', redirectTo: 'accueil', pathMatch: 'full' },
-        { path: 'accueil', component: ManageStoriesHomeComponent },
-        { path: 'creer', component: CreateStoryComponent, children: [
-          { path: '', redirectTo: 'etape-1', pathMatch: 'full' },
-          { path: 'etape-1', component: StepTitleComponent },
-          { path: 'etape-2', component: StepMiscInfoComponent },
-          { path: 'etape-3', component: StepSummaryComponent },
-          { path: 'etape-4', component: StepThumbnailComponent }
+  {
+    path: 'histoires', children: [
+      { path: '', redirectTo: 'liste', pathMatch: 'full' },
+      { path: 'liste', component: ListStoriesComponent },
+      {
+        path: 'lire', children: [
+          { path: 'au-hasard', component: ReadRandomComponent },
+          { path: ':id', component: ReadStoryComponent }
         ]
-        },
-      { path: ':id', component: EditStoryComponent },
-      { path: ':id/ajouter-chapitre', component: EditChapterComponent },
-      { path: ':id/modifier-chapitre/:chapterPosition', component: EditChapterComponent }
+      }
     ]
-    },
-  ]
   },
 
-  { path: 'communaute', component: CommunityComponent, children: [
-    { path: '', redirectTo: 'membres', pathMatch: 'full' },
-    { path: 'membres', component: ListMembersComponent, children: [
-      { path: ':id', component: MemberProfileComponent }
+  {
+    path: 'mon-compte', canActivate: [AuthGuard], component: AccountManagementComponent, children: [
+      { path: '', redirectTo: 'mes-histoires', pathMatch: 'full' },
+      { path: 'mon-profil', component: PrivateProfileComponent },
+      { path: 'reglages', component: SettingsComponent },
+      {
+        path: 'mes-histoires', component: ManageStoriesComponent, children: [
+          { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+          { path: 'accueil', component: ManageStoriesHomeComponent },
+          {
+            path: 'creer', canDeactivate: [CreateStoryStepsFormGuard], component: CreateStoryComponent, children: [
+              { path: '', redirectTo: 'etape-1', pathMatch: 'full' },
+              { path: 'etape-1', component: StepTitleComponent },
+              { path: 'etape-2', component: StepMiscInfoComponent },
+              { path: 'etape-3', component: StepSummaryComponent },
+              { path: 'etape-4', component: StepThumbnailComponent }
+            ]
+          },
+          { path: ':id', component: EditStoryComponent },
+          { path: ':id/ajouter-chapitre', component: EditChapterComponent },
+          { path: ':id/modifier-chapitre/:chapterPosition', component: EditChapterComponent }
+        ]
+      },
     ]
-    },
-    { path: 'forum', component: ForumComponent }
-  ]
+  },
+
+  {
+    path: 'communaute', component: CommunityComponent, children: [
+      { path: '', redirectTo: 'membres', pathMatch: 'full' },
+      {
+        path: 'membres', component: ListMembersComponent, children: [
+          { path: ':id', component: MemberProfileComponent }
+        ]
+      },
+      { path: 'forum', component: ForumComponent }
+    ]
   },
 
   { path: 'contact', component: ContactComponent },

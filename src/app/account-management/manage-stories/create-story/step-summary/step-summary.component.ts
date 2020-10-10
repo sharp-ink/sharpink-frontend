@@ -27,8 +27,9 @@ export class StepSummaryComponent implements OnInit {
   }
 
   private initForm() {
+    const createStory = this.createStoryService.story;
     this.stepSummaryForm = new FormGroup({
-      'storySummary': new FormControl(null, [ Validators.maxLength(2000) ])
+      'storySummary': new FormControl(createStory.summary ? createStory.summary : '', [ Validators.maxLength(2000) ])
     });
   }
 

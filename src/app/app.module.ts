@@ -27,6 +27,7 @@ import { NavComponent } from './nav/nav.component';
 import { LoadingComponent } from './shared/component/loading/loading.component';
 import { PaginationComponent } from './shared/component/pagination/pagination.component';
 import { AuthGuard } from './shared/service/guard/auth.guard';
+import { CreateStoryStepsFormGuard } from './shared/service/guard/create-story-steps-form.guard';
 import { MemberService } from './shared/service/member.service';
 import { StoryService } from './shared/service/story.service';
 import { ListStoriesComponent } from './story/list-stories/list-stories.component';
@@ -119,7 +120,8 @@ const toastrConfig = {
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     StoryService,
     MemberService,
-    AuthGuard
+    AuthGuard,
+    CreateStoryStepsFormGuard
   ],
   bootstrap: [AppComponent]
 })

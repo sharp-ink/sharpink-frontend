@@ -1,9 +1,10 @@
 import { ApiErrorCodeEnum } from '../../../../shared/model/error/api-error-code-enum.model';
 import { ApiError } from '../../../../shared/model/error/api-error.model';
+import { Story } from '../../../../shared/model/story/story.model';
 import { NotificationService } from '../../../../shared/service/util/notification.service';
 import { CreateStoryService } from '../create-story.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,7 +15,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class StepTitleComponent implements OnInit {
   stepTitleForm: FormGroup;
-  storyId: number; // si la création a réussi, contient l'id de l'histoire nouvellement créée
   backendOperationInProgress: boolean;
 
   constructor(
@@ -31,14 +31,14 @@ export class StepTitleComponent implements OnInit {
   }
 
   initCreateStory() {
-    if (!this.createStoryService.createStory) {
-      this.createStoryService.createStory = {};
+    if (!this.createStoryService.story) {
+      this.createStoryService.story = {};
     }
   }
 
   initForm() {
     // si une histoire était déjà en cours de création on reprend ses infos (par exemple si on revient de l'étape 2)
-    const createStory = this.createStoryService.createStory;
+    const createStory = this.createStoryService.story;
     this.stepTitleForm = new FormGroup({
       'storyTitle': new FormControl(createStory && createStory.title ? createStory.title : '', [
         Validators.required,
@@ -63,12 +63,15 @@ export class StepTitleComponent implements OnInit {
     this.backendOperationInProgress = true;
 
     this.createStoryService.initStoryStepTitle(this.stepTitleForm).subscribe(
-      (storyId: number) => {
-        this.storyId = storyId;
-        this.createStoryService.storyId = storyId;
-        this.router.navigate(redirectTo, { relativeTo: this.route });
-        this.notificationService.success(`L'histoire <b><u>${this.stepTitleForm.value.storyTitle}</u></b> a bien été créée.`);
+      (response: number | Story) => {
+        if (typeof response === 'number') {
+          this.createStoryService.story.id = response;
+          this.notificationService.success(`L'histoire <b><u>${this.stepTitleForm.value.storyTitle}</u></b> a bien été créée.`);
+        } else {
+          this.notificationService.success('Les informations de l\'histoire ont bien été mises à jour.');
+        }
         this.backendOperationInProgress = false;
+        this.router.navigate(redirectTo, { relativeTo: this.route });
       },
       (errorResponse: HttpErrorResponse) => {
         const apiError: ApiError = errorResponse.error;
@@ -82,5 +85,4 @@ export class StepTitleComponent implements OnInit {
       }
     );
   }
-
 }
