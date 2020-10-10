@@ -20,5 +20,9 @@
       "esnext",
       "dom"
     ]
-  }
+  },
+  "exclude": [
+    "dist/**/*.js",
+    "src/**/*.js"
+  ]
 }

@@ -3,14 +3,14 @@ import { EndpointEnum } from '../constant/endpoint.enum';
 import { Story } from '../model/story/story.model';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Member } from 'src/app/shared/model/member/member.model';
+import { User } from 'src/app/shared/model/member/member.model';
 
 @Injectable()
 export class MemberService {
 
   // La liste des membres de la communauté
-  allMembers: Member[] = [];
-  allMembersSubject = new Subject<Member[]>();
+  allMembers: User[] = [];
+  allMembersSubject = new Subject<User[]>();
 
   constructor(
     private apiService: ApiService
@@ -20,8 +20,8 @@ export class MemberService {
    * Requête pour récupérer tous les Member depuis le backend.
    * Remarque : pour chaque Member, ça ne charge pas ses Story, seulement leur nombre.
    */
-  getAllMembersHttpObservable(): Observable<Member[]> {
-    return this.apiService.get<Member[]>(EndpointEnum.MEMBERS);
+  getAllMembersHttpObservable(): Observable<User[]> {
+    return this.apiService.get<User[]>(EndpointEnum.USERS);
   }
 
   /**
@@ -32,7 +32,7 @@ export class MemberService {
 
     if (this.allMembers.length === 0) {
       this.getAllMembersHttpObservable().subscribe(
-        (members: Member[]) => {
+        (members: User[]) => {
           this.allMembers = members;
           this.allMembersSubject.next(this.allMembers);
         }
@@ -47,15 +47,15 @@ export class MemberService {
    * Requête pour récupérer un Member donné depuis le backend, via son id.
    * Remarque : ça ne charge pas ses Story, seulement leur nombre.
    */
-  getMemberObservable(memberId: number): Observable<Member> {
-    return this.apiService.get<Member>(`${EndpointEnum.MEMBERS}/${memberId}`);
+  getMemberObservable(memberId: number): Observable<User> {
+    return this.apiService.get<User>(`${EndpointEnum.USERS}/${memberId}`);
   }
 
   /**
    * Load stories of the given member
    */
   loadStoriesOfAuthor(memberId: number): Observable<Story[]> {
-    return this.apiService.get<Story[]>(`${EndpointEnum.MEMBERS}/${memberId}/stories`);
+    return this.apiService.get<Story[]>(`${EndpointEnum.USERS}/${memberId}/stories`);
   }
 
 }

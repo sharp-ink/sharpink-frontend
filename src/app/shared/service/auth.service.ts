@@ -3,20 +3,20 @@ import { EndpointEnum } from '../constant/endpoint.enum';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Member } from 'src/app/shared/model/member/member.model';
+import { User } from 'src/app/shared/model/member/member.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  connectedMemberSubject: Subject<Member>;
+  connectedMemberSubject: Subject<User>;
 
   constructor(private apiService: ApiService) {
-    this.connectedMemberSubject = new Subject<Member>();
+    this.connectedMemberSubject = new Subject<User>();
   }
 
-  logIn(login: string, password: string): Observable<Member> {
-    return this.apiService.get<Member>(`${EndpointEnum.ACCOUNTS}/log-in`, {
+  logIn(login: string, password: string): Observable<User> {
+    return this.apiService.get<User>(`${EndpointEnum.ACCOUNTS}/log-in`, {
       params: {
         login: login,
         password: password
@@ -31,12 +31,12 @@ export class AuthService {
     );
   }
 
-  storeConnectedUser(member: Member) {
+  storeConnectedUser(member: User) {
     localStorage.connectedUser = JSON.stringify(member);
     this.connectedMemberSubject.next(member);
   }
 
-  getConnectedUser(): Member {
+  getConnectedUser(): User {
     return (localStorage.connectedUser) ? JSON.parse(localStorage.connectedUser) : null;
   }
 

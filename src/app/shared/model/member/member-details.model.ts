@@ -1,5 +1,5 @@
 
-export interface MemberDetails {
+export interface UserDetails {
     firstName: string;
     lastName: string;
     profilePicture: string;

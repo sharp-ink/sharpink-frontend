@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Member } from 'src/app/shared/model/member/member.model';
+import { User } from 'src/app/shared/model/member/member.model';
 import { MemberService } from 'src/app/shared/service/member.service';
 
 
@@ -12,7 +12,7 @@ import { MemberService } from 'src/app/shared/service/member.service';
 })
 export class ListMembersComponent implements OnInit, OnDestroy {
 
-  allMembers: Member[] = [];
+  allMembers: User[] = [];
   allMembersSubscription: Subscription;
 
   constructor(
@@ -21,7 +21,7 @@ export class ListMembersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.allMembersSubscription = this.memberService.allMembersSubject.subscribe(
-      (members: Member[]) => {
+      (members: User[]) => {
         this.allMembers = members;
       }
     );

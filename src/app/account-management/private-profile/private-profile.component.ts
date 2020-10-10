@@ -1,7 +1,7 @@
 import { AccountManagementService } from '../account-management.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Member } from 'src/app/shared/model/member/member.model';
+import { User } from 'src/app/shared/model/member/member.model';
 import { AuthService } from 'src/app/shared/service/auth.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/shared/service/auth.service';
 })
 export class PrivateProfileComponent implements OnInit {
 
-  member: Member;
+  member: User;
   hasProfileDetails = false; // indique si l'utilisateur a des informations sur son profil (pas nécessairement terminé)
   isEditingProfile = false;
   editProfileForm: FormGroup;

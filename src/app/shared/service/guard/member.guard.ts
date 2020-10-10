@@ -1,4 +1,4 @@
-import { Member } from '../../model/member/member.model';
+import { User } from '../../model/member/member.model';
 import { AuthService } from '../auth.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
@@ -18,7 +18,7 @@ export class MemberGuard implements CanActivate {
     private router: Router
   ) {
     this.authService.connectedMemberSubject.subscribe(
-      (member: Member) => {
+      (member: User) => {
         this.connectedMemberId = member.id;
       }
     );

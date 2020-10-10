@@ -1,5 +1,5 @@
 export enum EndpointEnum {
     ACCOUNTS = 'accounts',
-    MEMBERS = 'members',
+    USERS = 'users',
     STORIES = 'stories'
 }
