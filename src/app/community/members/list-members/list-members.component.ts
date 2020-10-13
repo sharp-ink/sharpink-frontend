@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/shared/model/member/member.model';
-import { MemberService } from 'src/app/shared/service/member.service';
+import { User } from 'src/app/shared/model/user/user.model';
+import { UserService } from 'src/app/shared/service/user.service';
 
 
 
@@ -16,7 +16,7 @@ export class ListMembersComponent implements OnInit, OnDestroy {
   allMembersSubscription: Subscription;
 
   constructor(
-    private memberService: MemberService
+    private memberService: UserService
   ) { }
 
   ngOnInit() {

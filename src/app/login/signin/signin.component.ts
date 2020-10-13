@@ -1,7 +1,10 @@
+import { EndpointEnum } from '../../shared/constant/endpoint.enum';
+import { UserPreferences } from '../../shared/model/user/user-preferences.model';
+import { ApiService } from '../../shared/service/util/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/shared/model/member/member.model';
+import { User } from 'src/app/shared/model/user/user.model';
 import { AuthService } from 'src/app/shared/service/auth.service';
 import { AuthGuard } from 'src/app/shared/service/guard/auth.guard';
 
@@ -18,6 +21,7 @@ export class SigninComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private apiService: ApiService,
     private authGuard: AuthGuard,
     private router: Router
   ) { }
@@ -37,10 +41,14 @@ export class SigninComponent implements OnInit {
     const formValue = this.signinForm.value;
     this.authService.logIn(formValue.login, formValue.password)
       .subscribe(
-        (member: User) => {
-          console.log('authentifié en tant que :', member);
-          this.authService.storeConnectedUser(member);
+        (user: User) => {
+          console.log('authentifié en tant que :', user);
+          this.authService.storeConnectedUser(user);
           this.router.navigateByUrl(this.authGuard.requestedUrl);
+          this.apiService.get(`${EndpointEnum.USERS}/${user.id}/preferences`).subscribe(
+            (userPreferences: UserPreferences) => {
+              this.authService.storeConnectedUserPreferences(userPreferences);
+            });
         },
         (error) => {
           console.log('Erreur d\'authentification. Code erreur : ' + error.status);

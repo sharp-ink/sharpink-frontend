@@ -26,7 +26,7 @@ export class CreateStoryService {
     this.story.title = fv.storyTitle;
     this.story.originalStory = fv.storyIsOriginal;
     this.story.status = StoryStatusEnum.PROGRESS;
-    this.story.authorId = this.authService.getConnectedUser().id;
+    this.story.authorId = this.authService.connectedUser.id;
     if (this.story.id) {
       return this.updateStoryObservable(this.story);
     } else {

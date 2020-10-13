@@ -3,10 +3,10 @@ import { EndpointEnum } from '../constant/endpoint.enum';
 import { Story } from '../model/story/story.model';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { User } from 'src/app/shared/model/member/member.model';
+import { User } from 'src/app/shared/model/user/user.model';
 
 @Injectable()
-export class MemberService {
+export class UserService {
 
   // La liste des membres de la communauté
   allMembers: User[] = [];

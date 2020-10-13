@@ -20,8 +20,7 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    const connectedMemberInWebStorage = this.authService.getConnectedUser();
-    if (connectedMemberInWebStorage != null) {
+    if (this.authService.connectedUser != null) {
       return true;
     } else {
       // on stocke l'URL à laquelle on tente d'accéder

@@ -28,8 +28,8 @@ import { LoadingComponent } from './shared/component/loading/loading.component';
 import { PaginationComponent } from './shared/component/pagination/pagination.component';
 import { AuthGuard } from './shared/service/guard/auth.guard';
 import { CreateStoryStepsFormGuard } from './shared/service/guard/create-story-steps-form.guard';
-import { MemberService } from './shared/service/member.service';
 import { StoryService } from './shared/service/story.service';
+import { UserService } from './shared/service/user.service';
 import { ListStoriesComponent } from './story/list-stories/list-stories.component';
 import { PreviewStoryComponent } from './story/list-stories/preview-story/preview-story.component';
 import { DisplayPaginatedChapterComponent } from './story/read-story/display-paginated-chapter/display-paginated-chapter.component';
@@ -119,7 +119,7 @@ const toastrConfig = {
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
     StoryService,
-    MemberService,
+    UserService,
     AuthGuard,
     CreateStoryStepsFormGuard
   ],

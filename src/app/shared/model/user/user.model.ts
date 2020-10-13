@@ -1,4 +1,4 @@
-import { UserDetails } from './member-details.model';
+import { UserDetails } from './user-details.model';
 import { Story } from 'src/app/shared/model/story/story.model';
 
 export interface User {
@@ -7,5 +7,5 @@ export interface User {
   email: string;
   storiesCount: number;
   stories: Story[]; // ne sera pas toujours chargé, parfois on se contentera de storiesCount
-  memberDetails: UserDetails;
+  userDetails: UserDetails;
 }

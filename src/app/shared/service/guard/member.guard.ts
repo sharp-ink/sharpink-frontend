@@ -1,4 +1,4 @@
-import { User } from '../../model/member/member.model';
+import { User } from '../../model/user/user.model';
 import { AuthService } from '../auth.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
@@ -11,15 +11,15 @@ import { Observable } from 'rxjs';
  */
 @Injectable()
 export class MemberGuard implements CanActivate {
-  connectedMemberId: number = null;
+  connectedUserId: number = null;
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) {
-    this.authService.connectedMemberSubject.subscribe(
-      (member: User) => {
-        this.connectedMemberId = member.id;
+    this.authService.connectedUserSubject.subscribe(
+      (user: User) => {
+        this.connectedUserId = user.id;
       }
     );
   }
@@ -27,8 +27,8 @@ export class MemberGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const requestedMemberId = +route.params['id'];
     console.log(requestedMemberId);
-    console.log(this.connectedMemberId);
-    if (this.connectedMemberId === requestedMemberId) {
+    console.log(this.connectedUserId);
+    if (this.connectedUserId === requestedMemberId) {
       return true;
     } else {
       this.router.navigate(['/403-acces-interdit']);

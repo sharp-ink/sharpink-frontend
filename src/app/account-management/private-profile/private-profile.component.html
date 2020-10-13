@@ -8,9 +8,7 @@
 
 <div class="row">
   <div class="col-12">
-    Vous pouvez renseigner ici certaines informations personnelles si vous le souhaitez. Ce sont les informations que
-    les autres membres
-    peuvent voir lorsqu'ils consultent votre profil.
+    Vous pouvez renseigner ici certaines informations personnelles si vous le souhaitez. Ce sont les informations que les autres membres peuvent voir lorsqu'ils consultent votre profil.
   </div>
 </div>
 
@@ -37,34 +35,34 @@
 
   <div class="row form-group">
     <label class="col-2 col-form-label text-right" for="nickname">Pseudo</label>
-    <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ member.nickname }}</label>
+    <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ user.nickname }}</label>
     <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" formControlName="nickname" />
     <div *ngIf="isEditingProfile" class="col-1 col-form-label mandatory-indicator">*</div>
   </div>
 
   <div class="row form-group">
     <label class="col-2 col-form-label text-right" for="email">Email</label>
-    <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ member.email }}</label>
+    <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ user.email }}</label>
     <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" formControlName="email" id="email" />
   </div>
 
   <div class="row form-group">
     <label class="col-2 col-form-label text-right" for="firstName">Prénom</label>
-    <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ member.memberDetails?.firstName }}</label>
+    <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ user.userDetails?.firstName }}</label>
     <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" formControlName="firstName" id="firstName" />
   </div>
 
   <div class="row form-group">
     <label class="col-2 col-form-label text-right" for="lastName">Nom</label>
-    <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ member.memberDetails?.lastName }}</label>
+    <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ user.userDetails?.lastName }}</label>
     <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" formControlName="lastName" id="lastName" />
   </div>
 
   <div class="row form-group">
     <label class="col-2 col-form-label text-right" for="picture">Image de profil</label>
-    <img *ngIf="member.memberDetails?.profilePicture" class="col-2 offset-1 profile-picture"
-      [src]="member.memberDetails.profilePicture" alt="Image non trouvée" />
-    <div *ngIf="!member.memberDetails?.profilePicture" class="col-2 offset-1 col-form-label">Aucune image de profil
+    <img *ngIf="user.userDetails?.profilePicture" class="col-2 offset-1 profile-picture"
+      [src]="user.userDetails.profilePicture" alt="Image non trouvée" />
+    <div *ngIf="!user.userDetails?.profilePicture" class="col-2 offset-1 col-form-label">Aucune image de profil
     </div>
   </div>
   <div *ngIf="isEditingProfile" class="row form-group">

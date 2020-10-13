@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/shared/model/member/member.model';
+import { User } from 'src/app/shared/model/user/user.model';
 import { AuthService } from 'src/app/shared/service/auth.service';
 
 
@@ -20,9 +20,9 @@ export class LoginStatusComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.connectedUser = this.authService.getConnectedUser();
-    this.authService.connectedMemberSubject.subscribe((connectedMember: User) => {
-      this.connectedUser = connectedMember;
+    this.connectedUser = this.authService.getConnectedUserFromCookies();
+    this.authService.connectedUserSubject.subscribe((connectedUser: User) => {
+      this.connectedUser = connectedUser;
     });
   }
 
@@ -31,7 +31,7 @@ export class LoginStatusComponent implements OnInit {
   }
 
   logout() {
-    this.authService.clearConnectedUser();
+    this.authService.clearConnectionData();
   }
 
 }

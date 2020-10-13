@@ -1,18 +1,23 @@
 import { ApiService } from './util/api.service';
 import { EndpointEnum } from '../constant/endpoint.enum';
+import { UserPreferences } from '../model/user/user-preferences.model';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { User } from 'src/app/shared/model/member/member.model';
+import { User } from 'src/app/shared/model/user/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  connectedMemberSubject: Subject<User>;
+  connectedUser: User;
+  connectedUserSubject: Subject<User>;
+  connectedUserPreferences: UserPreferences;
+  connectedUserPreferencesSubject: Subject<UserPreferences>;
 
   constructor(private apiService: ApiService) {
-    this.connectedMemberSubject = new Subject<User>();
+    this.connectedUserSubject = new Subject<User>();
+    this.connectedUserPreferencesSubject = new Subject<UserPreferences>();
   }
 
   logIn(login: string, password: string): Observable<User> {
@@ -28,21 +33,44 @@ export class AuthService {
             return throwError(error);
           }
         )
-    );
+      );
   }
 
-  storeConnectedUser(member: User) {
-    localStorage.connectedUser = JSON.stringify(member);
-    this.connectedMemberSubject.next(member);
-  }
-
-  getConnectedUser(): User {
+  getConnectedUserFromCookies(): User {
     return (localStorage.connectedUser) ? JSON.parse(localStorage.connectedUser) : null;
   }
 
-  clearConnectedUser() {
+  getConnectedUserPreferencesFromCookies(): UserPreferences {
+    return (localStorage.connectedUserPreferences) ? JSON.parse(localStorage.connectedUserPreferences) : null;
+  }
+
+  storeConnectedUser(user: User) {
+    this.connectedUser = user;
+    localStorage.connectedUser = JSON.stringify(user);
+    this.connectedUserSubject.next(user);
+  }
+
+  storeConnectedUserPreferences(userPreferences: UserPreferences) {
+    this.connectedUserPreferences = userPreferences;
+    localStorage.connectedUserPreferences = JSON.stringify(userPreferences);
+    this.connectedUserPreferencesSubject.next(userPreferences);
+  }
+
+  clearConnectionData() {
+    this.clearConnectedUser();
+    this.clearConnectedUserPreferences();
+  }
+
+  private clearConnectedUser(): void {
     localStorage.removeItem('connectedUser');
-    this.connectedMemberSubject.next(null);
+    this.connectedUser = null;
+    this.connectedUserSubject.next(null);
+  }
+
+  private clearConnectedUserPreferences() {
+    localStorage.removeItem('connectedUserPreferences');
+    this.connectedUserPreferences = null;
+    this.connectedUserPreferencesSubject.next(null);
   }
 
 }

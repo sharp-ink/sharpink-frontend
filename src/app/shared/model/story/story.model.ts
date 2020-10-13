@@ -1,5 +1,5 @@
-import { User } from 'src/app/shared/model/member/member.model';
 import { Chapter } from 'src/app/shared/model/story/chapter/chapter.model';
+import { User } from 'src/app/shared/model/user/user.model';
 
 export interface Story {
   id: number;
