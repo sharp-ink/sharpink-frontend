@@ -51,8 +51,10 @@ h3 {
  * *************************************************
  */
 
+
 a {
-  color: var(--button-primary-background-color);
+  //color: var(--button-primary-background-color);
+  color: #505050;
 }
 
 /* ************************************************
@@ -81,6 +83,24 @@ a {
   background-color: var(--button-primary-background-color);
   color: white;
 }
+
+.btn.btn-xs { // smaller button than Bootstrap btn-sm
+  padding: 0.2rem 0.3rem;
+  font-size: 0.7rem;
+  line-height: 1.4;
+  border-radius: 0.2rem;
+}
+
+/* ************************************************
+ * Switches (override les styles de Bootstrap)
+ * ************************************************
+ */
+
+ .custom-control-input:checked~.custom-control-label::before {
+  color: #fff;
+  border-color: var(--theme-primary-color);
+  background-color: var(--theme-primary-color);
+ }
 
 /* *************************************************
  * Badges (override les styles de Bootstrap)
@@ -114,10 +134,6 @@ a {
   border-bottom-color: var(--body-background-color);
   background-color: var(--body-background-color);
   color: var(--theme-primary-color);
-}
-
-.nav-tabs .nav-link.active:hover {
-  cursor: default;
 }
 
 /* *************************************************
@@ -206,11 +222,15 @@ ckeditor.ng-touched.ng-invalid .ck.ck-editor {
   text-decoration: underline;
   color: var(--theme-secondary-color);
 }
-span.story-title {
-  display: inline-block; // if displayed normally (inline) ::first-letter does not work
+span.story-title, span.chapter-title {
+  display: inline-block; // ::first-letter does not work on inline elements
 }
-.story-title::first-letter {
+.story-title::first-letter, .chapter-title::first-letter {
   text-transform: uppercase;
+}
+
+.chapter-title {
+  text-decoration: inherit;  
 }
 
 .chapter-content p {

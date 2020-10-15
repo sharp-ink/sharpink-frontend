@@ -24,12 +24,15 @@ import { CreateStoryStepsFormGuard } from './shared/service/guard/create-story-s
 import { ListStoriesComponent } from './story/list-stories/list-stories.component';
 import { ReadRandomComponent } from './story/read-story/read-random/read-random.component';
 import { ReadStoryComponent } from './story/read-story/read-story.component';
+import { TestComponent } from './test/test.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
 
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+
+  { path: 'test', component: TestComponent },
 
   { path: 'accueil', component: HomeComponent },
 

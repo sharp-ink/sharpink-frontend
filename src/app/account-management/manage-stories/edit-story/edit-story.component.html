@@ -64,14 +64,30 @@
 
     <div class="row">
         <div class="col-12 mb-3">Ci-dessous la liste des chapitres que vous avez écrits (vous pouvez toujours les modifier...) :</div>
-        <ol>
-            <li *ngFor="let chapter of story.chapters">
-                <a [routerLink]="['modifier-chapitre', chapter.position]">{{ chapter.title || '-' }}</a>
-                <button type="button" class="btn btn-outline-primary btn-sm ml-1" (click)="removeChapter(chapter)" title="Supprimer le chapitre">
-                    <span class="fa fa-trash"></span>
-                </button>
-            </li>
-        </ol>
+    </div>
+
+    <div class="row">
+        <div class="col-12 mb-3">
+            <div class="table table-sm table-borderless">
+                <tbody>
+                    <tr *ngFor="let chapter of story.chapters">
+                        <td>
+                            <a [routerLink]="['modifier-chapitre', chapter.position]" class="mr-1">
+                                {{ chapter.position }}. <span class="chapter-title">{{ chapter.title || '-' }}</span>
+                            </a>
+                        </td>
+                        <td>
+                            <a [routerLink]="['modifier-chapitre', chapter.position]" class="btn btn-outline-primary btn-xs mr-1" title="Modifier le chapitre">
+                                <span class="fa fa-pen"></span>
+                            </a>
+                            <button type="button" class="btn btn-outline-secondary btn-xs" (click)="removeChapter(chapter)" title="Supprimer le chapitre">
+                                <span class="fa fa-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </div>
+        </div>
     </div>
 
     <div class="row mb-3">

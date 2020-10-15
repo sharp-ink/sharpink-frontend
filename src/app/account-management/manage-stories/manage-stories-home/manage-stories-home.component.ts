@@ -1,19 +1,22 @@
 import { ManageStoriesHomeService } from './manage-stories-home.service';
+import { DisplayMode } from './stories-list-display-mode.enum';
 import { Story } from '../../../shared/model/story/story.model';
 import { AuthService } from '../../../shared/service/auth.service';
 import { UserService } from '../../../shared/service/user.service';
 import { NotificationService } from '../../../shared/service/util/notification.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-stories-home',
   templateUrl: './manage-stories-home.component.html',
-  styleUrls: ['./manage-stories-home.component.scss']
+  styleUrls: ['./manage-stories-home.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ManageStoriesHomeComponent implements OnInit {
   isLoading: boolean;
-  @Input() memberId: number;
+  displayMode: DisplayMode = DisplayMode.TILES;
+  DisplayMode = DisplayMode; // expose enum to the template
   myStories: Story[] = [];
 
   constructor(
@@ -38,6 +41,10 @@ export class ManageStoriesHomeComponent implements OnInit {
 
   goToCreation() {
     this.router.navigate(['../creer'], { relativeTo: this.route });
+  }
+
+  toggleDisplayMode(event: any) {
+    console.log(event);
   }
 
   updateStoryStatus(story: Story) {
