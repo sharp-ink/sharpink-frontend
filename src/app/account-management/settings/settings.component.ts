@@ -26,10 +26,14 @@ export class SettingsComponent implements OnInit {
 
   changeTheme(themeId: number) {
     this.themeService.loadTheme(themeId);
-    this.settingsService.savePreference({ theme: themeId }).subscribe(
+    this.settingsService.savePreference({
+      appearance: {
+        theme: themeId
+      }
+    }).subscribe(
       (userPreferences: UserPreferences) => {
         const userPreferencesFromCookies = this.authService.getConnectedUserPreferencesFromCookies();
-        userPreferencesFromCookies.theme = themeId;
+        userPreferencesFromCookies.appearance.theme = themeId;
         localStorage.connectedUserPreferences = JSON.stringify(userPreferencesFromCookies);
       }
     );

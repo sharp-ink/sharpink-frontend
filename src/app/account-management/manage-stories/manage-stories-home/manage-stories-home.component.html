@@ -70,7 +70,7 @@
 </div>
 
 <!-- Tiles display -->
-<div class="row row-cols-3 no-gutters mx-n2 tiles-display" *ngIf="displayMode === DisplayMode.TILES">
+<div class="row row-cols-2 no-gutters mx-n2 tiles-display" *ngIf="displayMode === DisplayMode.TILES">
     <div class="col mb-2 px-2" *ngFor="let story of myStories">
         <div class="card h-100">
             <div class="card-header d-flex align-items-center">
@@ -89,7 +89,10 @@
                     <span class="fa fa-trash"></span>
                 </button>
             </div>
-            <div class="card-body summary-content" [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></div>
+            <div class="card-body summary-content">
+                <img *ngIf="story.thumbnail" [src]="story.thumbnail" class="float-left thumbnail"/>
+                <div [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></div>
+            </div>
         </div>
     </div>
 </div>

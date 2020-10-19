@@ -1,5 +1,5 @@
 import { ManageStoriesHomeService } from './manage-stories-home.service';
-import { DisplayMode } from './stories-list-display-mode.enum';
+import { StoriesDisplayMode } from './stories-list-display-mode.enum';
 import { Story } from '../../../shared/model/story/story.model';
 import { AuthService } from '../../../shared/service/auth.service';
 import { UserService } from '../../../shared/service/user.service';
@@ -15,8 +15,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ManageStoriesHomeComponent implements OnInit {
   isLoading: boolean;
-  displayMode: DisplayMode = DisplayMode.TILES;
-  DisplayMode = DisplayMode; // expose enum to the template
+  displayMode: StoriesDisplayMode = StoriesDisplayMode.TILES;
+  DisplayMode = StoriesDisplayMode; // expose enum to the template
   myStories: Story[] = [];
 
   constructor(

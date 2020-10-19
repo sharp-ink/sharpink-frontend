@@ -1,3 +1,3 @@
-export enum DisplayMode {
+export enum StoriesDisplayMode {
     CLASSIC, TILES
 }

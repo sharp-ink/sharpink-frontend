@@ -80,7 +80,7 @@ export class ThemeService {
   constructor(private authService: AuthService) {
     this.authService.connectedUserPreferencesSubject.subscribe((userPreferences: UserPreferences) => {
       if (userPreferences) {
-        this.currentThemeId = userPreferences.theme;
+        this.currentThemeId = userPreferences.appearance.theme;
         this.loadTheme(this.currentThemeId);
       } else {
         this.loadTheme(this.DEFAULT_THEME_ID);
