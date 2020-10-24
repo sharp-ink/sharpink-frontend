@@ -14,16 +14,14 @@
 </div>
 
 <div class="row mb-3">
-    <div class="col-12">
-        <div class="mb-1">Mode d'affichage :</div>
+    <div class="col-12 d-flex">
+        <span class="mb-1">Affichage :&nbsp;</span>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="classic"
-                [(ngModel)]="displayMode" (ngModelChange)="toggleDisplayMode($event)" [value]="DisplayMode.CLASSIC">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="classic" [(ngModel)]="displayMode" [value]="DisplayMode.CLASSIC">
             <label class="form-check-label" for="classic">Classique</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="tiles" [(ngModel)]="displayMode"
-                (ngModelChange)="toggleDisplayMode($event)" [value]="DisplayMode.TILES">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="tiles" [(ngModel)]="displayMode" [value]="DisplayMode.TILES">
             <label class="form-check-label" for="tiles">Tuiles</label>
         </div>
     </div>
@@ -70,28 +68,25 @@
 </div>
 
 <!-- Tiles display -->
-<div class="row row-cols-2 no-gutters mx-n2 tiles-display" *ngIf="displayMode === DisplayMode.TILES">
-    <div class="col mb-2 px-2" *ngFor="let story of myStories">
+<div class="row no-gutters mx-n2 tiles-display" [ngClass]="{ 'row-cols-2': myStories.length <= 4, 'row-cols-3': myStories.length > 4 }" *ngIf="displayMode === DisplayMode.TILES">
+    <div class="col mb-3 px-2" *ngFor="let story of myStories">
         <div class="card h-100">
-            <div class="card-header d-flex align-items-center">
-                <a [routerLink]="['..', story.id]"><span class="story-title">{{ story.title }}</span></a>
-                <span class="badge badge-light">({{ story.chaptersNumber }} chap.)</span>
+            <div class="card-header d-flex justify-content-center align-items-center" (click)="goToEdition(story.id)">
+                <span class="story-title" title="{{ story.title }}">{{ story.title }}</span>
+            </div>
+            <div class="card-body summary-content" (click)="goToEdition(story.id)">
+                <img *ngIf="story.thumbnail" [src]="story.thumbnail" class="float-left thumbnail"/>
+                <div [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></div>
+                <span class="badge badge-light">{{ story.chaptersNumber }} chapitre{{ story.chaptersNumber > 0 ? 's' : '' }}</span>
+            </div>
+            <div class="card-footer">
                 <a [routerLink]="['..', story.id]" class="btn btn-xs btn-primary ml-auto mr-1" title="Éditer l'histoire">
                     <span class="fa fa-pen"></span>
                 </a>
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="{{ 'publishSwitch_' + story.id }}" [ngModel]="story.published" (change)="updateStoryStatus(story)">
-                    <label class="custom-control-label" for="{{ 'publishSwitch_' + story.id }}"
-                        [title]="story.published ? 'L\'histoire est visible par les autres membres' : 'L\'histoire n\'est visible que par vous'"></label>
-                </div>
                 <button type="button" (click)="removeStory(story)" class="btn btn-xs btn-outline-secondary"
                     title="Supprimer l'histoire">
                     <span class="fa fa-trash"></span>
                 </button>
-            </div>
-            <div class="card-body summary-content">
-                <img *ngIf="story.thumbnail" [src]="story.thumbnail" class="float-left thumbnail"/>
-                <div [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></div>
             </div>
         </div>
     </div>

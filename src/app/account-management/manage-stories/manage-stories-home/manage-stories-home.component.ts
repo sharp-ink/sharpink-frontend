@@ -43,8 +43,8 @@ export class ManageStoriesHomeComponent implements OnInit {
     this.router.navigate(['../creer'], { relativeTo: this.route });
   }
 
-  toggleDisplayMode(event: any) {
-    console.log(event);
+  goToEdition(storyId: number) {
+    this.router.navigate(['..', storyId], { relativeTo: this.route });
   }
 
   updateStoryStatus(story: Story) {

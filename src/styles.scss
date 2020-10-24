@@ -102,17 +102,6 @@ a {
   background-color: var(--theme-primary-color);
  }
 
-/* *************************************************
- * Badges (override les styles de Bootstrap)
- * ************************************************
- */
-
- .badge-primary {
-   border: 1px solid black;
-   background-color: var(--button-primary-background-color);
-   opacity: 80%
- }
-
  /* *************************************************
  * Onglets (override les styles de Bootstrap)
  * ************************************************

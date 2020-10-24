@@ -59,6 +59,10 @@ export class EditStoryComponent implements OnInit {
     );
   }
 
+  goBackToHome() {
+    this.router.navigate(['/mon-compte/mes-histoires']);
+  }
+
   goToNewChapter() {
     this.router.navigate(['ajouter-chapitre']);
   }

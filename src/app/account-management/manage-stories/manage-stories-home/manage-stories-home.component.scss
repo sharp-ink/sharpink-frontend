@@ -1,15 +1,36 @@
+
 .summary-content {
-    margin-bottom: 0;
-    font-size: 0.85rem;
+    font-size: 0.875rem;
 }
 
 .tiles-display .col {
-    height: 200px;
+    height: 260px;
+}
+
+.card-header {
+    padding: 0.8rem 0.5rem;
+    // to make overflow and ellipsis work correctly
+    min-width: 0;
+}
+
+.card-header .story-title {
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
 }
 
 .card-body {
-    padding: 0.5rem;
+    padding: 0.8rem 0.5rem;
     overflow-y: auto;
+}
+
+.card-footer {
+    padding: 0.5rem;
+    background-color: inherit;
+}
+
+.card-header:hover, .card-body:hover {
+    cursor: pointer;
 }
 
 .tiles-display ::-webkit-scrollbar {
@@ -26,6 +47,6 @@
 .thumbnail {
     border: 2px solid var(--theme-secondary-color);
     margin-right: 0.75rem;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
 }
