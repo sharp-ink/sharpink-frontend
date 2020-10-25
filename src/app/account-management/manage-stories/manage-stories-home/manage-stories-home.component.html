@@ -47,16 +47,20 @@
                     <td class="col-6 d-flex align-items-center summary-content "
                         [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></td>
                     <td class="col-2 btn-toolbar d-flex align-items-center">
-                        <a [routerLink]="['..', story.id]" class="btn btn-sm btn-primary mr-1"
+                        <a [routerLink]="['..', story.id]" class="btn btn-xs btn-primary mr-1"
                             title="Éditer l'histoire">
                             <span class="fa fa-pen"></span>
+                        </a>
+                        <a [routerLink]="['..', story.id, 'ajouter-chapitre']" class="btn btn-xs btn-primary mr-1"
+                            title="Ajouter un chapitre">
+                            <span class="fa fa-plus"></span>
                         </a>
                         <div class="custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="{{ 'publishSwitch_' + story.id }}" [ngModel]="story.published" (change)="updateStoryStatus(story)">
                             <label class="custom-control-label" for="{{ 'publishSwitch_' + story.id }}"
                                 [title]="story.published ? 'L\'histoire est visible par les autres membres' : 'L\'histoire n\'est visible que par vous'"></label>
                         </div>
-                        <button type="button" (click)="removeStory(story)" class="btn btn-sm btn-outline-secondary"
+                        <button type="button" (click)="removeStory(story)" class="btn btn-xs btn-outline-secondary"
                             title="Supprimer l'histoire">
                             <span class="fa fa-trash"></span>
                         </button>
@@ -80,8 +84,11 @@
                 <span class="badge badge-light">{{ story.chaptersNumber }} chapitre{{ story.chaptersNumber > 0 ? 's' : '' }}</span>
             </div>
             <div class="card-footer">
-                <a [routerLink]="['..', story.id]" class="btn btn-xs btn-primary ml-auto mr-1" title="Éditer l'histoire">
+                <a [routerLink]="['..', story.id]" class="btn btn-xs btn-primary ml-auto mr-2" title="Éditer l'histoire">
                     <span class="fa fa-pen"></span>
+                </a>
+                <a [routerLink]="['..', story.id, 'ajouter-chapitre']" class="btn btn-xs btn-primary mr-2" title="Ajouter un chapitre">
+                    <span class="fa fa-plus"></span>
                 </a>
                 <button type="button" (click)="removeStory(story)" class="btn btn-xs btn-outline-secondary"
                     title="Supprimer l'histoire">
