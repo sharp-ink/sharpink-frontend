@@ -7,6 +7,15 @@
     height: 260px;
 }
 
+.card {
+    border-width: 2px;
+}
+
+.card:hover {
+    border-color: var(--theme-secondary-color);
+    cursor: pointer;
+}
+
 .card-header {
     padding: 0.8rem 0.5rem;
     // to make overflow and ellipsis work correctly
@@ -27,10 +36,6 @@
 .card-footer {
     padding: 0.5rem;
     background-color: inherit;
-}
-
-.card-header:hover, .card-body:hover {
-    cursor: pointer;
 }
 
 .tiles-display ::-webkit-scrollbar {

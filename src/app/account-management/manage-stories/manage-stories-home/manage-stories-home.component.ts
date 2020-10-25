@@ -58,7 +58,8 @@ export class ManageStoriesHomeComponent implements OnInit {
     });
   }
 
-  removeStory(story: Story) {
+  removeStory(story: Story, event: Event) {
+    event.stopPropagation();
     if (confirm(`Êtes-vous sûr de vouloir supprimer l\'histoire [${story.title}] ? ATTENTION, CETTE OPÉRATION EST IRRÉVERSIBLE !`)) {
       this.myStories = this.myStories.filter(s => s.id !== story.id);
       this.manageStoriesHomeService.removeStory(story.id).subscribe(response => {

@@ -74,11 +74,11 @@
 <!-- Tiles display -->
 <div class="row no-gutters mx-n2 tiles-display" [ngClass]="{ 'row-cols-2': myStories.length <= 4, 'row-cols-3': myStories.length > 4 }" *ngIf="displayMode === DisplayMode.TILES">
     <div class="col mb-3 px-2" *ngFor="let story of myStories">
-        <div class="card h-100">
-            <div class="card-header d-flex justify-content-center align-items-center" (click)="goToEdition(story.id)">
+        <div class="card h-100" (click)="goToEdition(story.id)">
+            <div class="card-header d-flex justify-content-center align-items-center">
                 <span class="story-title" title="{{ story.title }}">{{ story.title }}</span>
             </div>
-            <div class="card-body summary-content" (click)="goToEdition(story.id)">
+            <div class="card-body summary-content">
                 <img *ngIf="story.thumbnail" [src]="story.thumbnail" class="float-left thumbnail"/>
                 <div [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></div>
                 <span class="badge badge-light">{{ story.chaptersNumber }} chapitre{{ story.chaptersNumber > 0 ? 's' : '' }}</span>
@@ -90,7 +90,7 @@
                 <a [routerLink]="['..', story.id, 'ajouter-chapitre']" class="btn btn-xs btn-primary mr-2" title="Ajouter un chapitre">
                     <span class="fa fa-plus"></span>
                 </a>
-                <button type="button" (click)="removeStory(story)" class="btn btn-xs btn-outline-secondary"
+                <button type="button" (click)="removeStory(story, $event)" class="btn btn-xs btn-outline-secondary"
                     title="Supprimer l'histoire">
                     <span class="fa fa-trash"></span>
                 </button>
