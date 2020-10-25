@@ -24,6 +24,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginStatusComponent } from './login/login-status.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { NavComponent } from './nav/nav.component';
+import { BreadcrumbComponent } from './shared/component/breadcrumb/breadcrumb.component';
 import { LoadingComponent } from './shared/component/loading/loading.component';
 import { PaginationComponent } from './shared/component/pagination/pagination.component';
 import { AuthGuard } from './shared/service/guard/auth.guard';
@@ -67,6 +68,7 @@ const toastrConfig = {
     AppComponent,
     // application components
     AccountManagementComponent,
+    BreadcrumbComponent,
     CommunityComponent,
     ContactComponent,
     CreateStoryButtonsGroupComponent,

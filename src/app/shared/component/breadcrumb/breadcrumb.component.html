@@ -1,0 +1,7 @@
+
+<ol class="breadcrumb">
+    <li *ngFor="let segment of breadcrumbSegments; last as isCurrentPage" [ngClass]="{ 'breadcrumb-item': true, 'active': isCurrentPage }">
+        <a *ngIf=!isCurrentPage [routerLink]="[segment.url]">{{ segment.title }}</a>
+        <span *ngIf=isCurrentPage>{{ segment.title }}</span>
+    </li>
+</ol>

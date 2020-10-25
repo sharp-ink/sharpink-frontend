@@ -1,12 +1,16 @@
 
 <div class="container-fluid">
 
+  <app-breadcrumb [breadcrumbSegments]="[
+    { title: 'Sharpink', url: '/'},
+    { title: 'Lecture', url: '/histoires' },
+    { title: 'Les histoires de la communauté' }
+  ]"></app-breadcrumb>
+
   <h1>Les histoires de la communauté</h1>
 
   <div class="row">
     <div class="col">
-
-      <h2>Liste des histoires</h2>
       
       <div class="row mb-2">
         <div class="col">

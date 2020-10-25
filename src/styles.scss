@@ -31,7 +31,7 @@ html, body {
 h1 {
   border-left: 3px solid var(--button-primary-background-color);
   margin-bottom: 20px;
-  padding-left: 5px;
+  padding-left: 0.5rem;
   font-size: 1.7rem;
 }
 
@@ -54,10 +54,9 @@ h3 {
  * *************************************************
  */
 
-
 a {
-  //color: var(--button-primary-background-color);
-  color: #505050;
+  color: var(--button-primary-background-color);
+  //color: #505050;
 }
 
 /* ************************************************
@@ -128,6 +127,22 @@ a {
 }
 
 /* *************************************************
+ * Fil d'ariane (override les styles de Bootstrap)
+ * *************************************************
+ */
+ 
+.breadcrumb {
+  border-left: 3px solid var(--theme-primary-color);
+  border-radius: 0;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+ 
+.breadcrumb-item+.breadcrumb-item::before {
+  content: ">"; // override le séparateur par défaut de Bootstrap
+}
+
+/* *************************************************
  * Forms
  * *************************************************
  */
@@ -185,7 +200,7 @@ ckeditor.ng-touched.ng-invalid .ck.ck-editor {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Cpath fill='rgb(114,28,26)' d='M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z'/%3E%3C/svg%3E");
   color: #721C1A;
 }
-.toast-info {
+.ngx-toastr.toast-info {
   // TODO
 }
 .ngx-toastr.toast-warning {

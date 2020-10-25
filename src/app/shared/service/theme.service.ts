@@ -15,6 +15,7 @@ export class ThemeService {
   private readonly THEME_GREY_PRIMARY_COLOR = '#303030';
   private readonly THEME_PUMPKIN_PRIMARY_COLOR = '#FF8C00';
   private readonly THEME_DARLING_PRIMARY_COLOR = '#00CED1';
+  private readonly THEME_BARLEY_SUGAR_PRIMARY_COLOR = '#A000B0';
   private readonly THEMES = [
     {
       id: 0,
@@ -44,7 +45,7 @@ export class ThemeService {
       id: 3,
       name: 'Brick',
       themePrimaryColor: this.THEME_BRICK_PRIMARY_COLOR,
-      themeSecondaryColor: '#A04030',
+      themeSecondaryColor: '#A05000',
       headerForegroundColor: this.DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS,
       buttonPrimaryBackgroundColor: this.THEME_BRICK_PRIMARY_COLOR
     },
@@ -71,6 +72,14 @@ export class ThemeService {
       themeSecondaryColor: '#0090D0',
       headerForegroundColor: this.DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS,
       buttonPrimaryBackgroundColor: this.THEME_DARLING_PRIMARY_COLOR
+    },
+    {
+      id: 7,
+      name: 'Sucre d\'orge',
+      themePrimaryColor: this.THEME_BARLEY_SUGAR_PRIMARY_COLOR,
+      themeSecondaryColor: '#C71585',
+      headerForegroundColor: this.DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS,
+      buttonPrimaryBackgroundColor: this.THEME_BARLEY_SUGAR_PRIMARY_COLOR
     }
   ];
 
