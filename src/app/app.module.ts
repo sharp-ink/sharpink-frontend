@@ -13,6 +13,7 @@ import { PrivateProfileComponent } from './account-management/private-profile/pr
 import { SettingsComponent } from './account-management/settings/settings.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CommunityHomeComponent } from './community/community-home/community-home.component';
 import { CommunityComponent } from './community/community.component';
 import { ForumComponent } from './community/forum/forum.component';
 import { LastActivityComponent } from './community/last-activity/last-activity.component';
@@ -70,6 +71,7 @@ const toastrConfig = {
     AccountManagementComponent,
     BreadcrumbComponent,
     CommunityComponent,
+    CommunityHomeComponent,
     ContactComponent,
     CreateStoryButtonsGroupComponent,
     CreateStoryComponent,

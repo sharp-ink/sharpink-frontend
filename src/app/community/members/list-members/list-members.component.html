@@ -11,7 +11,7 @@
 
 <div class="row">
   <div class="col-12">
-    <table class="table">
+    <table class="table table-sm">
       <thead>
         <tr>
           <th>Pseudo</th>
@@ -21,9 +21,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let member of allMembers">
-          <td>
-            <a [routerLink]="[member.id]">{{ member.nickname }}</a>
-          </td>
+          <td><a [routerLink]="['/communaute/membres', member.id]">{{ member.nickname }}</a></td>
           <td>{{ member.email }}</td>
           <td>{{ member.storiesCount }}</td>
         </tr>

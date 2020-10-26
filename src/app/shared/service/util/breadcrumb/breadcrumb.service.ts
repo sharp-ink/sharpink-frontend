@@ -34,8 +34,15 @@ export class BreadcrumbService {
             }
         } else if (rootPath === 'communaute') {
             breadcrumbSegments.push({ title: 'Communauté', url: '/communaute' });
-            if (currentPagePath === 'membres') {
+            if (currentPagePath === 'accueil') {
+                breadcrumbSegments.push({ title: 'Tableau de bord' });
+            } else if (currentPagePath === 'membres') {
                 breadcrumbSegments.push({ title: 'Membres' });
+            } else if (currentPagePath === 'forum') {
+                breadcrumbSegments.push({ title: 'Forum' });
+            } else if (urlSegments[2] === 'membres' && urlSegments[3]) {
+                breadcrumbSegments.push({ title: 'Membres', url: '/communaute/membres' });
+                breadcrumbSegments.push({ title: 'Consultation profil' });
             }
         // TODO other cases
         }

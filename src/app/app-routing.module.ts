@@ -11,6 +11,7 @@ import { ManageStoriesHomeComponent } from './account-management/manage-stories/
 import { ManageStoriesComponent } from './account-management/manage-stories/manage-stories.component';
 import { PrivateProfileComponent } from './account-management/private-profile/private-profile.component';
 import { SettingsComponent } from './account-management/settings/settings.component';
+import { CommunityHomeComponent } from './community/community-home/community-home.component';
 import { CommunityComponent } from './community/community.component';
 import { ForumComponent } from './community/forum/forum.component';
 import { ListMembersComponent } from './community/members/list-members/list-members.component';
@@ -79,12 +80,10 @@ const appRoutes: Routes = [
 
   {
     path: 'communaute', component: CommunityComponent, children: [
-      { path: '', redirectTo: 'membres', pathMatch: 'full' },
-      {
-        path: 'membres', component: ListMembersComponent, children: [
-          { path: ':id', component: MemberProfileComponent }
-        ]
-      },
+      { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+      { path: 'accueil', component: CommunityHomeComponent },
+      { path: 'membres/:id', component: MemberProfileComponent },
+      { path: 'membres', component: ListMembersComponent },
       { path: 'forum', component: ForumComponent }
     ]
   },
