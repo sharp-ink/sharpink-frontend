@@ -25,7 +25,7 @@ export class BreadcrumbService {
 
         if (rootPath === 'mon-compte') {
             breadcrumbSegments.push({ title: 'Mon compte', url: '/mon-compte' });
-            if (currentPagePath === 'accueil' || currentPagePath === 'mes-histoires') {
+            if (currentPagePath === 'mes-histoires') {
                 breadcrumbSegments.push({ title: 'Mes histoires' });
             } else if (currentPagePath === 'mon-profil') {
                 breadcrumbSegments.push({ title: 'Mon profil' });
@@ -34,9 +34,7 @@ export class BreadcrumbService {
             }
         } else if (rootPath === 'communaute') {
             breadcrumbSegments.push({ title: 'Communauté', url: '/communaute' });
-            if (currentPagePath === 'accueil') {
-                breadcrumbSegments.push({ title: 'Tableau de bord' });
-            } else if (currentPagePath === 'membres') {
+            if (currentPagePath === 'membres') {
                 breadcrumbSegments.push({ title: 'Membres' });
             } else if (currentPagePath === 'forum') {
                 breadcrumbSegments.push({ title: 'Forum' });

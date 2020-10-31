@@ -1,3 +1,37 @@
-<p>
-  forum works!
-</p>
+
+<div class="row my-4">
+  <div class="col-4 mx-auto text-center">
+    <button type="button" class="btn btn-primary btn-lg" (click)="showCreationForm = true">
+      <div class="fa fa-plus"></div>
+      <div>Nouveau sujet</div>
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  
+  <div *ngIf="showCreationForm" class="col-12">
+    <div class="row">
+      <div class="col-12 text-center">
+        <span class="fa fa-chevron-up" (click)="showCreationForm = false"></span></div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <form [formGroup]="threadCreationForm" #f=ngForm (ngSubmit)="onSubmit()">
+          <div class="row justify-content-center">
+            <div class="col-8">
+              <label for="threadTitle">Titre</label>
+              <textarea rows="1" formControlName="threadTitle" autofocus placeholder="Posez votre question, lancez un sujet de conversation..." class="form-control" ></textarea>
+            </div>
+            <div class="col-1">
+              <label>&nbsp;</label>
+              <input type="submit" [disabled]="f.invalid" class="btn btn-primary form-control" value="Créer" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
