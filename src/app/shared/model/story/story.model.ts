@@ -11,7 +11,7 @@ export interface Story {
   thumbnail: string;
   published: boolean;
   authorId: number;                 // toujours rempli, même si on ne charge pas les données de l'auteur
-  author: User;                   // ne sera pas toujours rempli (parfois pas besoin de charger l'auteur', son id suffit)
+  author: User;                     // ne sera pas toujours rempli (parfois pas besoin de charger l'auteur', son id suffit)
   chaptersNumber: number;           // toujours rempli, même si on ne charge pas les chapitres
   chapters: Chapter[];              // ne sera pas toujours rempli (parfois pas besoin de charger les chapitres, leur nombre suffit)
   creationDate: string;             // date au format YYYYMMDD hh:mm:ss

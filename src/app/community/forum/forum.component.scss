@@ -6,3 +6,16 @@ span.fa-chevron-up:hover {
 .btn-primary.form-control {
     color: #fff;
 }
+
+.threads-list {
+    border: 1px solid #dee2e6;
+}
+
+.threads-list .thread {
+    border-bottom: 1px solid #dee2e6;
+    font-size: 0.85rem;
+}
+
+.threads-list .thread:last-child {
+    border-bottom: none;
+}

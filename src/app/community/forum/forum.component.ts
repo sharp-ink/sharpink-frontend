@@ -1,5 +1,5 @@
+import { Thread } from '../../shared/model/forum/thread.model';
 import { ForumService } from '../../shared/service/forum.service';
-import { ApiService } from '../../shared/service/util/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -9,14 +9,22 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./forum.component.scss']
 })
 export class ForumComponent implements OnInit {
+  isLoading: boolean;
   showCreationForm: boolean;
   threadCreationForm: FormGroup;
+  threads: Thread[];
 
   constructor(private forumService: ForumService) { }
 
   ngOnInit() {
+    this.isLoading = true;
+
     this.showCreationForm = false;
     this.initForm();
+    this.forumService.loadThreadsObservable().subscribe((threads: Thread[]) => {
+      this.threads = threads;
+      this.isLoading = false;
+    });
   }
 
   onSubmit() {

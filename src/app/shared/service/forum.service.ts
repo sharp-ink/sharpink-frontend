@@ -2,6 +2,7 @@ import { AuthService } from './auth.service';
 import { ApiService } from './util/api.service';
 import { EndpointEnum } from '../constant/endpoint.enum';
 import { ThreadRequest } from '../model/forum/thread-request.model';
+import { Thread } from '../model/forum/thread.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -15,6 +16,10 @@ export class ForumService {
         private authService: AuthService,
         private apiService: ApiService
     ) { }
+
+    loadThreadsObservable(): Observable<Thread[]> {
+        return this.apiService.get(EndpointEnum.THREADS);
+    }
 
     createThread(title: string): void {
         const originalAuthorId = this.authService.connectedUser.id;
