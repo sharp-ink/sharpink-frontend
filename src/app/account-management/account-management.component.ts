@@ -9,14 +9,18 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./account-management.component.scss']
 })
 export class AccountManagementComponent implements OnInit, OnDestroy {
-  breadcrumbSegments = new Array<BreadcrumbSegment>();
+  breadcrumbSegments: BreadcrumbSegment[];
   subscription: Subscription;
 
   constructor(private breadcrumbService: BreadcrumbService) { }
 
   ngOnInit() {
-    this.breadcrumbService.setBreadcrumbSegmentsForCurrentPage(this.breadcrumbSegments);
-    this.subscription = this.breadcrumbService.subscribeToRouterEvents(this.breadcrumbSegments);
+    this.breadcrumbService.breadcrumbSegmentsSubject.subscribe((breadcrumbSegments: BreadcrumbSegment[]) => {
+      this.breadcrumbSegments = breadcrumbSegments;
+    });
+
+    this.breadcrumbService.setBreadcrumbSegmentsForCurrentPage();
+    this.subscription = this.breadcrumbService.subscribeToRouterEvents();
   }
 
   ngOnDestroy(): void {

@@ -37,4 +37,8 @@ export class ForumService {
         );
     }
 
+    getThreadByIdObservable(id: number) {
+        return this.apiService.get(`${EndpointEnum.THREADS}/${id}`);
+    }
+
 }

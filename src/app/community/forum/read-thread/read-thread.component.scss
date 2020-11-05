@@ -1,0 +1,25 @@
+
+h1 {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: var(--theme-primary-color);
+    color: var(--theme-secondary-color);
+    font-size: 1.4rem;
+}
+
+.message {
+    background-color: #F0F0F0;
+}
+
+.message .message-date {
+    font-size: 0.7rem;
+}
+
+.message .message-author {
+    color: var(--theme-secondary-color);
+}
+
+.message .message-content {
+    margin-top: 4px;
+    font-size: 0.85rem;
+}

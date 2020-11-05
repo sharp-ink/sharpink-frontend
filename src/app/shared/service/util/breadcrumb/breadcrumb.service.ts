@@ -1,7 +1,7 @@
 import { BreadcrumbSegment } from '../../../component/breadcrumb/breadcrumb-segment.model';
 import { Injectable, Input } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -9,11 +9,14 @@ import { Subscription } from 'rxjs';
 export class BreadcrumbService {
     readonly HOME_BREADCRUMB_SEGMENT: BreadcrumbSegment = { title: 'Sharpink', url: '/' };
 
+    breadcrumbSegmentsSubject = new BehaviorSubject<BreadcrumbSegment[]>([]);
+
     constructor(private router: Router) { }
 
-    setBreadcrumbSegmentsForCurrentPage(breadcrumbSegments: BreadcrumbSegment[], currentUrl?: string) {
-        breadcrumbSegments.splice(0);
-        breadcrumbSegments.push(this.HOME_BREADCRUMB_SEGMENT);
+    setBreadcrumbSegmentsForCurrentPage(currentUrl?: string): void {
+        const breadcrumbSegments = [
+            this.HOME_BREADCRUMB_SEGMENT
+        ];
 
         if (!currentUrl) {
             currentUrl = this.router.url;
@@ -41,16 +44,26 @@ export class BreadcrumbService {
             } else if (urlSegments[2] === 'membres' && urlSegments[3]) {
                 breadcrumbSegments.push({ title: 'Membres', url: '/communaute/membres' });
                 breadcrumbSegments.push({ title: 'Consultation profil' });
+            } else if (urlSegments[3] === 'discussion' && urlSegments[4]) {
+                breadcrumbSegments.push({ title: 'Forum', url: '/communaute/forum' });
             }
         // TODO other cases
         }
+
+        this.breadcrumbSegmentsSubject.next(breadcrumbSegments);
     }
 
-    subscribeToRouterEvents(breadcrumbSegments: BreadcrumbSegment[]): Subscription {
+    subscribeToRouterEvents(): Subscription {
         return this.router.events.subscribe((event: Event) => {
             if (event instanceof NavigationEnd) {
-                this.setBreadcrumbSegmentsForCurrentPage(breadcrumbSegments, event.url);
+                this.setBreadcrumbSegmentsForCurrentPage(event.url);
             }
         });
+    }
+
+    addSegment(breadcrumbSegment: BreadcrumbSegment) {
+        const breadcrumbSegments = this.breadcrumbSegmentsSubject.value;
+        breadcrumbSegments.push(breadcrumbSegment);
+        this.breadcrumbSegmentsSubject.next(breadcrumbSegments);
     }
 }

@@ -44,7 +44,7 @@
   <div class="col-12">
     <div *ngFor="let thread of threads" class="row thread">
       <div class="col-12 py-3">
-        <a [routerLink]="['']">{{ thread.title }}</a>
+        <a [routerLink]="['discussion', thread.id]">{{ thread.title }}</a>
         <small class="text-muted ml-1">par {{ thread.authorNickname }}</small>
       </div>
     </div>

@@ -14,6 +14,7 @@ import { SettingsComponent } from './account-management/settings/settings.compon
 import { CommunityHomeComponent } from './community/community-home/community-home.component';
 import { CommunityComponent } from './community/community.component';
 import { ForumComponent } from './community/forum/forum.component';
+import { ReadThreadComponent } from './community/forum/read-thread/read-thread.component';
 import { ListMembersComponent } from './community/members/list-members/list-members.component';
 import { MemberProfileComponent } from './community/members/member-profile/member-profile.component';
 import { ContactComponent } from './contact/contact.component';
@@ -84,7 +85,12 @@ const appRoutes: Routes = [
       { path: 'accueil', component: CommunityHomeComponent },
       { path: 'membres/:id', component: MemberProfileComponent },
       { path: 'membres', component: ListMembersComponent },
-      { path: 'forum', component: ForumComponent }
+      {
+        path: 'forum', children: [
+          { path: '', component: ForumComponent, pathMatch: 'full' },
+          { path: 'discussion/:id', component: ReadThreadComponent }
+        ]
+      }
     ]
   },
 

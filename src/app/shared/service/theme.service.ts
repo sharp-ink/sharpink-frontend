@@ -1,6 +1,5 @@
 import { AuthService } from './auth.service';
 import { UserPreferences } from '../model/user/user-preferences.model';
-import { User } from '../model/user/user.model';
 import { Injectable } from '@angular/core';
 
 @Injectable({
