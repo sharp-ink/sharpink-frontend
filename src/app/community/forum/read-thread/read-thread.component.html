@@ -5,11 +5,15 @@
 
 <div *ngIf="!isLoading">
 
-    <div *ngFor="let message of thread.messages" class="row m-1">
-        <div class="col-12 message py-2">
+    <div *ngFor="let message of thread.messages" class="row m-1 message">
+        <div class="col-12 py-2">
             <div>
                 <span class="message-author">{{ message.authorNickname }} - </span>
                 <span class="message-date">{{ formatDate(message.publicationDate) }}</span>
+                <span *ngIf="showActions(message)" class="float-right">
+                    <button class="btn btn-outline-primary btn-xs mr-1"><span class="fa fa-pen"></span></button>
+                    <button class="btn btn-outline-primary btn-xs" (click)="removeMessage(thread.id, message)"><span class="fa fa-trash"></span></button>
+                </span>
             </div>
             <div markdown [data]="message.content" class="message-content"></div>
         </div>

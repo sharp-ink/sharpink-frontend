@@ -1,4 +1,4 @@
-import { MessageResponse } from './message.model';
+import { Message } from './message.model';
 
 export interface Thread {
     id: number;
@@ -6,6 +6,6 @@ export interface Thread {
     title: string;
     creationDate: string; // date au format 'yyyyMMdd HH:mm:ss'
     messageCount: number;
-    lastMessage?: MessageResponse;
-    messages?: MessageResponse[];
+    lastMessage?: Message;
+    messages?: Message[];
 }

@@ -1,8 +1,8 @@
+import { Message } from '../../../shared/model/forum/message.model';
 import { Thread } from '../../../shared/model/forum/thread.model';
 import { BreadcrumbService } from '../../../shared/service/util/breadcrumb/breadcrumb.service';
 import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
 import { ForumService } from '../forum.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -62,6 +62,18 @@ export class ReadThreadComponent implements OnInit {
       this.thread = thread;
       this.answerForm.reset();
     });
+  }
+
+  showActions(message: Message) {
+    return this.forumService.isMessageByConnectedUser(message);
+  }
+
+  removeMessage(threadId: number, message: Message) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce message ?')) {
+      this.forumService.removeChapter(threadId, message).pipe(
+        switchMap(() => this.forumService.getThreadByIdObservable(threadId))
+      ).subscribe((thread: Thread) => this.thread = thread);
+    }
   }
 
   private initForm() {

@@ -7,7 +7,11 @@ h1 {
     font-size: 1.4rem;
 }
 
-.message {
+.message:nth-child(odd) {
+    background-color: #E7E7E7;
+}
+
+.message:nth-child(even) {
     background-color: #F0F0F0;
 }
 
