@@ -11,9 +11,21 @@
                 <span class="message-author">{{ message.authorNickname }} - </span>
                 <span class="message-date">{{ formatDate(message.publicationDate) }}</span>
             </div>
-            <div class="message-content">
-                {{ message.content }}
-            </div>
+            <div markdown [data]="message.content" class="message-content"></div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <form [formGroup]="answerForm" #f=ngForm (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <ckeditor #editor [editor]="ckEditor" [config]="ckEditorConfig" (ready)="onEditorReady($event)" formControlName="message"></ckeditor>
+                    <div *ngIf="f.invalid && answerForm.get('message').touched" class="error-msg">Ce champ est obligatoire.</div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Répondre" class="btn btn-primary" [disabled]="f.invalid"/>
+                </div>
+            </form>
         </div>
     </div>
 

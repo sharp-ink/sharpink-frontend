@@ -1,9 +1,15 @@
 import { Thread } from '../../../shared/model/forum/thread.model';
-import { ForumService } from '../../../shared/service/forum.service';
 import { BreadcrumbService } from '../../../shared/service/util/breadcrumb/breadcrumb.service';
-import { Component, OnInit } from '@angular/core';
+import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
+import { ForumService } from '../forum.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 import { switchMap } from 'rxjs/operators';
+import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
+import GFMDataProcessor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/src/ckeditor5-markdown-gfm/gfmdataprocessor';
 declare const moment: any;
 
 @Component({
@@ -14,6 +20,10 @@ declare const moment: any;
 export class ReadThreadComponent implements OnInit {
   isLoading: boolean;
   thread: Thread;
+  answerForm: FormGroup;
+  ckEditor = CustomEditor;
+  ckEditorConfig: any;
+  @ViewChild('editor', { static: false }) editorComponent: CKEditorComponent;
 
   constructor(
     private forumService: ForumService,
@@ -31,10 +41,36 @@ export class ReadThreadComponent implements OnInit {
       this.breadcrumbService.addSegment({ title: thread.title });
       this.isLoading = false;
     });
+
+    this.initForm();
+    this.initCkEditor();
+  }
+
+  onEditorReady($event: any) {
+    $event.data.processor = new GFMDataProcessor($event.editing.view.document);
   }
 
   formatDate(date: string) {
     return moment(date, 'YYYYMMDD hh:mm:ss').fromNow();
   }
 
+  onSubmit() {
+    // creates the message and reload the thread
+    this.forumService.createMessage(this.thread.id, this.answerForm.value.message).pipe(
+      switchMap(() => this.forumService.getThreadByIdObservable(this.thread.id))
+    ).subscribe((thread: Thread) => {
+      this.thread = thread;
+      this.answerForm.reset();
+    });
+  }
+
+  private initForm() {
+    this.answerForm = new FormGroup({
+      'message': new FormControl('', Validators.required)
+    });
+  }
+
+  private initCkEditor() {
+    this.ckEditorConfig = CkeditorConfigUtil.getCkeditorConfig(EditorType.FORUM_MESSAGE);
+  }
 }

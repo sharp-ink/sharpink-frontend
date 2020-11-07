@@ -1,5 +1,5 @@
+import { ForumService } from './forum.service';
 import { Thread } from '../../shared/model/forum/thread.model';
-import { ForumService } from '../../shared/service/forum.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 

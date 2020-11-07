@@ -1,8 +1,8 @@
-import { AuthService } from './auth.service';
-import { ApiService } from './util/api.service';
-import { EndpointEnum } from '../constant/endpoint.enum';
-import { ThreadRequest } from '../model/forum/thread-request.model';
-import { Thread } from '../model/forum/thread.model';
+import { EndpointEnum } from '../../shared/constant/endpoint.enum';
+import { ThreadRequest } from '../../shared/model/forum/thread-request.model';
+import { Thread } from '../../shared/model/forum/thread.model';
+import { AuthService } from '../../shared/service/auth.service';
+import { ApiService } from '../../shared/service/util/api.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -39,6 +39,15 @@ export class ForumService {
 
     getThreadByIdObservable(id: number) {
         return this.apiService.get(`${EndpointEnum.THREADS}/${id}`);
+    }
+
+    createMessage(threadId: number, content: string): Observable<number> {
+        const authorId = this.authService.connectedUser.id;
+        const message = {
+            authorId,
+            content
+        };
+        return this.apiService.post(`${EndpointEnum.THREADS}/${threadId}`, message);
     }
 
 }

@@ -4,7 +4,7 @@ import { Story } from '../../../../shared/model/story/story.model';
 import { NotificationService } from '../../../../shared/service/util/notification.service';
 import { CreateStoryService } from '../create-story.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 

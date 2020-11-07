@@ -7,4 +7,5 @@ export interface Thread {
     creationDate: string; // date au format 'yyyyMMdd HH:mm:ss'
     messageCount: number;
     lastMessage?: MessageResponse;
+    messages?: MessageResponse[];
 }
