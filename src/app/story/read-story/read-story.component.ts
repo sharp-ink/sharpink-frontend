@@ -1,3 +1,4 @@
+import { ForumService } from '../../community/forum/forum.service';
 import { Chapter } from '../../shared/model/story/chapter/chapter.model';
 import { Story } from '../../shared/model/story/story.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -20,6 +21,7 @@ export class ReadStoryComponent implements OnInit, OnDestroy {
 
   constructor(
     private storyService: StoryService,
+    private forumService: ForumService,
     private route: ActivatedRoute
   ) { }
 
@@ -43,6 +45,13 @@ export class ReadStoryComponent implements OnInit, OnDestroy {
       }
     );
 
+  }
+
+  /**
+   * Redirige vers le fil de discussion du forum pour cette histoire (en propose la création s'il n'existe pas)
+   */
+  goToStoryThread(story: Story) {
+    this.forumService.goToStoryThread(story);
   }
 
   ngOnDestroy() {

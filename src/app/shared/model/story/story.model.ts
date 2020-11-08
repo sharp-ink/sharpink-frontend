@@ -17,4 +17,5 @@ export interface Story {
   creationDate: string;             // date au format YYYYMMDD hh:mm:ss
   lastModificationDate: string;     // date au format YYYYMMDD hh:mm:ss
   finalReleaseDate: string;         // date au format YYYYMMDD hh:mm:ss
+  threadId?: number;
 }

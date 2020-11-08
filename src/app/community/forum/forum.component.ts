@@ -28,7 +28,7 @@ export class ForumComponent implements OnInit {
   }
 
   onSubmit() {
-    this.forumService.createThread(this.threadCreationForm.value.threadTitle);
+    this.forumService.createThread(this.threadCreationForm.value.threadTitle).subscribe();
   }
 
   private initForm() {

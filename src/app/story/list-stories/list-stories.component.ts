@@ -1,6 +1,7 @@
 import { PreviewStoryComponent } from './preview-story/preview-story.component';
+import { ForumService } from '../../community/forum/forum.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
 import { Story } from 'src/app/shared/model/story/story.model';
@@ -21,7 +22,8 @@ export class ListStoriesComponent implements OnInit, OnDestroy {
   constructor(
     private storyService: StoryService,
     private router: Router,
-    private bsModalService: BsModalService
+    private bsModalService: BsModalService,
+    private forumService: ForumService
   ) { }
 
   ngOnInit() {
@@ -70,6 +72,13 @@ export class ListStoriesComponent implements OnInit, OnDestroy {
    */
   goToStory(storyId: number) {
     this.router.navigate(['/histoires/lire', storyId]);
+  }
+
+  /**
+   * Redirige vers le fil de discussion du forum pour cette histoire (en propose la création s'il n'existe pas)
+   */
+  goToStoryThread(story: Story, event: Event) {
+    this.forumService.goToStoryThread(story, event);
   }
 
   ngOnDestroy() {

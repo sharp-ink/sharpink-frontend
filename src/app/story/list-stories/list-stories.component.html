@@ -40,8 +40,11 @@
                 </td>
                 <td class="col-1 d-flex align-items-center">{{ story.author.nickname }}</td>
                 <td class="col-1 d-flex align-items-center">{{ lastUpdateDate(story) }}</td>
-                <td class="col-6 d-flex align-items-center text-justify" [innerHTML]="story.summary != null ? replaceParagraphsWithDiv(story.summary) : 'Pas de résumé'"></td>
-                <td class="col-1 d-flex align-items-center"><a [routerLink]="['../lire', story.id]" class="btn btn-primary btn-sm">Lire</a></td>
+                <td class="col-5 d-flex align-items-center text-justify" [innerHTML]="story.summary != null ? replaceParagraphsWithDiv(story.summary) : 'Pas de résumé'"></td>
+                <td class="col-2 d-flex align-items-center">
+                  <a [routerLink]="['../lire', story.id]" class="btn btn-primary btn-sm mr-1">Lire</a>
+                  <button class="btn btn-outline-primary btn-sm" (click)="goToStoryThread(story, $event)" title="Aller à la discussion"><span class="far fa-comment-dots"></span></button>
+                </td>
               </tr>
             </tbody>
           </table>
