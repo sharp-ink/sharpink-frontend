@@ -35,7 +35,7 @@ export class ReadThreadComponent implements OnInit {
     this.isLoading = true;
 
     this.route.params.pipe(
-      switchMap((params: Params) => this.forumService.getThreadByIdObservable(+params['id']))
+      switchMap((params: Params) => this.forumService.getThread(+params['id']))
     ).subscribe((thread: Thread) => {
       this.thread = thread;
       this.breadcrumbService.addSegment({ title: thread.title });
@@ -57,7 +57,7 @@ export class ReadThreadComponent implements OnInit {
   onSubmit() {
     // creates the message and reload the thread
     this.forumService.createMessage(this.thread.id, this.answerForm.value.message).pipe(
-      switchMap(() => this.forumService.getThreadByIdObservable(this.thread.id))
+      switchMap(() => this.forumService.getThread(this.thread.id))
     ).subscribe((thread: Thread) => {
       this.thread = thread;
       this.answerForm.reset();
@@ -70,8 +70,8 @@ export class ReadThreadComponent implements OnInit {
 
   removeMessage(threadId: number, message: Message) {
     if (confirm('Êtes-vous sûr de vouloir supprimer ce message ?')) {
-      this.forumService.removeChapter(threadId, message).pipe(
-        switchMap(() => this.forumService.getThreadByIdObservable(threadId))
+      this.forumService.removeMessage(threadId, message).pipe(
+        switchMap(() => this.forumService.getThread(threadId))
       ).subscribe((thread: Thread) => this.thread = thread);
     }
   }

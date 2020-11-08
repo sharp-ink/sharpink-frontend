@@ -20,7 +20,7 @@ export class ForumService {
         private router: Router
     ) { }
 
-    loadThreadsObservable(): Observable<Thread[]> {
+    getThreads(): Observable<Thread[]> {
         return this.apiService.get(EndpointEnum.THREADS);
     }
 
@@ -35,8 +35,16 @@ export class ForumService {
         return this.apiService.post<number>(EndpointEnum.THREADS, thread);
     }
 
-    getThreadByIdObservable(id: number) {
+    getThread(id: number) {
         return this.apiService.get(`${EndpointEnum.THREADS}/${id}`);
+    }
+
+    removeThread(id: number) {
+        if (confirm('Êtes-vous sûr de vouloir supprimer la discussion ?')) {
+            return this.apiService.delete(`${EndpointEnum.THREADS}/${id}`);
+        } else {
+            return EMPTY;
+        }
     }
 
     createMessage(threadId: number, content: string): Observable<number> {
@@ -49,10 +57,10 @@ export class ForumService {
     }
 
     isMessageByConnectedUser(message: Message) {
-        return this.authService.connectedUser &&  message.authorId === this.authService.connectedUser.id;
+        return this.authService.connectedUser && message.authorId === this.authService.connectedUser.id;
     }
 
-    removeChapter(threadId: number, message: Message): Observable<any> {
+    removeMessage(threadId: number, message: Message): Observable<any> {
         const connectedUserId = this.authService.connectedUser.id;
         if (connectedUserId === message.authorId) {
             return this.apiService.delete(`${EndpointEnum.THREADS}/${threadId}/messages/${message.number}`);
@@ -75,5 +83,9 @@ export class ForumService {
                 });
             }
         }
+    }
+
+    isThreadRemovalAllowed(thread: Thread) {
+        return this.authService.connectedUser && thread.authorId === this.authService.connectedUser.id && thread.messagesCount === 0;
     }
 }

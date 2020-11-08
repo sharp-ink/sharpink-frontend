@@ -2,10 +2,11 @@ import { Message } from './message.model';
 
 export interface Thread {
     id: number;
+    authorId: number;
     authorNickname: string;
     title: string;
     creationDate: string; // date au format 'yyyyMMdd HH:mm:ss'
-    messageCount: number;
+    messagesCount: number;
     lastMessage?: Message;
     messages?: Message[];
 }

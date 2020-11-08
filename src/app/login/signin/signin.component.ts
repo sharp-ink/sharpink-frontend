@@ -30,13 +30,6 @@ export class SigninComponent implements OnInit {
     this.initForm();
   }
 
-  initForm() {
-    this.signinForm = new FormGroup({
-      'login': new FormControl('', Validators.required),
-      'password': new FormControl('', Validators.required)
-    });
-  }
-
   onSubmit() {
     const formValue = this.signinForm.value;
     this.authService.logIn(formValue.login, formValue.password)
@@ -56,4 +49,10 @@ export class SigninComponent implements OnInit {
       );
   }
 
+  private initForm() {
+    this.signinForm = new FormGroup({
+      'login': new FormControl('', Validators.required),
+      'password': new FormControl('')
+    });
+  }
 }
