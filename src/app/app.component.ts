@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
 
   private initTheme() {
     const userTheme = this.authService.connectedUserPreferences?.appearance?.theme;
-    this.themeService.loadTheme(userTheme ? userTheme : this.themeService.DEFAULT_THEME_ID);
+    this.themeService.loadTheme(userTheme !== null ? userTheme : this.themeService.DEFAULT_THEME_ID);
   }
 
 }

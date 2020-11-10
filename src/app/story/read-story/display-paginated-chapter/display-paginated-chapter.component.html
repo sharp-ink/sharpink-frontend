@@ -6,7 +6,7 @@
 </div>
 
 <div class="row mb-2">
-    <div class="col-12 text-justify chapter-content" [innerHTML]="selectedChapter.content"></div>
+    <div class="col-12 text-justify chapter-content" markdown [data]="selectedChapter.content"></div>
 </div>
 
 <div class="row">

@@ -10,7 +10,7 @@
       </span>Accueil
     </a>
     <a class="nav-item nav-link" routerLink="/histoires" routerLinkActive="active"><i class="fa fa-book"></i>Lecture</a>
-    <a class="nav-item nav-link" routerLink="/mon-compte" routerLinkActive="active"><i class="fa fa-folder-open"></i>Mon compte</a>
+    <a class="nav-item nav-link" routerLink="/mon-compte" routerLinkActive="active"><i class="fa fa-folder-open"></i>Mon espace</a>
     <a class="nav-item nav-link" routerLink="/communaute" routerLinkActive="active"><i class="fa fa-users"></i>Communauté</a>
     <a class="nav-item nav-link" routerLink="/contact" routerLinkActive="active"><i class="fa fa-question-circle"></i>Support</a>
   </div>
@@ -21,3 +21,4 @@
 </nav>
 
 <ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
+<ng-keyboard-shortcuts-help [key]="'?'" [closeKey]="'escape'" [title]="'Aide'"></ng-keyboard-shortcuts-help>

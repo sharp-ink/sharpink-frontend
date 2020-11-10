@@ -3,10 +3,14 @@
   height: 100%;
 }
 
+.sharpink-feature {
+  background-image: linear-gradient(to bottom, var(--theme-primary-color), var(--theme-secondary-color));
+  color: white;
+}
+
 img {
   width: 200px;
   height: 200px;
-  border-radius: 50%;
 }
 
 // parallax elements

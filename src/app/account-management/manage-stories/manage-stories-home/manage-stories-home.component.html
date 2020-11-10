@@ -13,66 +13,7 @@
     </div>
 </div>
 
-<div class="row mb-3">
-    <div class="col-12 d-flex">
-        <span class="mb-1">Affichage :&nbsp;</span>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="classic" [(ngModel)]="displayMode" [value]="DisplayMode.CLASSIC">
-            <label class="form-check-label" for="classic">Classique</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="tiles" [(ngModel)]="displayMode" [value]="DisplayMode.TILES">
-            <label class="form-check-label" for="tiles">Tuiles</label>
-        </div>
-    </div>
-</div>
-
-<!-- Classic display: list -->
-<div class="row" *ngIf="displayMode === DisplayMode.CLASSIC">
-    <div class="col-12">
-        <table class="table table-sm">
-            <thead>
-                <tr class="d-flex">
-                    <th class="col-4">Titre</th>
-                    <th class="col-6">Résumé</th>
-                    <th class="col-2"></th> <!-- actions -->
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let story of myStories" class="d-flex">
-                    <td class="col-4 d-flex align-items-center">
-                        <a [routerLink]="['..', story.id]"><span class="story-title">{{ story.title }}</span></a> <span
-                            class="badge badge-light">({{ story.chaptersNumber }} chap.)</span>
-                    </td>
-                    <td class="col-6 d-flex align-items-center summary-content "
-                        [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></td>
-                    <td class="col-2 btn-toolbar d-flex align-items-center">
-                        <a [routerLink]="['..', story.id]" class="btn btn-xs btn-primary mr-1"
-                            title="Éditer l'histoire">
-                            <span class="fa fa-pen"></span>
-                        </a>
-                        <a [routerLink]="['..', story.id, 'ajouter-chapitre']" class="btn btn-xs btn-primary mr-1"
-                            title="Ajouter un chapitre">
-                            <span class="fa fa-plus"></span>
-                        </a>
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="{{ 'publishSwitch_' + story.id }}" [ngModel]="story.published" (change)="updateStoryStatus(story)">
-                            <label class="custom-control-label" for="{{ 'publishSwitch_' + story.id }}"
-                                [title]="story.published ? 'L\'histoire est visible par les autres membres' : 'L\'histoire n\'est visible que par vous'"></label>
-                        </div>
-                        <button type="button" (click)="removeStory(story)" class="btn btn-xs btn-outline-secondary"
-                            title="Supprimer l'histoire">
-                            <span class="fa fa-trash"></span>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<!-- Tiles display -->
-<div class="row no-gutters mx-n2 tiles-display" [ngClass]="{ 'row-cols-2': myStories.length <= 4, 'row-cols-3': myStories.length > 4 }" *ngIf="displayMode === DisplayMode.TILES">
+<div class="row no-gutters mx-n2 tiles-display" [ngClass]="{ 'row-cols-2': myStories.length <= 4, 'row-cols-3': myStories.length > 4 }">
     <div class="col mb-3 px-2" *ngFor="let story of myStories">
         <div class="card h-100" (click)="goToEdition(story.id)">
             <div class="card-header d-flex justify-content-center align-items-center">

@@ -52,6 +52,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { KeyboardShortcutsModule } from 'ng-keyboard-shortcuts';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MarkdownModule } from 'ngx-markdown';
 import { ToastrModule } from 'ngx-toastr';
@@ -127,6 +128,7 @@ const toastrConfig = {
     ModalModule.forRoot(), // ngx-bootstrap
     PaginationModule.forRoot(), // ngx-bootstrap
     ToastrModule.forRoot(toastrConfig), // ngx-toastr (Toastr notifications)
+    TooltipModule.forRoot() // ngx-bootstrap
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

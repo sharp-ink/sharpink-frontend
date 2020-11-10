@@ -15,8 +15,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ManageStoriesHomeComponent implements OnInit {
   isLoading: boolean;
-  displayMode: StoriesDisplayMode = StoriesDisplayMode.TILES;
-  DisplayMode = StoriesDisplayMode; // expose enum to the template
   myStories: Story[] = [];
 
   constructor(
