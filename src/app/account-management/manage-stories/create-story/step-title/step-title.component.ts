@@ -1,6 +1,7 @@
 import { ApiErrorCodeEnum } from '../../../../shared/model/error/api-error-code-enum.model';
 import { ApiError } from '../../../../shared/model/error/api-error.model';
 import { Story } from '../../../../shared/model/story/story.model';
+import { AuthService } from '../../../../shared/service/auth.service';
 import { NotificationService } from '../../../../shared/service/util/notification.service';
 import { CreateStoryService } from '../create-story.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -18,6 +19,7 @@ export class StepTitleComponent implements OnInit {
   backendOperationInProgress: boolean;
 
   constructor(
+    private authService: AuthService,
     private createStoryService: CreateStoryService,
     private router: Router,
     private route: ActivatedRoute,
@@ -32,7 +34,9 @@ export class StepTitleComponent implements OnInit {
 
   initCreateStory() {
     if (!this.createStoryService.story) {
-      this.createStoryService.story = {};
+      this.createStoryService.story = {
+        authorId: this.authService.connectedUser.id
+      };
     }
   }
 

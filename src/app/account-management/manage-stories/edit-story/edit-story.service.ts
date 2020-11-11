@@ -24,7 +24,6 @@ export class EditStoryService {
         const fv = storyInformationsForm.value;
         console.log(fv);
         const storyPatchRequest: StoryPatchRequest = {
-            authorId: story.authorId,
             title: fv.storyTitle,
             type: fv.storyType,
             originalStory: fv.storyIsOriginal,

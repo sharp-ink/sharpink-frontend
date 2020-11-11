@@ -10,7 +10,7 @@ export class ThemeService {
   private readonly THEME_BLUE_PRIMARY_COLOR = '#0045C0';
   private readonly THEME_MARINE_PRIMARY_COLOR = '#00304F';
   private readonly THEME_FANCY_PRIMARY_COLOR = '#F81FAA';
-  private readonly THEME_BRICK_PRIMARY_COLOR = '#B22222';
+  private readonly THEME_SCARLET_PRIMARY_COLOR = '#B22222';
   private readonly THEME_GREY_PRIMARY_COLOR = '#303030';
   private readonly THEME_PUMPKIN_PRIMARY_COLOR = '#FF8C00';
   private readonly THEME_DARLING_PRIMARY_COLOR = '#00CED1';
@@ -42,11 +42,11 @@ export class ThemeService {
     },
     {
       id: 3,
-      name: 'Brick',
-      themePrimaryColor: this.THEME_BRICK_PRIMARY_COLOR,
-      themeSecondaryColor: '#A05000',
+      name: 'Écarlate',
+      themePrimaryColor: this.THEME_SCARLET_PRIMARY_COLOR,
+      themeSecondaryColor: '#F03060',
       headerForegroundColor: this.DEFAULT_TEXT_COLOR_ON_COLORED_BACKGROUNDS,
-      buttonPrimaryBackgroundColor: this.THEME_BRICK_PRIMARY_COLOR
+      buttonPrimaryBackgroundColor: this.THEME_SCARLET_PRIMARY_COLOR
     },
     {
       id: 4,

@@ -1,5 +1,6 @@
 import { EndpointEnum } from '../../../shared/constant/endpoint.enum';
 import { StoryStatusEnum } from '../../../shared/constant/story-status.enum';
+import { StoryCreationRequest } from '../../../shared/model/story/story-creation-request.model';
 import { StoryPatchRequest } from '../../../shared/model/story/story-patch-request.model';
 import { Story } from '../../../shared/model/story/story.model';
 import { AuthService } from '../../../shared/service/auth.service';
@@ -13,7 +14,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CreateStoryService {
-  story: StoryPatchRequest; // une histoire complétée au fur et à mesure des étapes du formulaire de création
+  story: StoryCreationRequest; // une histoire complétée au fur et à mesure des étapes du formulaire de création
 
   constructor(
     private apiService: ApiService,

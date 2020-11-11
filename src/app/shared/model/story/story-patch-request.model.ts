@@ -7,7 +7,6 @@ export interface StoryPatchRequest {
     originalStory?: boolean;
     type?: StoryTypeEnum;
     status?: StoryStatusEnum;
-    authorId?: number;
     summary?: string; // html string
     thumbnail?: string; // base64 thumbnail
     // TODO
