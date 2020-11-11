@@ -3,9 +3,10 @@ import { StoryTypeEnum } from '../../../shared/constant/story-type.enum';
 import { Chapter } from '../../../shared/model/story/chapter/chapter.model';
 import { Story } from '../../../shared/model/story/story.model';
 import { StoryService } from '../../../shared/service/story.service';
+import { BreadcrumbService } from '../../../shared/service/util/breadcrumb/breadcrumb.service';
 import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
 import { NotificationService } from '../../../shared/service/util/notification.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
@@ -17,7 +18,7 @@ import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom
   templateUrl: './edit-story.component.html',
   styleUrls: ['./edit-story.component.scss']
 })
-export class EditStoryComponent implements OnInit {
+export class EditStoryComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   storySubscription: Subscription;
   story: Story = null;
@@ -33,6 +34,7 @@ export class EditStoryComponent implements OnInit {
     private storyService: StoryService,
     private editStoryService: EditStoryService,
     private notificationService: NotificationService,
+    private breadcrumbService: BreadcrumbService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -44,8 +46,12 @@ export class EditStoryComponent implements OnInit {
     this.storySubscription = this.storyService.currentStorySubject.subscribe(
       (story: Story) => {
         this.story = story;
+
+        this.breadcrumbService.addSegment({ title: story.title });
+
         this.initForm();
         this.initCkEditor();
+
         this.isLoading = false;
       }
     );
@@ -125,5 +131,10 @@ export class EditStoryComponent implements OnInit {
 
   private initCkEditor() {
     this.ckEditorConfig = CkeditorConfigUtil.getCkeditorConfig(EditorType.SUMMARY);
+  }
+
+  ngOnDestroy() {
+    this.storySubscription.unsubscribe();
+    this.breadcrumbService.removeLastSegment();
   }
 }

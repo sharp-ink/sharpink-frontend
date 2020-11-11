@@ -34,6 +34,8 @@ export class BreadcrumbService {
                 breadcrumbSegments.push({ title: 'Mon profil' });
             } else if (currentPagePath === 'reglages') {
                 breadcrumbSegments.push({ title: 'Préférences' });
+            } else if (urlSegments[2] === 'mes-histoires') {
+                breadcrumbSegments.push({ title: 'Mes histoires', url: '/mon-compte/mes-histoires' });
             }
         } else if (rootPath === 'communaute') {
             breadcrumbSegments.push({ title: 'Communauté', url: '/communaute' });
@@ -47,7 +49,7 @@ export class BreadcrumbService {
             } else if (urlSegments[3] === 'discussion' && urlSegments[4]) {
                 breadcrumbSegments.push({ title: 'Forum', url: '/communaute/forum' });
             }
-        // TODO other cases
+            // TODO other cases
         }
 
         this.breadcrumbSegmentsSubject.next(breadcrumbSegments);
@@ -64,6 +66,12 @@ export class BreadcrumbService {
     addSegment(breadcrumbSegment: BreadcrumbSegment) {
         const breadcrumbSegments = this.breadcrumbSegmentsSubject.value;
         breadcrumbSegments.push(breadcrumbSegment);
+        this.breadcrumbSegmentsSubject.next(breadcrumbSegments);
+    }
+
+    removeLastSegment() {
+        const breadcrumbSegments = this.breadcrumbSegmentsSubject.value;
+        breadcrumbSegments.pop();
         this.breadcrumbSegmentsSubject.next(breadcrumbSegments);
     }
 }
