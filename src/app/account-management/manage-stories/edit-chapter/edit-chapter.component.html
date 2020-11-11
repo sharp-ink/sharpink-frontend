@@ -1,12 +1,12 @@
 
-<app-loading *ngIf="isLoading"></app-loading>
+<app-loading *ngIf="isLoading" class="d-block mb-4"></app-loading>
 
-<div class="row mb-3" *ngIf="!isLoading">
+<div class="row mb-3">
     <div class="col-6">
         <h3>
-            Modifier l'histoire <span class="story-title">{{ story.title }}</span> :
+            Modifier l'histoire <span *ngIf="!isLoading" class="story-title">{{ story.title }}</span> :
             <span *ngIf="chapter === null">ajouter un chapitre</span>
-            <span *ngIf="chapter !== null">modifier le chapitre {{ chapter.position }}</span>
+            <span *ngIf="chapter !== null">modifier le chapitre <span *ngIf="!isLoading">{{ chapter.position }}</span></span>
         </h3>
     </div>
     <div class="col-2">
