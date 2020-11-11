@@ -4,10 +4,11 @@ import { Chapter } from '../../../shared/model/story/chapter/chapter.model';
 import { Story } from '../../../shared/model/story/story.model';
 import { StoryService } from '../../../shared/service/story.service';
 import { ApiService } from '../../../shared/service/util/api.service';
+import { BreadcrumbService } from '../../../shared/service/util/breadcrumb/breadcrumb.service';
 import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
 import { HtmlUtil } from '../../../shared/service/util/html-util.service';
 import { NotificationService } from '../../../shared/service/util/notification.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
@@ -20,7 +21,7 @@ import GFMDataProcessor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-
   templateUrl: './edit-chapter.component.html',
   styleUrls: ['./edit-chapter.component.scss']
 })
-export class EditChapterComponent implements OnInit {
+export class EditChapterComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   storySubscription: Subscription;
   story: Story;
@@ -36,6 +37,7 @@ export class EditChapterComponent implements OnInit {
     private apiService: ApiService,
     private htmlUtilService: HtmlUtil,
     private notificationService: NotificationService,
+    private breadcrumbService: BreadcrumbService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -47,8 +49,13 @@ export class EditChapterComponent implements OnInit {
     this.storySubscription = this.storyService.currentStorySubject.subscribe(
       (story: Story) => {
         this.story = story;
+
+        this.breadcrumbService.addSegment({ title: story.title, url: `/mon-compte/mes-histoires/${story.id}` });
+
         const chapterPosition = this.route.snapshot.params['chapterPosition'];
         if (chapterPosition) {
+          this.breadcrumbService.addSegment({ title: `Chapitre ${chapterPosition}` });
+
           this.chapter = this.story.chapters[chapterPosition - 1];
           this.chapterContentForm.patchValue({
             chapterTitle: this.chapter.title,
@@ -56,6 +63,7 @@ export class EditChapterComponent implements OnInit {
           });
         } else {
           this.chapter = null;
+          this.breadcrumbService.addSegment({ title: 'Nouveau chapitre' });
         }
 
         this.isLoading = false;
@@ -145,4 +153,8 @@ export class EditChapterComponent implements OnInit {
     };
   }
 
+  ngOnDestroy() {
+    this.storySubscription.unsubscribe();
+    this.breadcrumbService.removeLastSegment();
+  }
 }
