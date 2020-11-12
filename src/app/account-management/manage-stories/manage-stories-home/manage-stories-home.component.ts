@@ -57,7 +57,9 @@ export class ManageStoriesHomeComponent implements OnInit, AfterViewInit {
     this.router.navigate(['..', storyId], { relativeTo: this.route });
   }
 
-  updateStoryStatus(story: Story) {
+  updateStoryStatus(story: Story, event: Event) {
+    event.stopPropagation();
+
     this.manageStoriesHomeService.changeStoryStatus(story).subscribe(updatedStory => {
       console.log(updatedStory);
       story.published = updatedStory.published; // reflect the new status on the page
