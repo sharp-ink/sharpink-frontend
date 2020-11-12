@@ -5,7 +5,7 @@ import { AuthService } from '../../../../shared/service/auth.service';
 import { NotificationService } from '../../../../shared/service/util/notification.service';
 import { CreateStoryService } from '../create-story.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,8 +14,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './step-title.component.html',
   styleUrls: ['./step-title.component.scss']
 })
-export class StepTitleComponent implements OnInit {
+export class StepTitleComponent implements OnInit, AfterViewInit {
   stepTitleForm: FormGroup;
+  @ViewChild('storyTitleElement') storyTitleElement: ElementRef;
   backendOperationInProgress: boolean;
 
   constructor(
@@ -30,6 +31,11 @@ export class StepTitleComponent implements OnInit {
     this.initCreateStory();
     this.initForm();
     this.backendOperationInProgress = false;
+  }
+
+  ngAfterViewInit() {
+    const storyTitleElement: HTMLElement = this.storyTitleElement.nativeElement;
+    storyTitleElement.focus();
   }
 
   initCreateStory() {

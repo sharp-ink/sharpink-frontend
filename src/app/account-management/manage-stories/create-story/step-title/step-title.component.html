@@ -6,7 +6,7 @@
 
             <div class="form-group">
                 <label for="storyTitle">Quel est le titre de votre histoire ?</label>
-                <input id="storyTitle" formControlName="storyTitle" type="text" autofocus autocomplete="off" class="form-control" />
+                <input id="storyTitle" formControlName="storyTitle" type="text" autocomplete="off" class="form-control" #storyTitleElement />
                 <div *ngIf="stepTitleForm.get('storyTitle').invalid && stepTitleForm.get('storyTitle').touched">
                     <div *ngIf="stepTitleForm.get('storyTitle').errors.required" class="error-msg">Renseignez un titre pour
                         votre histoire.</div>

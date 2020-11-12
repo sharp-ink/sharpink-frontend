@@ -10,6 +10,7 @@ import { ManageStoriesHomeService } from '../manage-stories-home/manage-stories-
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ShortcutInput } from 'ng-keyboard-shortcuts';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { Subscription } from 'rxjs';
 import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';

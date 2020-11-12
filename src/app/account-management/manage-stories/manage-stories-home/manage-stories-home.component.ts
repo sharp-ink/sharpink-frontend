@@ -4,8 +4,9 @@ import { Story } from '../../../shared/model/story/story.model';
 import { AuthService } from '../../../shared/service/auth.service';
 import { UserService } from '../../../shared/service/user.service';
 import { NotificationService } from '../../../shared/service/util/notification.service';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ShortcutEventOutput, ShortcutInput } from 'ng-keyboard-shortcuts';
 
 @Component({
   selector: 'app-manage-stories-home',
@@ -13,9 +14,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./manage-stories-home.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ManageStoriesHomeComponent implements OnInit {
+export class ManageStoriesHomeComponent implements OnInit, AfterViewInit {
   isLoading: boolean;
   myStories: Story[] = [];
+  shortcuts: ShortcutInput[] = [];
 
   constructor(
     private router: Router,
@@ -35,6 +37,16 @@ export class ManageStoriesHomeComponent implements OnInit {
         this.myStories = stories;
         this.isLoading = false;
       });
+  }
+
+  ngAfterViewInit() {
+    this.shortcuts.push({
+      key: 'n',
+      command: (e: ShortcutEventOutput) => {
+        e.event.preventDefault(); // prevent having the character 'n' entered in the focused input in StepTitleComponent
+        this.goToCreation();
+      }
+    });
   }
 
   goToCreation() {
