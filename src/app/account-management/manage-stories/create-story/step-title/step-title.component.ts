@@ -66,10 +66,10 @@ export class StepTitleComponent implements OnInit, AfterViewInit {
   }
 
   onFinish(): void {
-    this.saveStoryAndRedirect(['../../accueil']);
+    this.saveStoryAndRedirect();
   }
 
-  private saveStoryAndRedirect(redirectTo: string[]) {
+  private saveStoryAndRedirect(redirectTo?: string[]) {
     this.backendOperationInProgress = true;
 
     this.createStoryService.initStoryStepTitle(this.stepTitleForm).subscribe(
@@ -81,7 +81,11 @@ export class StepTitleComponent implements OnInit, AfterViewInit {
           this.notificationService.success('Les informations de l\'histoire ont bien été mises à jour.');
         }
         this.backendOperationInProgress = false;
-        this.router.navigate(redirectTo, { relativeTo: this.route });
+        if (redirectTo) {
+          this.router.navigate(redirectTo, { relativeTo: this.route });
+        } else {
+          this.router.navigate(['/mon-compte/mes-histoires', this.createStoryService.story.id], { relativeTo: this.route });
+        }
       },
       (errorResponse: HttpErrorResponse) => {
         const apiError: ApiError = errorResponse.error;

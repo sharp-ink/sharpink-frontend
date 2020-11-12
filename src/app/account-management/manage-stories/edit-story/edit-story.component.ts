@@ -72,9 +72,7 @@ export class EditStoryComponent implements OnInit, OnDestroy {
     this.router.navigate(['/mon-compte/mes-histoires']);
   }
 
-  updateStoryStatus(story: Story, event: Event) {
-    event.stopPropagation();
-
+  updateStoryStatus(story: Story) {
     this.manageStoriesHomeService.changeStoryStatus(story).subscribe(updatedStory => {
       console.log(updatedStory);
       story.published = updatedStory.published; // reflect the new status on the page

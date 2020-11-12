@@ -41,8 +41,8 @@
                     title="Supprimer l'histoire">
                     <span class="fa fa-trash"></span>
                 </button>
-                <span class="custom-control custom-switch d-inline-block float-right">
-                    <input type="checkbox" class="custom-control-input" id="{{ 'publishSwitch_' + story.id }}" [ngModel]="story.published" (change)="updateStoryStatus(story, $event)">
+                <span class="custom-control custom-switch d-inline-block float-right" (click)="$event.stopPropagation()">
+                    <input type="checkbox" class="custom-control-input" id="{{ 'publishSwitch_' + story.id }}" [ngModel]="story.published" (change)="updateStoryStatus(story)">
                     <label class="custom-control-label" for="{{ 'publishSwitch_' + story.id }}"
                         [title]="story.published ? 'L\'histoire est visible par les autres membres' : 'L\'histoire n\'est visible que par vous'"></label>
                 </span>

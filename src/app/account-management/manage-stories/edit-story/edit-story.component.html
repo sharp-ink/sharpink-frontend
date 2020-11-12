@@ -16,7 +16,7 @@
     <div class="col-12">
         <span class="button-label">Publication de l'histoire</span>
         <span class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="publishSwitch" [ngModel]="story.published" (change)="updateStoryStatus(story, $event)">
+            <input type="checkbox" class="custom-control-input" id="publishSwitch" [ngModel]="story.published" (change)="updateStoryStatus(story)">
             <label class="custom-control-label" for="publishSwitch"
                 [title]="story.published ? 'L\'histoire est visible par les autres membres' : 'L\'histoire n\'est visible que par vous'">
             </label>
