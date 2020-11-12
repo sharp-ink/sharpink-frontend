@@ -1,15 +1,30 @@
 <app-loading *ngIf="isLoading"></app-loading>
 
-<div *ngIf="!isLoading" class="row">
+<div *ngIf="!isLoading" class="row mb-4">
     <div class="col-6">
         <h3>Modifier l'histoire <span class="story-title">{{ story.title }}</span></h3>
     </div>
     <div class="col-2">
-        <button type="button" class="btn btn-outline-primary btn-sm" (click)="goBackToHome();" title="Retour à mes histoires">
+        <button type="button" class="btn btn-outline-primary btn-sm" (click)="goBackToHome();"
+            title="Retour à mes histoires">
             <span class="fa fa-arrow-left"></span>
         </button>
     </div>
 </div>
+
+<div *ngIf="!isLoading" class="row mb-4">
+    <div class="col-12">
+        <span class="button-label">Publication de l'histoire</span>
+        <span class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="publishSwitch" [ngModel]="story.published" (change)="updateStoryStatus(story, $event)">
+            <label class="custom-control-label" for="publishSwitch"
+                [title]="story.published ? 'L\'histoire est visible par les autres membres' : 'L\'histoire n\'est visible que par vous'">
+            </label>
+        </span>
+    </div>
+</div>
+
+<hr />
 
 <div *ngIf="!isLoading">
 
@@ -22,11 +37,14 @@
             <form [formGroup]="storyInformationsForm" #f=ngForm (ngSubmit)="onSubmit()">
                 <div class="form-group row align-items-center">
                     <label class="col-1 col-form-label col-form-label-sm" for="storyTitle">Titre :</label>
-                    <input class="col-3 form-control form-control-sm" id="storyTitle" formControlName="storyTitle" type="text" autocomplete="off" />
+                    <input class="col-3 form-control form-control-sm" id="storyTitle" formControlName="storyTitle"
+                        type="text" autocomplete="off" />
                 </div>
                 <div class="form-group row align-items-center">
-                    <label class="col-1 col-form-label col-form-label-sm" for="storyIsOriginal">Histoire originale ou fanfiction&nbsp;:</label>
-                    <select class="col-2 form-control form-control-sm" id="storyIsOriginal" formControlName="storyIsOriginal">
+                    <label class="col-1 col-form-label col-form-label-sm" for="storyIsOriginal">Histoire originale ou
+                        fanfiction&nbsp;:</label>
+                    <select class="col-2 form-control form-control-sm" id="storyIsOriginal"
+                        formControlName="storyIsOriginal">
                         <option value="true">Histoire originale</option>
                         <option value="false">Fanfiction</option>
                     </select>
@@ -40,22 +58,19 @@
                 </div>
                 <div class="form-group row align-items-center">
                     <label class="col-1 col-form-label col-form-label-sm" for="storySummary">Résumé :</label>
-                    <ckeditor class="col-6 px-0 py-2 summary-content" [editor]="ckEditor" [config]="ckEditorConfig" formControlName="storySummary"></ckeditor>
+                    <ckeditor class="col-6 px-0 py-2 summary-content" [editor]="ckEditor" [config]="ckEditorConfig"
+                        formControlName="storySummary"></ckeditor>
                 </div>
                 <div class="form-group row align-items-center">
                     <label class="col-1 col-form-label col-form-label-sm" for="storyThumbnail">Vignette :</label>
-                    <img class="mr-2" id="thumbnail" [src]="croppedImage || story.thumbnail" alt="Aucune image définie" />
-                    <input class="col-3 pl-0 form-control-file form-control-sm" id="storyThumbnail" type="file" accept="image/*" (change)="fileChangeEvent($event)" />
-                    <image-cropper [ngClass]="{ 'd-none': !isCropperVisible }"
-                        [imageChangedEvent]="imageChangedEvent"
-                        [aspectRatio]="1"
-                        [maintainAspectRatio]="true"
-                        [containWithinAspectRatio]="true"
-                        [format]="png"
-                        (imageCropped)="imageCropped($event)"
-                        (imageLoaded)="imageLoaded()"
-                        (cropperReady)="cropperReady()"
-                        (loadImageFailed)="loadImageFailed()">
+                    <img class="mr-2" id="thumbnail" [src]="croppedImage || story.thumbnail"
+                        alt="Aucune image définie" />
+                    <input class="col-3 pl-0 form-control-file form-control-sm" id="storyThumbnail" type="file"
+                        accept="image/*" (change)="fileChangeEvent($event)" />
+                    <image-cropper [ngClass]="{ 'd-none': !isCropperVisible }" [imageChangedEvent]="imageChangedEvent"
+                        [aspectRatio]="1" [maintainAspectRatio]="true" [containWithinAspectRatio]="true" [format]="png"
+                        (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                        (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()">
                     </image-cropper>
                 </div>
                 <div class="row">
@@ -69,10 +84,11 @@
         </div>
     </div>
 
-    <hr/>
+    <hr />
 
     <div class="row">
-        <div class="col-12 mb-3">Ci-dessous la liste des chapitres que vous avez écrits (vous pouvez toujours les modifier...) :</div>
+        <div class="col-12 mb-3">Ci-dessous la liste des chapitres que vous avez écrits (vous pouvez toujours les
+            modifier...) :</div>
     </div>
 
     <div class="row">
@@ -86,10 +102,12 @@
                             </a>
                         </td>
                         <td>
-                            <a [routerLink]="['modifier-chapitre', chapter.position]" class="btn btn-outline-primary btn-xs mr-1" title="Modifier le chapitre">
+                            <a [routerLink]="['modifier-chapitre', chapter.position]"
+                                class="btn btn-outline-primary btn-xs mr-1" title="Modifier le chapitre">
                                 <span class="fa fa-pen"></span>
                             </a>
-                            <button type="button" class="btn btn-outline-secondary btn-xs" (click)="removeChapter(chapter)" title="Supprimer le chapitre">
+                            <button type="button" class="btn btn-outline-secondary btn-xs"
+                                (click)="removeChapter(chapter)" title="Supprimer le chapitre">
                                 <span class="fa fa-trash"></span>
                             </button>
                         </td>

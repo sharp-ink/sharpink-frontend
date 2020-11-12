@@ -6,6 +6,7 @@ import { StoryService } from '../../../shared/service/story.service';
 import { BreadcrumbService } from '../../../shared/service/util/breadcrumb/breadcrumb.service';
 import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
 import { NotificationService } from '../../../shared/service/util/notification.service';
+import { ManageStoriesHomeService } from '../manage-stories-home/manage-stories-home.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -32,6 +33,7 @@ export class EditStoryComponent implements OnInit, OnDestroy {
 
   constructor(
     private storyService: StoryService,
+    private manageStoriesHomeService: ManageStoriesHomeService,
     private editStoryService: EditStoryService,
     private notificationService: NotificationService,
     private breadcrumbService: BreadcrumbService,
@@ -67,6 +69,19 @@ export class EditStoryComponent implements OnInit, OnDestroy {
 
   goBackToHome() {
     this.router.navigate(['/mon-compte/mes-histoires']);
+  }
+
+  updateStoryStatus(story: Story, event: Event) {
+    event.stopPropagation();
+
+    this.manageStoriesHomeService.changeStoryStatus(story).subscribe(updatedStory => {
+      console.log(updatedStory);
+      story.published = updatedStory.published; // reflect the new status on the page
+      this.notificationService.success(
+        `L'histoire est désormais <b>${story.published ? 'visible publiquement' : 'masquée'}</b>.`
+      );
+
+    });
   }
 
   goToNewChapter() {
