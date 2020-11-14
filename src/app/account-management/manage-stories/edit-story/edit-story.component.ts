@@ -7,10 +7,10 @@ import { BreadcrumbService } from '../../../shared/service/util/breadcrumb/bread
 import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
 import { NotificationService } from '../../../shared/service/util/notification.service';
 import { ManageStoriesHomeService } from '../manage-stories-home/manage-stories-home.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ShortcutInput } from 'ng-keyboard-shortcuts';
+import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { Subscription } from 'rxjs';
 import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
@@ -22,12 +22,15 @@ import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom
 })
 export class EditStoryComponent implements OnInit, OnDestroy {
   isLoading: boolean;
+  isComponentInitialization: boolean;
+  navigationExtrasState: any;
   storySubscription: Subscription;
   story: Story = null;
   storyInformationsForm: FormGroup;
   types = new Array<{ name: string, label: string }>();
   ckEditor = CustomEditor;
   ckEditorConfig: any;
+  @ViewChild('summaryEditor', { static: false }) editorComponent: CKEditorComponent;
   isCropperVisible = false;
   imageChangedEvent: any = null;
   croppedImage: any = null;
@@ -40,10 +43,13 @@ export class EditStoryComponent implements OnInit, OnDestroy {
     private breadcrumbService: BreadcrumbService,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {
+    this.navigationExtrasState = this.router.getCurrentNavigation().extras.state;
+  }
 
   ngOnInit() {
     this.isLoading = true;
+    this.isComponentInitialization = true;
 
     // souscrit à currentStorySubject pour que this.story soit mis à jour à chaque fois que c'est nécessaire
     this.storySubscription = this.storyService.currentStorySubject.subscribe(
@@ -66,6 +72,14 @@ export class EditStoryComponent implements OnInit, OnDestroy {
         // storyService nous notifiera en retour, via currentStorySuject.next(), dès qu'il aura récupéré l'histoire  (opération asynchrone)
       }
     );
+  }
+
+  onEditorReady(event: any) {
+    if (this.navigationExtrasState?.elementToBeFocused === 'summary') {
+      event.ui.element.scrollIntoView();
+      event.editing.view.focus();
+      this.isComponentInitialization = false;
+    }
   }
 
   goBackToHome() {

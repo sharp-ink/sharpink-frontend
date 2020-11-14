@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group row align-items-center">
                     <label class="col-1 col-form-label col-form-label-sm" for="storySummary">Résumé :</label>
-                    <ckeditor class="col-6 px-0 py-2 summary-content" [editor]="ckEditor" [config]="ckEditorConfig"
+                    <ckeditor class="col-6 px-0 py-2 summary-content" #summaryEditor [editor]="ckEditor" [config]="ckEditorConfig" (ready)="onEditorReady($event)"
                         formControlName="storySummary"></ckeditor>
                 </div>
                 <div class="form-group row align-items-center">

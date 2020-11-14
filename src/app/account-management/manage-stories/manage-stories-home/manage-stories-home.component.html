@@ -15,21 +15,33 @@
 
 <div class="row no-gutters mx-n2 tiles-display" [ngClass]="{ 'row-cols-2': myStories.length <= 4, 'row-cols-3': myStories.length > 4 }">
     <div class="col mb-3 px-2" *ngFor="let story of myStories">
+        
         <div class="card h-100" (click)="goToEdition(story.id)">
+            
             <div class="card-header d-flex justify-content-center align-items-center">
                 <span class="story-title" title="{{ story.title }}">{{ story.title }}</span>
             </div>
+
             <div class="card-body summary-content">
                 <img *ngIf="story.thumbnail" [src]="story.thumbnail" class="float-left thumbnail"/>
                 <div [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></div>
                 <div class="badge badge-light">{{ story.chaptersNumber }} chapitre{{ story.chaptersNumber > 0 ? 's' : '' }}</div>
-                <div *ngIf="story.chaptersNumber === 0" class="text-center">
-                    <a [routerLink]="['..', story.id, 'ajouter-chapitre']" class="btn btn-primary btn-lg" title="Ajouter un chapitre">
-                        <span class="fa fa-plus"></span>
-                    </a><br/>
-                    <small class="text-muted">Ajouter un chapitre</small>
+                <div *ngIf="story.chaptersNumber === 0" class="row mx-0 actions text-center">
+                    <div class="col-3 ml-auto">
+                        <a [routerLink]="['..', story.id, 'ajouter-chapitre']" class="btn btn-primary btn-lg" title="Ajouter un chapitre">
+                            <span class="fa fa-plus"></span>
+                        </a><br/>
+                        <small class="text-muted">Ajouter un chapitre</small>
+                    </div>
+                    <div class="col-3 mr-auto">
+                        <a [routerLink]="['..', story.id]" [state]="{ elementToBeFocused: 'summary' }" class="btn btn-primary btn" title="Ajouter un résumé">
+                            <span class="far fa-file-alt"></span>
+                        </a><br/>
+                        <small class="text-muted">Ajouter un résumé</small>
+                    </div>
                 </div>
             </div>
+
             <div class="card-footer">
                 <a [routerLink]="['..', story.id]" class="btn btn-xs btn-primary ml-auto mr-2" title="Éditer l'histoire">
                     <span class="fa fa-pen"></span>
@@ -47,7 +59,9 @@
                         [title]="story.published ? 'L\'histoire est visible par les autres membres' : 'L\'histoire n\'est visible que par vous'"></label>
                 </span>
             </div>
+
         </div>
+
     </div>
 </div>
 
