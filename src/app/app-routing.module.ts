@@ -108,7 +108,7 @@ const appRoutes: Routes = [
     PageNotFoundComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' })
   ],
   exports: [
     RouterModule
