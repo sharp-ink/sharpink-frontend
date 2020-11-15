@@ -26,18 +26,24 @@
                 <img *ngIf="story.thumbnail" [src]="story.thumbnail" class="float-left thumbnail"/>
                 <div [innerHTML]="story.summary != null ? story.summary : 'Aucun résumé'"></div>
                 <div class="badge badge-light">{{ story.chaptersNumber }} chapitre{{ story.chaptersNumber > 0 ? 's' : '' }}</div>
-                <div *ngIf="story.chaptersNumber === 0" class="row mx-0 actions text-center">
-                    <div class="col-3 ml-auto">
+                <div class="row mx-0 actions justify-content-center align-items-end">
+                    <div *ngIf="story.chaptersNumber === 0" class="col-3 text-center">
                         <a [routerLink]="['..', story.id, 'ajouter-chapitre']" class="btn btn-primary btn-lg" title="Ajouter un chapitre">
                             <span class="fa fa-plus"></span>
                         </a><br/>
                         <small class="text-muted">Ajouter un chapitre</small>
                     </div>
-                    <div class="col-3 mr-auto">
+                    <div *ngIf="!story.summary" class="col-3 text-center">
                         <a [routerLink]="['..', story.id]" [state]="{ elementToBeFocused: 'summary' }" class="btn btn-primary btn" title="Ajouter un résumé">
                             <span class="far fa-file-alt"></span>
                         </a><br/>
                         <small class="text-muted">Ajouter un résumé</small>
+                    </div>
+                    <div *ngIf="!story.thumbnail" class="col-3 text-center">
+                        <a [routerLink]="['..', story.id]" [state]="{ elementToBeFocused: 'thumbnail' }" class="btn btn-primary btn" title="Ajouter une vignette">
+                            <span class="far fa-file-alt"></span>
+                        </a><br/>
+                        <small class="text-muted">Ajouter une vignette</small>
                     </div>
                 </div>
             </div>

@@ -63,10 +63,9 @@
                 </div>
                 <div class="form-group row align-items-center">
                     <label class="col-1 col-form-label col-form-label-sm" for="storyThumbnail">Vignette :</label>
-                    <img class="mr-2" id="thumbnail" [src]="croppedImage || story.thumbnail"
-                        alt="Aucune image définie" />
+                    <img class="mr-2" id="thumbnail" [src]="croppedImage || story.thumbnail" alt="Aucune image définie" />
                     <input class="col-3 pl-0 form-control-file form-control-sm" id="storyThumbnail" type="file"
-                        accept="image/*" (change)="fileChangeEvent($event)" />
+                        accept="image/*" (change)="fileChangeEvent($event)" #thumbnail />
                     <image-cropper [ngClass]="{ 'd-none': !isCropperVisible }" [imageChangedEvent]="imageChangedEvent"
                         [aspectRatio]="1" [maintainAspectRatio]="true" [containWithinAspectRatio]="true" [format]="png"
                         (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
@@ -75,9 +74,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary">
-                            Enregistrer
-                        </button>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
                     </div>
                 </div>
             </form>

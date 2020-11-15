@@ -1,5 +1,4 @@
 import { ManageStoriesHomeService } from './manage-stories-home.service';
-import { StoriesDisplayMode } from './stories-list-display-mode.enum';
 import { Story } from '../../../shared/model/story/story.model';
 import { AuthService } from '../../../shared/service/auth.service';
 import { UserService } from '../../../shared/service/user.service';

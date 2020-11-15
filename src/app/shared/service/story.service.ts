@@ -12,8 +12,6 @@ export class StoryService {
   allStories: Story[] = [];
   allStoriesSubject = new Subject<Story[]>();
 
-  currentStorySubject = new Subject<Story>();
-
   constructor(
     private apiService: ApiService
   ) { }
@@ -59,22 +57,10 @@ export class StoryService {
   }
 
   /**
-   * Récupère une histoire via son id. Renvoie les informations de la Story + le premier Chapter s'il y en a un.
+   * Retrieves a story by id from the backend.
+   * Note: does not retrieve author (only his id), neither chapters (only chapters count + first chapter)
    */
-  getStoryById(id: number) {
-    this.getStoryByIdHttpObservable(id).subscribe(
-      (s: Story) => {
-        this.currentStorySubject.next(s);
-      }
-    );
-  }
-
-  /**
-   * Requête pour récupérer une Story depuis le backend.
-   * Remarque : ça ne charge pas l'auteur (seulement son id) ni tous les chapitres (seulement leur nombre),
-   * mais on renvoie tout de même le premier chapitre par commodité.
-   */
-  getStoryByIdHttpObservable(id: number): Observable<Story> {
+  getStoryById(id: number): Observable<Story> {
     return this.apiService.get<Story>(`${EndpointEnum.STORIES}/${id}`);
   }
 }

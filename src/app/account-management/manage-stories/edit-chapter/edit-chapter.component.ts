@@ -23,7 +23,6 @@ import GFMDataProcessor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-
 })
 export class EditChapterComponent implements OnInit, OnDestroy {
   isLoading: boolean;
-  storySubscription: Subscription;
   story: Story;
   chapter: Chapter; // only set if we are editing an existing chapter, null if it is a creation
   chapterContentForm: FormGroup;
@@ -45,38 +44,28 @@ export class EditChapterComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
 
-    // souscrit à currentStorySubject pour que this.story soit mis à jour à chaque fois que c'est nécessaire
-    this.storySubscription = this.storyService.currentStorySubject.subscribe(
-      (story: Story) => {
-        this.story = story;
+    const routeParams = this.route.snapshot.params;
 
-        this.breadcrumbService.addSegment({ title: story.title, url: `/mon-compte/mes-histoires/${story.id}` });
+    this.storyService.getStoryById(+routeParams['id']).subscribe(story => {
+      this.story = story;
+      this.breadcrumbService.addSegment({ title: story.title, url: `/mon-compte/mes-histoires/${story.id}` });
 
-        const chapterPosition = this.route.snapshot.params['chapterPosition'];
-        if (chapterPosition) {
-          this.breadcrumbService.addSegment({ title: `Chapitre ${chapterPosition}` });
+      const chapterPosition = +routeParams['chapterPosition'];
+      if (chapterPosition) {
+        this.breadcrumbService.addSegment({ title: `Chapitre ${chapterPosition}` });
 
-          this.chapter = this.story.chapters[chapterPosition - 1];
-          this.chapterContentForm.patchValue({
-            chapterTitle: this.chapter.title,
-            chapterContent: this.chapter.content
-          });
-        } else {
-          this.chapter = null;
-          this.breadcrumbService.addSegment({ title: 'Nouveau chapitre' });
-        }
-
-        this.isLoading = false;
+        this.chapter = this.story.chapters[chapterPosition - 1];
+        this.chapterContentForm.patchValue({
+          chapterTitle: this.chapter.title,
+          chapterContent: this.chapter.content
+        });
+      } else {
+        this.chapter = null;
+        this.breadcrumbService.addSegment({ title: 'Nouveau chapitre' });
       }
-    );
 
-    // chaque fois que les paramètres de l'URL changent (y compris au premier appel), on force l'appel de storyService.getStoryById()
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.storyService.getStoryById(+params['id']);
-        // storyService nous notifiera en retour, via currentStorySuject.next(), dès qu'il aura récupéré l'histoire (opération asynchrone)
-      }
-    );
+      this.isLoading = false;
+    });
 
     this.initForm();
     this.initCkEditor();
@@ -87,11 +76,10 @@ export class EditChapterComponent implements OnInit, OnDestroy {
     this.router.navigate(['/mon-compte/mes-histoires', this.story.id]);
   }
 
-  onEditorReady($event: any) {
-    console.log('editorInstance:', $event);
+  onEditorReady(event: any) {
+    console.log('editorInstance:', event);
     // console.log(CustomEditor.builtinPlugins.map(plugin => plugin.pluginName));
-    // console.log(this.editorComponent);
-    $event.data.processor = new GFMDataProcessor($event.editing.view.document);
+    event.data.processor = new GFMDataProcessor(event.editing.view.document);
   }
 
   onUpdateStats(stats: ChapterStats) {
@@ -131,7 +119,7 @@ export class EditChapterComponent implements OnInit, OnDestroy {
   }
 
   onKeyDown(event: KeyboardEvent) {
-    if ((event.metaKey || event.ctrlKey) && event.key === 's') { // binds Ctrl|Cmd|Windows + S to submit
+    if ((event.metaKey || event.ctrlKey) && event.key === 's') { // binds Ctrl|Cmd + S to submit
       event.preventDefault();
       if (this.chapterContentForm.valid && !this.chapterContentForm.pristine) {
         this.onSubmit();
@@ -154,7 +142,6 @@ export class EditChapterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.storySubscription.unsubscribe();
     this.breadcrumbService.removeLastSegment();
   }
 }

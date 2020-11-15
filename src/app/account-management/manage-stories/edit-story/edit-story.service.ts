@@ -33,7 +33,7 @@ export class EditStoryService {
         this.updateStoryObservable(story.id, storyPatchRequest).subscribe(response => {
             console.log(response);
             this.notificationService.success('Les informations de l\'histoire ont bien été mises à jour.');
-            this.router.navigate(['/mon-compte/mes-histoires'], { relativeTo: this.route }); // we are on route 'mon-compte'
+            this.router.navigate(['/mon-compte/mes-histoires']);
         });
     }
 

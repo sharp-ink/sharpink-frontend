@@ -7,7 +7,7 @@ import { BreadcrumbService } from '../../../shared/service/util/breadcrumb/bread
 import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
 import { NotificationService } from '../../../shared/service/util/notification.service';
 import { ManageStoriesHomeService } from '../manage-stories-home/manage-stories-home.service';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
@@ -24,13 +24,13 @@ export class EditStoryComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   isComponentInitialization: boolean;
   navigationExtrasState: any;
-  storySubscription: Subscription;
   story: Story = null;
   storyInformationsForm: FormGroup;
   types = new Array<{ name: string, label: string }>();
   ckEditor = CustomEditor;
   ckEditorConfig: any;
   @ViewChild('summaryEditor', { static: false }) editorComponent: CKEditorComponent;
+  @ViewChild('thumbnail') thumbnailElement: ElementRef;
   isCropperVisible = false;
   imageChangedEvent: any = null;
   croppedImage: any = null;
@@ -51,27 +51,17 @@ export class EditStoryComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.isComponentInitialization = true;
 
-    // souscrit à currentStorySubject pour que this.story soit mis à jour à chaque fois que c'est nécessaire
-    this.storySubscription = this.storyService.currentStorySubject.subscribe(
+    this.storyService.getStoryById(+this.route.snapshot.params['id']).subscribe(
       (story: Story) => {
         this.story = story;
-
         this.breadcrumbService.addSegment({ title: story.title });
 
         this.initForm();
         this.initCkEditor();
 
         this.isLoading = false;
-      }
-    );
+      });
 
-    // chaque fois que les paramètres de l'URL changent (y compris au premier appel), on force l'appel de storyService.getStoryById()
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.storyService.getStoryById(+params['id']);
-        // storyService nous notifiera en retour, via currentStorySuject.next(), dès qu'il aura récupéré l'histoire  (opération asynchrone)
-      }
-    );
   }
 
   onEditorReady(event: any) {
@@ -79,6 +69,12 @@ export class EditStoryComponent implements OnInit, OnDestroy {
       event.ui.element.scrollIntoView();
       event.editing.view.focus();
       this.isComponentInitialization = false;
+    }
+
+    if (this.navigationExtrasState?.elementToBeFocused === 'thumbnail') {
+      const thumbnailElement: HTMLElement = this.thumbnailElement.nativeElement;
+      thumbnailElement.scrollIntoView();
+      thumbnailElement.focus();
     }
   }
 
@@ -88,7 +84,6 @@ export class EditStoryComponent implements OnInit, OnDestroy {
 
   updateStoryStatus(story: Story) {
     this.manageStoriesHomeService.changeStoryStatus(story).subscribe(updatedStory => {
-      console.log(updatedStory);
       story.published = updatedStory.published; // reflect the new status on the page
       this.notificationService.success(
         `L'histoire est désormais <b>${story.published ? 'visible publiquement' : 'masquée'}</b>.`
@@ -162,7 +157,6 @@ export class EditStoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.storySubscription.unsubscribe();
     this.breadcrumbService.removeLastSegment();
   }
 }
