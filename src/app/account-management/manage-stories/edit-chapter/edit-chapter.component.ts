@@ -8,11 +8,10 @@ import { BreadcrumbService } from '../../../shared/service/util/breadcrumb/bread
 import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
 import { HtmlUtil } from '../../../shared/service/util/html-util.service';
 import { NotificationService } from '../../../shared/service/util/notification.service';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
-import { Subscription } from 'rxjs';
 import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
 import GFMDataProcessor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/src/ckeditor5-markdown-gfm/gfmdataprocessor';
 
@@ -28,6 +27,7 @@ export class EditChapterComponent implements OnInit, OnDestroy {
   chapterContentForm: FormGroup;
   ckEditor = CustomEditor;
   ckEditorConfig: any;
+  @ViewChild('chapterTitle') chapterTitleElement: ElementRef;
   @ViewChild('editor', { static: false }) editorComponent: CKEditorComponent;
   chapterStats: ChapterStats = { words: 0, characters: 0 };
 
@@ -61,6 +61,10 @@ export class EditChapterComponent implements OnInit, OnDestroy {
         });
       } else {
         this.chapter = null;
+
+        const chapterTitleElement: HTMLElement = this.chapterTitleElement.nativeElement;
+        chapterTitleElement.focus();
+
         this.breadcrumbService.addSegment({ title: 'Nouveau chapitre' });
       }
 

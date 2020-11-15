@@ -27,7 +27,7 @@
         <form [formGroup]="chapterContentForm" (ngSubmit)="onSubmit()" #f=ngForm (keydown)="onKeyDown($event)">
             <div class="row">
                 <div class="form-group col-6">
-                    <input class="form-control" formControlName="chapterTitle" placeholder="Titre du chapitre" />
+                    <input class="form-control" formControlName="chapterTitle" placeholder="Titre du chapitre" #chapterTitle />
                     <small class="form-text text-muted">Note : vous n'avez pas besoin d'indiquer de numéro, car celui-ci sera automatiquement affiché.</small>
                     <small class="form-text text-muted">Ainsi, préférez simplement "Mon premier chapitre" à "1 - Mon premier chapitre"</small>
                 </div>
