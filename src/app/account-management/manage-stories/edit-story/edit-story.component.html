@@ -13,14 +13,22 @@
 </div>
 
 <div *ngIf="!isLoading" class="row mb-4">
-    <div class="col-12">
-        <span class="button-label">Publication de l'histoire</span>
+    <div class="col-2 story-publication-status-control">
+        <span>Publication de l'histoire</span>
         <span class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="publishSwitch" [ngModel]="story.published" (change)="updateStoryStatus(story)">
+            <input type="checkbox" class="custom-control-input" id="publishSwitch" [ngModel]="story.published"
+                (change)="updateStoryPublicationStatus(story)">
             <label class="custom-control-label" for="publishSwitch"
                 [title]="story.published ? 'L\'histoire est visible par les autres membres' : 'L\'histoire n\'est visible que par vous'">
             </label>
         </span>
+    </div>
+    <div class="col-4 story-status-control">
+        <span>Statut de l'histoire</span><br/>
+        <div *ngFor="let storyStatus of this.storyStatuses" class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="status" [id]="storyStatus.name" [value]="storyStatus.name" [(ngModel)]="story.status" (change)="updateStoryStatus(story)">
+            <label class="form-check-label" [for]="storyStatus.name">{{ storyStatus.label }}</label>
+        </div>
     </div>
 </div>
 
@@ -58,12 +66,14 @@
                 </div>
                 <div class="form-group row align-items-center">
                     <label class="col-1 col-form-label col-form-label-sm" for="storySummary">Résumé :</label>
-                    <ckeditor class="col-6 px-0 py-2 summary-content" #summaryEditor [editor]="ckEditor" [config]="ckEditorConfig" (ready)="onEditorReady($event)"
-                        formControlName="storySummary"></ckeditor>
+                    <ckeditor class="col-6 px-0 py-2 summary-content" #summaryEditor [editor]="ckEditor"
+                        [config]="ckEditorConfig" (ready)="onEditorReady($event)" formControlName="storySummary">
+                    </ckeditor>
                 </div>
                 <div class="form-group row align-items-center">
                     <label class="col-1 col-form-label col-form-label-sm" for="storyThumbnail">Vignette :</label>
-                    <img class="mr-2" id="thumbnail" [src]="croppedImage || story.thumbnail" alt="Aucune image définie" />
+                    <img class="mr-2" id="thumbnail" [src]="croppedImage || story.thumbnail"
+                        alt="Aucune image définie" />
                     <input class="col-3 pl-0 form-control-file form-control-sm" id="storyThumbnail" type="file"
                         accept="image/*" (change)="fileChangeEvent($event)" #thumbnail />
                     <image-cropper [ngClass]="{ 'd-none': !isCropperVisible }" [imageChangedEvent]="imageChangedEvent"

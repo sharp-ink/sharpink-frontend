@@ -57,7 +57,7 @@ export class ManageStoriesHomeComponent implements OnInit, AfterViewInit {
   }
 
   updateStoryStatus(story: Story) {
-    this.manageStoriesHomeService.changeStoryStatus(story).subscribe(updatedStory => {
+    this.manageStoriesHomeService.changePublicationStatus(story).subscribe(updatedStory => {
       console.log(updatedStory);
       story.published = updatedStory.published; // reflect the new status on the page
       this.notificationService.success(

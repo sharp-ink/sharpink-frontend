@@ -1,4 +1,5 @@
 import { EditStoryService } from './edit-story.service';
+import { StoryStatusEnum } from '../../../shared/constant/story-status.enum';
 import { StoryTypeEnum } from '../../../shared/constant/story-type.enum';
 import { Chapter } from '../../../shared/model/story/chapter/chapter.model';
 import { Story } from '../../../shared/model/story/story.model';
@@ -9,10 +10,9 @@ import { NotificationService } from '../../../shared/service/util/notification.s
 import { ManageStoriesHomeService } from '../manage-stories-home/manage-stories-home.service';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { Subscription } from 'rxjs';
 import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
 
 @Component({
@@ -25,6 +25,7 @@ export class EditStoryComponent implements OnInit, OnDestroy {
   isComponentInitialization: boolean;
   navigationExtrasState: any;
   story: Story = null;
+  storyStatuses = new Array<{ name: string, label: string }>();
   storyInformationsForm: FormGroup;
   types = new Array<{ name: string, label: string }>();
   ckEditor = CustomEditor;
@@ -56,6 +57,7 @@ export class EditStoryComponent implements OnInit, OnDestroy {
         this.story = story;
         this.breadcrumbService.addSegment({ title: story.title });
 
+        this.storyStatuses = StoryStatusEnum.getTypesForRadioGroup();
         this.initForm();
         this.initCkEditor();
 
@@ -82,13 +84,21 @@ export class EditStoryComponent implements OnInit, OnDestroy {
     this.router.navigate(['/mon-compte/mes-histoires']);
   }
 
-  updateStoryStatus(story: Story) {
-    this.manageStoriesHomeService.changeStoryStatus(story).subscribe(updatedStory => {
+  updateStoryPublicationStatus(story: Story) {
+    this.manageStoriesHomeService.changePublicationStatus(story).subscribe(updatedStory => {
       story.published = updatedStory.published; // reflect the new status on the page
       this.notificationService.success(
         `L'histoire est désormais <b>${story.published ? 'visible publiquement' : 'masquée'}</b>.`
       );
+    });
+  }
 
+  updateStoryStatus(story: Story) {
+    // story.status has been changed via ngModel, so we can pass the story as is
+    this.manageStoriesHomeService.changeStatus(story).subscribe(updatedStory => {
+      this.notificationService.success(
+        `L'histoire est désormais <b>${StoryStatusEnum[story.status]}</b>.`
+      );
     });
   }
 

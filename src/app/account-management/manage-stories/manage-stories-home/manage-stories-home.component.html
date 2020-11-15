@@ -34,13 +34,13 @@
                         <small class="text-muted">Ajouter un chapitre</small>
                     </div>
                     <div *ngIf="!story.summary" class="col-3 text-center">
-                        <a [routerLink]="['..', story.id]" [state]="{ elementToBeFocused: 'summary' }" class="btn btn-primary btn" title="Ajouter un résumé">
+                        <a [routerLink]="['..', story.id]" [state]="{ elementToBeFocused: 'summary' }" class="btn btn-primary btn-sm" title="Ajouter un résumé">
                             <span class="far fa-file-alt"></span>
                         </a><br/>
                         <small class="text-muted">Ajouter un résumé</small>
                     </div>
                     <div *ngIf="!story.thumbnail" class="col-3 text-center">
-                        <a [routerLink]="['..', story.id]" [state]="{ elementToBeFocused: 'thumbnail' }" class="btn btn-primary btn" title="Ajouter une vignette">
+                        <a [routerLink]="['..', story.id]" [state]="{ elementToBeFocused: 'thumbnail' }" class="btn btn-primary btn-sm" title="Ajouter une vignette">
                             <span class="far fa-file-alt"></span>
                         </a><br/>
                         <small class="text-muted">Ajouter une vignette</small>

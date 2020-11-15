@@ -1,12 +1,14 @@
+import { StoryStatusEnum } from '../../constant/story-status.enum';
+import { StoryTypeEnum } from '../../constant/story-type.enum';
 import { Chapter } from 'src/app/shared/model/story/chapter/chapter.model';
 import { User } from 'src/app/shared/model/user/user.model';
 
 export interface Story {
   id: number;
   title: string;
-  type: string;
+  type: StoryTypeEnum;
   originalStory: boolean;
-  status: string;
+  status: StoryStatusEnum;
   summary: string;
   thumbnail: string;
   published: boolean;
