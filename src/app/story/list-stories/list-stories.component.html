@@ -17,7 +17,20 @@
           <p>Pour avoir un bref aperçu d'une histoire, cliquez sur la ligne de celle-ci dans le tableau. Pour en commencer la lecture, cliquer sur le bouton 'Lire'.</p>
         </div>
       </div>
-      
+
+      <div class="row mb-4">
+        <div class="col-2"><small><strong>Rechercher des histoires :</strong></small></div>
+        <div class="col-6">
+          <form class="form-inline" (submit)="searchStories()">
+            <div class="form-group">
+              <input type="text" class="form-control form-control-sm mr-2" placeholder="par titre" formControlName="title" />
+              <input type="text" class="form-control form-control-sm mr-3" placeholder="par auteur" formControlName="author" />
+              <button type="submit" class="btn btn-primary btn-sm"><span class="fa fa-search"></span></button>
+            </div>
+          </form>
+        </div>
+      </div>
+
       <app-loading *ngIf="isLoading"></app-loading>
 
       <div class="row" *ngIf="!isLoading">

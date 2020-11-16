@@ -1,7 +1,8 @@
 import { PreviewStoryComponent } from './preview-story/preview-story.component';
 import { ForumService } from '../../community/forum/forum.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
 import { Story } from 'src/app/shared/model/story/story.model';
@@ -17,6 +18,7 @@ export class ListStoriesComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   allStories: Story[] = [];
   allStoriesSubscription: Subscription;
+  searchForm: FormGroup;
   bsModalRef: BsModalRef;
 
   constructor(
@@ -39,10 +41,8 @@ export class ListStoriesComponent implements OnInit, OnDestroy {
       }
     );
     this.loadAllStories();
-  }
 
-  loadAllStories() {
-    this.storyService.loadAllStories();
+    this.initForm();
   }
 
   lastUpdateDate(story: Story): string {
@@ -74,11 +74,26 @@ export class ListStoriesComponent implements OnInit, OnDestroy {
     this.router.navigate(['/histoires/lire', storyId]);
   }
 
+  searchStories() {
+    const fv = this.searchForm.value;
+  }
+
   /**
    * Redirige vers le fil de discussion du forum pour cette histoire (en propose la création s'il n'existe pas)
    */
   goToStoryThread(story: Story, event: Event) {
     this.forumService.goToStoryThread(story, event);
+  }
+
+  private loadAllStories() {
+    this.storyService.loadAllStories();
+  }
+
+  private initForm() {
+    this.searchForm = new FormGroup({
+      title: new FormControl(''),
+      author: new FormControl('')
+    });
   }
 
   ngOnDestroy() {
