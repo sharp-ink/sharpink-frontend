@@ -77,11 +77,12 @@ export class EditChapterComponent implements OnInit, OnDestroy {
   }
 
   goBackToStory() {
-    this.router.navigate(['/mon-compte/mes-histoires', this.story.id]);
+    // navigate back to story page after a little sleep
+    setTimeout(() => this.router.navigate(['/mon-compte/mes-histoires', this.story.id]), 1000);
   }
 
   onEditorReady(event: any) {
-    console.log('editorInstance:', event);
+    // console.log('editorInstance:', event);
     // console.log(CustomEditor.builtinPlugins.map(plugin => plugin.pluginName));
     event.data.processor = new GFMDataProcessor(event.editing.view.document);
   }
@@ -100,10 +101,11 @@ export class EditChapterComponent implements OnInit, OnDestroy {
       this.apiService
         .put(`${EndpointEnum.STORIES}/${this.story.id}/chapters/${this.chapter.position}`, { title, content })
         .subscribe(
-          response => {
+          () => {
             this.notificationService.success('Le chapitre a bien été mis à jour.');
+            this.goBackToStory();
           },
-          error => {
+            () => {
             this.notificationService.error('Une erreur est survenue lors de l\'enregistrement du chapitre.');
           }
         );
@@ -111,11 +113,11 @@ export class EditChapterComponent implements OnInit, OnDestroy {
       this.apiService
         .post(`${EndpointEnum.STORIES}/${this.story.id}/chapters/`, { title, content })
         .subscribe(
-          response => {
+            () => {
             this.notificationService.success('Le chapitre a bien été créé.');
             this.goBackToStory();
           },
-          error => {
+            () => {
             this.notificationService.error('Une erreur est survenue lors de l\'enregistrement du chapitre.');
           }
         );

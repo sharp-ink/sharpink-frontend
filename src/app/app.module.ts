@@ -39,12 +39,11 @@ import { DisplayPaginatedChapterComponent } from './story/read-story/display-pag
 import { ReadRandomComponent } from './story/read-story/read-random/read-random.component';
 import { ReadStoryComponent } from './story/read-story/read-story.component';
 import { SelectChapterComponent } from './story/read-story/select-chapter/select-chapter.component';
-import { TestComponent } from './test/test.component';
 import { CommonModule } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
-import { LOCALE_ID, NgModule, SecurityContext } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -106,8 +105,7 @@ const toastrConfig = {
     StepMiscInfoComponent,
     StepSummaryComponent,
     StepThumbnailComponent,
-    StepTitleComponent,
-    TestComponent
+    StepTitleComponent
   ],
   entryComponents: [
     PreviewStoryComponent

@@ -13,19 +13,26 @@
       
       <div class="row mb-2">
         <div class="col">
-          <p>Cette page liste toutes les histoires. Elles sont classées par ordre décroissant de modification (comptent uniquement la création de l'histoire ou l'ajout d'un chapitre). Vous pouvez également choisir d'autres critères de tri.</p>
-          <p>Pour avoir un bref aperçu d'une histoire, cliquez sur la ligne de celle-ci dans le tableau. Pour en commencer la lecture, cliquer sur le bouton 'Lire'.</p>
+          <p>Cette page liste toutes les histoires publiées par les membres de la communauté Sharpink. Elles sont classées par ordre décroissant de modification.
+            Vous pouvez également choisir d'autres critères de tri. Seules les histoires ayant au moins un chapitre sont affichées.
+            </p>
+          <p>Pour avoir un bref aperçu d'une histoire, cliquez sur la ligne de celle-ci dans la liste. Pour en commencer la lecture, cliquer sur le bouton 'Lire'.</p>
         </div>
       </div>
 
       <div class="row mb-4">
         <div class="col-2"><small><strong>Rechercher des histoires :</strong></small></div>
         <div class="col-6">
-          <form class="form-inline" (submit)="searchStories()">
+          <form class="form-inline" [formGroup]="searchForm" (submit)="searchStories()">
             <div class="form-group">
-              <input type="text" class="form-control form-control-sm mr-2" placeholder="par titre" formControlName="title" />
-              <input type="text" class="form-control form-control-sm mr-3" placeholder="par auteur" formControlName="author" />
-              <button type="submit" class="btn btn-primary btn-sm"><span class="fa fa-search"></span></button>
+              <input type="search" class="form-control form-control-sm mr-2" placeholder="par titre" formControlName="title" />
+              <input type="search" class="form-control form-control-sm mr-3" placeholder="par auteur" formControlName="authorName" />
+              <button type="submit" class="btn btn-primary btn-sm mr-1">
+                <span class="fa fa-search"></span>
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" title="Effacer la recherche" (click)="clearSearch()">
+                <span class="fa fa-undo"></span>
+              </button>
             </div>
           </form>
         </div>

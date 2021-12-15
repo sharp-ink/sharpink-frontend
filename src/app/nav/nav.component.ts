@@ -18,25 +18,25 @@ export class NavComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.shortcuts.push(
       {
-        key: 'a',
+        key: 'alt + a',
         label: 'Menu principal',
         description: 'Accueil',
         command: (e) => this.router.navigate(['/accueil'])
       },
       {
-        key: 'l', // lower 'L'
+        key: 'alt + l',
         label: 'Menu principal',
         description: 'Lecture',
         command: (e) => this.router.navigate(['/histoires'])
       },
       {
-        key: 'p',
+        key: 'alt + p',
         label: 'Menu principal',
         description: 'Mon compte',
         command: (e) => this.router.navigate(['/mon-compte'])
       },
       {
-        key: 'c',
+        key: 'alt + c',
         label: 'Menu principal',
         description: 'Communuté',
         command: (e) => this.router.navigate(['/communaute'])

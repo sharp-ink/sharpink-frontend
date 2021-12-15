@@ -1,66 +1,73 @@
 import { ApiService } from './util/api.service';
 import { EndpointEnum } from '../constant/endpoint.enum';
-import { StoryPublicationStatusEnum } from '../constant/story-publication-status.enum';
-import { StorySearchCriteria } from '../model/story-search-criteria.model';
+import { StorySearch } from '../model/story-search.model';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Story } from 'src/app/shared/model/story/story.model';
 
 @Injectable()
 export class StoryService {
+    allStories: Story[] = [];
+    allStoriesSubject = new Subject<Story[]>();
 
-  allStories: Story[] = [];
-  allStoriesSubject = new Subject<Story[]>();
+    constructor(
+        private apiService: ApiService
+    ) { }
 
-  constructor(
-    private apiService: ApiService
-  ) { }
-
-  /**
-   * Force le chargement de la liste des histoires si elle n'avait pas encore été initialisée,
-   * et transmet les changements à tous ceux ayant souscrit à l'Observable.
-   */
-  loadAllStories() {
-    const storySearchCriteria: StorySearchCriteria = {
-      publicationStatus: StoryPublicationStatusEnum.PUBLISHED
-    };
-
-    if (this.allStories.length === 0) {
-      this.getAllStoriesHttpObservable(storySearchCriteria).subscribe(
-        (stories: Story[]) => {
-          this.allStories = stories;
-          this.allStoriesSubject.next(this.allStories);
+    /**
+     * Loads the list of all stories if not initialized (or if explicitly required by passing 'forceReloading')
+     * and broadcast changes to every subscriber of this list.
+     */
+    loadAllStories(forceReloading?: boolean) {
+        if (this.allStories.length === 0 || forceReloading) {
+            this.getAllStoriesHttpObservable().subscribe(
+                (stories: Story[]) => {
+                    this.allStories = stories;
+                    this.allStoriesSubject.next(this.allStories);
+                }
+            );
+        } else {
+            this.allStoriesSubject.next(this.allStories);
         }
-      );
-    } else {
-      this.allStoriesSubject.next(this.allStories);
     }
-  }
 
-  /**
-   * Requête pour récupérer toutes les Story depuis le backend.
-   * Remarque : ça ne charge ni l'auteur (seulement son id) ni les chapitres (seulement leur nombre).
-   * Remarque 2 : on peut passer des paramètres (des filtres) qui affineront la recherche.
-   */
-  getAllStoriesHttpObservable(storySearchCriteria: StorySearchCriteria): Observable<Story[]> {
-    const queryParams = <any>{};
+    searchStories(title: string, authorName: string) {
+        const storySearch: StorySearch = { criteria: {}};
 
-    if (storySearchCriteria.count) {
-      queryParams.count = storySearchCriteria.count;
+        if (title) {
+            storySearch.criteria.title = title;
+        }
+
+        if (authorName) {
+            storySearch.criteria.authorName = authorName;
+        }
+
+        this.searchStoriesHttpObservable(storySearch).subscribe(
+          (stories: Story[]) => {
+            this.allStories = stories;
+            this.allStoriesSubject.next(this.allStories);
+          }
+        );
     }
-    if (storySearchCriteria.sort) {
-      queryParams.sort = storySearchCriteria.sort;
+
+    /**
+     * Requête pour récupérer toutes les Story depuis le backend.
+     * Remarque : ça ne charge pas les chapitres (seulement leur nombre), par contre l'auteur est récupéré.
+     * Remarque 2 : on peut passer des paramètres (des filtres) qui affineront la recherche.
+     */
+    getAllStoriesHttpObservable(): Observable<Story[]> {
+        return this.apiService.get<Story[]>(EndpointEnum.STORIES);
     }
-    queryParams.published = StoryPublicationStatusEnum.toOptionalBoolean(storySearchCriteria.publicationStatus);
 
-    return this.apiService.get<Story[]>(EndpointEnum.STORIES, { params: queryParams });
-  }
+    searchStoriesHttpObservable(storySearch: StorySearch): Observable<Story[]> {
+        return this.apiService.post(`${EndpointEnum.STORIES}/search`, storySearch);
+    }
 
-  /**
-   * Retrieves a story by id from the backend.
-   * Note: does not retrieve author (only his id), neither chapters (only chapters count + first chapter)
-   */
-  getStoryById(id: number): Observable<Story> {
-    return this.apiService.get<Story>(`${EndpointEnum.STORIES}/${id}`);
-  }
+    /**
+     * Retrieves a story by id from the backend.
+     * Note: does not retrieve author (only his id), neither chapters (only chapters count + first chapter)
+     */
+    getStoryById(id: number): Observable<Story> {
+        return this.apiService.get<Story>(`${EndpointEnum.STORIES}/${id}`);
+    }
 }
