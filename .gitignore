@@ -2,6 +2,10 @@
 ###  Mac ###
 .DS_Store
 
+### Intellij ###
+.idea
+sharpink-frontend.iml
+
 ### VS Code workspace ###
 sharp-ink.code-workspace
 

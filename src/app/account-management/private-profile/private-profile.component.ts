@@ -61,7 +61,7 @@ export class PrivateProfileComponent implements OnInit {
   updateProfile(): void {
     this.accountManagementService.updatePrivateProfile(this.user.id, this.editProfileForm).subscribe(
       updatedMember => {
-        console.log(`Le membre ${this.user.id} a bien été mis à jour`, updatedMember);
+        console.log(`L'utilisateur ${this.user.id} a bien été mis à jour`, updatedMember);
         this.toggleEditingMode();
         this.user = updatedMember;
         this.accountManagementService.updateMemberIntoWebStorage(updatedMember);
