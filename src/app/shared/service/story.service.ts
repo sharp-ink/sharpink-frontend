@@ -1,6 +1,6 @@
 import { ApiService } from './util/api.service';
 import { EndpointEnum } from '../constant/endpoint.enum';
-import { StorySearch } from '../model/story-search.model';
+import { StorySearch } from '../model/story/search/story-search.model';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Story } from 'src/app/shared/model/story/story.model';

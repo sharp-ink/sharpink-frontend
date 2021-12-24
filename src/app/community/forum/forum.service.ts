@@ -8,6 +8,8 @@ import { ApiService } from '../../shared/service/util/api.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
+import {StorySearch} from '../../shared/model/story/search/story-search.model';
+import {ThreadSearch} from '../../shared/model/forum/search/thread-search.model';
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +24,24 @@ export class ForumService {
 
     getThreads(): Observable<Thread[]> {
         return this.apiService.get(EndpointEnum.THREADS);
+    }
+
+    searchThreads(title: string, authorName: string, keyWords: string): Observable<Thread[]> {
+        const threadSearch: ThreadSearch = { criteria: {}};
+
+        if (title) {
+            threadSearch.criteria.title = title;
+        }
+
+        if (authorName) {
+            threadSearch.criteria.authorName = authorName;
+        }
+
+        if (keyWords) {
+            threadSearch.criteria.keyWords = keyWords;
+        }
+
+        return this.apiService.post(`${EndpointEnum.THREADS}/search`, threadSearch);
     }
 
     createThread(title: string, storyId?: number): Observable<number> {
