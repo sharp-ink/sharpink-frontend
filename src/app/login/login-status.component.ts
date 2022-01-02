@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/shared/model/user/user.model';
 import { AuthService } from 'src/app/shared/service/auth.service';
-
+import { ThemeService } from '../shared/service/theme.service';
 
 
 @Component({
@@ -16,11 +16,12 @@ export class LoginStatusComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private themeService: ThemeService,
   ) { }
 
   ngOnInit() {
-    this.connectedUser = this.authService.getConnectedUserFromCookies();
+    this.connectedUser = this.authService.getConnectedUserFromLocalStorage();
     this.authService.connectedUserSubject.subscribe((connectedUser: User) => {
       this.connectedUser = connectedUser;
     });
@@ -31,7 +32,8 @@ export class LoginStatusComponent implements OnInit {
   }
 
   logout() {
-    this.authService.clearConnectionData();
+    this.authService.clearConnectedUser();
+    this.themeService.loadTheme(this.themeService.DEFAULT_THEME_ID); // re-apply default theme
   }
 
 }

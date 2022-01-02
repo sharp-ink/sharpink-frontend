@@ -1,5 +1,4 @@
 import { EndpointEnum } from '../../../shared/constant/endpoint.enum';
-import { Chapter } from '../../../shared/model/story/chapter/chapter.model';
 import { StoryPatchRequest } from '../../../shared/model/story/story-patch-request.model';
 import { Story } from '../../../shared/model/story/story.model';
 import { ApiService } from '../../../shared/service/util/api.service';

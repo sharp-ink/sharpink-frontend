@@ -1,6 +1,6 @@
 export enum EndpointEnum {
-    ACCOUNTS = 'accounts',
+    AUTHENTICATION = 'authentication',
     USERS = 'users',
     STORIES = 'stories',
-    THREADS = 'threads'
+    THREADS = 'threads',
 }

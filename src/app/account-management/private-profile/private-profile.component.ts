@@ -64,7 +64,7 @@ export class PrivateProfileComponent implements OnInit {
         console.log(`L'utilisateur ${this.user.id} a bien été mis à jour`, updatedMember);
         this.toggleEditingMode();
         this.user = updatedMember;
-        this.accountManagementService.updateMemberIntoWebStorage(updatedMember);
+        this.accountManagementService.updateUserIntoWebStorage(updatedMember);
       },
       error => console.log(error)
     );

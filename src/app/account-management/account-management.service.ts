@@ -11,13 +11,13 @@ import { EndpointEnum } from '../shared/constant/endpoint.enum';
 export class AccountManagementService {
   constructor(private apiService: ApiService) { }
 
-  updatePrivateProfile(memberId: number, editProfileForm: FormGroup): Observable<any> {
+  updatePrivateProfile(userId: number, editProfileForm: FormGroup): Observable<any> {
     const profileData = editProfileForm.value;
-    console.log(`Mise à jour du membre [${memberId}] avec les nouvelles informations suivantes :`, profileData);
-    return this.apiService.put(`${EndpointEnum.USERS}/${memberId}/profile`, profileData);
+    console.log(`Mise à jour de l'utilisateur [${userId}] avec les nouvelles informations suivantes :`, profileData);
+    return this.apiService.patch(`${EndpointEnum.USERS}/${userId}`, profileData);
   }
 
-  updateMemberIntoWebStorage(member: User) {
-    localStorage.connectedUser = JSON.stringify(member);
+  updateUserIntoWebStorage(user: User) {
+    localStorage.connectedUser = JSON.stringify(user);
   }
 }

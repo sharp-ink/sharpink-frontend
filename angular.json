@@ -31,10 +31,10 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/moment/min/moment-with-locales.min.js",
-              "node_modules/rellax/rellax.min.js",
+              "node_modules/emoji-toolkit/lib/js/joypixels.min.js",
               "node_modules/marked/lib/marked.js",
-              "node_modules/emoji-toolkit/lib/js/joypixels.min.js"
+              "node_modules/moment/min/moment-with-locales.min.js",
+              "node_modules/rellax/rellax.min.js"
             ]
           },
           "configurations": {

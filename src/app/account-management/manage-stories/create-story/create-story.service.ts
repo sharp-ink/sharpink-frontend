@@ -26,7 +26,6 @@ export class CreateStoryService {
     const fv = stepTitleForm.value;
     this.story.title = fv.storyTitle;
     this.story.originalStory = fv.storyIsOriginal;
-    this.story.status = StoryStatusEnum.PROGRESS;
     this.story.authorId = this.authService.connectedUser.id;
     if (this.story.id) {
       return this.updateStoryObservable(this.story);
@@ -68,7 +67,7 @@ export class CreateStoryService {
   /**
    * Requête pour créer une Story avec les infos minimales (titre + type). Renvoie l'id de la Story si la création s'est bien passée.
    */
-  createStoryObservable(story: StoryPatchRequest): Observable<number> {
+  createStoryObservable(story: StoryCreationRequest): Observable<number> {
     return this.apiService.post<number>(EndpointEnum.STORIES, story);
   }
 

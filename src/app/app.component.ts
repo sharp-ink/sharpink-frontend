@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.initLocaleConfig();
-    this.initUserFromCookiesIfPresent();
+    this.initUserFromLocalStorageIfPresent();
     this.initTheme();
   }
 
@@ -25,14 +25,13 @@ export class AppComponent implements OnInit {
     moment.locale('fr'); // set the locale for MomentJS dates
   }
 
-  private initUserFromCookiesIfPresent() {
-    this.authService.connectedUser = this.authService.getConnectedUserFromCookies();
-    this.authService.connectedUserPreferences = this.authService.getConnectedUserPreferencesFromCookies();
+  private initUserFromLocalStorageIfPresent() {
+    this.authService.connectedUser = this.authService.getConnectedUserFromLocalStorage();
   }
 
   private initTheme() {
-    const userTheme = this.authService.connectedUserPreferences?.appearance?.theme;
-    this.themeService.loadTheme(userTheme !== null ? userTheme : this.themeService.DEFAULT_THEME_ID);
+    const userTheme = this.authService.connectedUser?.userPreferences?.appearance?.theme;
+    this.themeService.loadTheme(userTheme ?? this.themeService.DEFAULT_THEME_ID);
   }
 
 }

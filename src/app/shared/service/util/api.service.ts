@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /**
- * Classe permettant de communiquer avec l'API RESTful exposée par le backend.
+ * Class handling communication with the RESTful API exposed by the backend.
  */
 @Injectable({
     providedIn: 'root'
