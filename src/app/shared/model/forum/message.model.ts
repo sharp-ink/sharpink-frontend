@@ -2,9 +2,10 @@
 export interface Message {
     id: number;
     threadId: number;
+    threadTitle: string;
     authorId: number;
     authorNickname: string;
-    publicationDate: string; // date au format 'yyyyMMdd HH:mm:ss.SSSSSS'
+    publicationDate: Date;
     number: number;
     content: string;
 }

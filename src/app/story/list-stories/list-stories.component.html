@@ -56,7 +56,7 @@
               <tr *ngFor="let story of allStories" (click)="showPreview(story)" class="d-flex">
                 <td class="col-3 d-flex align-items-center">
                   <span class="story-title">{{ story.title }}</span>
-                  <img *ngIf="story.thumbnail" class="ml-auto" [src]="story.thumbnail" />
+                  <img *ngIf="story.thumbnail" class="ml-auto" [src]="story.thumbnail" alt="Image non trouvée" />
                 </td>
                 <td class="col-1 d-flex align-items-center">{{ story.author.nickname }}</td>
                 <td class="col-1 d-flex align-items-center">{{ lastUpdateDate(story) }}</td>

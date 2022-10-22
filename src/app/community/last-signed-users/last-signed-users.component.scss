@@ -1,0 +1,7 @@
+
+// first column (pseudo + profile picture)
+td:nth-child(1) img {
+  border: 1px solid var(--theme-secondary-color);
+  width: 30px;
+  aspect-ratio: 1;
+}

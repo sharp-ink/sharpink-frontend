@@ -1,0 +1,27 @@
+
+<h2>
+    Les petits nouveaux
+    <small class="text-muted">(derniers membres incrits)</small>
+</h2>
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Inscription</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let user of lastSignedUsers">
+                <td class="d-flex align-items-center">
+                    <a [routerLink]="['/communaute/membres', user.id]">{{ user.nickname }}</a>
+                    <img *ngIf="user.userDetails?.profilePicture" class="ml-1" [src]="user.userDetails.profilePicture" alt="Aucune image définie" />
+                </td>
+                <td>{{ format(user.registrationDate) }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

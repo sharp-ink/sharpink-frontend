@@ -1,8 +1,25 @@
-
 <h2>
-  Activité récente
+    Activité récente
 </h2>
 
-<p>
-  Mettre ici la liste des utilisateurs connectés sur le chat, un aperçu du dernier billet posté sur le forum, etc.
-</p>
+<div *ngIf="lastForumMessage" class="row mb-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                Message posté {{ format(lastForumMessage.publicationDate) }} sur le forum par
+                <a [routerLink]="['/communaute/membres', lastForumMessage.authorId]">{{ lastForumMessage.authorNickname }}</a>
+                dans le thread
+                <a [routerLink]="['/communaute/forum/discussion', lastForumMessage.threadId]">{{ lastForumMessage.threadTitle }}</a>
+            </div>
+            <div class="card-body">
+                {{ lastForumMessage.content }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="border: 2px solid red">
+    <div class="col">
+        TODO : Mettre ici la liste des utilisateurs connectés sur le chat
+    </div>
+</div>

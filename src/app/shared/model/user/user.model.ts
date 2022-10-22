@@ -6,8 +6,9 @@ export interface User {
   id: number;
   nickname: string;
   email: string;
+  registrationDate: Date;
   storiesCount: number;
-  stories?: Story[]; // ne sera pas toujours chargé, parfois on se contentera de storiesCount
+  stories?: Story[]; // not systematically loaded, sometimes we have enough information with storiesCount
   userDetails?: UserDetails;
   userPreferences?: UserPreferences;
 }

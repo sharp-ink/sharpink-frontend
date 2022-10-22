@@ -18,6 +18,7 @@ import { CommunityComponent } from './community/community.component';
 import { ForumComponent } from './community/forum/forum.component';
 import { ReadThreadComponent } from './community/forum/read-thread/read-thread.component';
 import { LastActivityComponent } from './community/last-activity/last-activity.component';
+import { LastSignedUsersComponent } from './community/last-signed-users/last-signed-users.component';
 import { ListMembersComponent } from './community/members/list-members/list-members.component';
 import { MemberProfileComponent } from './community/members/member-profile/member-profile.component';
 import { ContactComponent } from './contact/contact.component';
@@ -39,8 +40,7 @@ import { DisplayPaginatedChapterComponent } from './story/read-story/display-pag
 import { ReadRandomComponent } from './story/read-story/read-random/read-random.component';
 import { ReadStoryComponent } from './story/read-story/read-story.component';
 import { SelectChapterComponent } from './story/read-story/select-chapter/select-chapter.component';
-import { CommonModule } from '@angular/common';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -85,6 +85,7 @@ const toastrConfig = {
     HomeComponent,
     HeaderComponent,
     LastActivityComponent,
+    LastSignedUsersComponent,
     ListMembersComponent,
     ListStoriesComponent,
     LoadingComponent,
@@ -105,7 +106,7 @@ const toastrConfig = {
     StepMiscInfoComponent,
     StepSummaryComponent,
     StepThumbnailComponent,
-    StepTitleComponent
+    StepTitleComponent,
   ],
   entryComponents: [
     PreviewStoryComponent
