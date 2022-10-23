@@ -67,75 +67,72 @@ const toastrConfig = {
 };
 
 @NgModule({
-  declarations: [
-    // main component
-    AppComponent,
-    // application components
-    AccountManagementComponent,
-    BreadcrumbComponent,
-    CommunityComponent,
-    CommunityHomeComponent,
-    ContactComponent,
-    CreateStoryButtonsGroupComponent,
-    CreateStoryComponent,
-    DisplayPaginatedChapterComponent,
-    EditChapterComponent,
-    EditStoryComponent,
-    ForumComponent,
-    HomeComponent,
-    HeaderComponent,
-    LastActivityComponent,
-    LastSignedUsersComponent,
-    ListMembersComponent,
-    ListStoriesComponent,
-    LoadingComponent,
-    LoginStatusComponent,
-    ManageStoriesComponent,
-    ManageStoriesHomeComponent,
-    MemberProfileComponent,
-    NavComponent,
-    PaginationComponent,
-    PreviewStoryComponent,
-    PrivateProfileComponent,
-    ReadRandomComponent,
-    ReadStoryComponent,
-    ReadThreadComponent,
-    SelectChapterComponent,
-    SettingsComponent,
-    SigninComponent,
-    StepMiscInfoComponent,
-    StepSummaryComponent,
-    StepThumbnailComponent,
-    StepTitleComponent,
-  ],
-  entryComponents: [
-    PreviewStoryComponent
-  ],
-  imports: [
-    // main modules
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    CommonModule,
-    FormsModule, ReactiveFormsModule,
-    HttpClientModule,
-    // vendor modules
-    CKEditorModule, // WYSIWYG editor
-    ImageCropperModule, // ngx-image-cropper (image cropper)
-    KeyboardShortcutsModule.forRoot(), // ng-keyboard-shortcuts
-    MarkdownModule.forRoot({ loader: HttpClient }), // ngx-markdown (Markdown parser)
-    ModalModule.forRoot(), // ngx-bootstrap
-    PaginationModule.forRoot(), // ngx-bootstrap
-    ToastrModule.forRoot(toastrConfig), // ngx-toastr (Toastr notifications)
-    TooltipModule.forRoot() // ngx-bootstrap
-  ],
-  providers: [
-    { provide: LOCALE_ID, useValue: 'fr-FR' },
-    StoryService,
-    UserService,
-    AuthGuard,
-    CreateStoryStepsFormGuard
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        // main component
+        AppComponent,
+        // application components
+        AccountManagementComponent,
+        BreadcrumbComponent,
+        CommunityComponent,
+        CommunityHomeComponent,
+        ContactComponent,
+        CreateStoryButtonsGroupComponent,
+        CreateStoryComponent,
+        DisplayPaginatedChapterComponent,
+        EditChapterComponent,
+        EditStoryComponent,
+        ForumComponent,
+        HomeComponent,
+        HeaderComponent,
+        LastActivityComponent,
+        LastSignedUsersComponent,
+        ListMembersComponent,
+        ListStoriesComponent,
+        LoadingComponent,
+        LoginStatusComponent,
+        ManageStoriesComponent,
+        ManageStoriesHomeComponent,
+        MemberProfileComponent,
+        NavComponent,
+        PaginationComponent,
+        PreviewStoryComponent,
+        PrivateProfileComponent,
+        ReadRandomComponent,
+        ReadStoryComponent,
+        ReadThreadComponent,
+        SelectChapterComponent,
+        SettingsComponent,
+        SigninComponent,
+        StepMiscInfoComponent,
+        StepSummaryComponent,
+        StepThumbnailComponent,
+        StepTitleComponent,
+    ],
+    imports: [
+        // main modules
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        BrowserModule,
+        CommonModule,
+        FormsModule, ReactiveFormsModule,
+        HttpClientModule,
+        // vendor modules
+        CKEditorModule,
+        ImageCropperModule,
+        KeyboardShortcutsModule.forRoot(),
+        MarkdownModule.forRoot({ loader: HttpClient }),
+        ModalModule.forRoot(),
+        PaginationModule.forRoot(),
+        ToastrModule.forRoot(toastrConfig),
+        TooltipModule.forRoot() // ngx-bootstrap
+    ],
+    providers: [
+        { provide: LOCALE_ID, useValue: 'fr-FR' },
+        StoryService,
+        UserService,
+        AuthGuard,
+        CreateStoryStepsFormGuard
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
