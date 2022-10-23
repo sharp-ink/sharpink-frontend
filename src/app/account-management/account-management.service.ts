@@ -13,11 +13,6 @@ export class AccountManagementService {
 
   updatePrivateProfile(userId: number, editProfileForm: FormGroup): Observable<any> {
     const profileData = editProfileForm.value;
-    console.log(`Mise à jour de l'utilisateur [${userId}] avec les nouvelles informations suivantes :`, profileData);
     return this.apiService.patch(`${EndpointEnum.USERS}/${userId}`, profileData);
-  }
-
-  updateUserIntoWebStorage(user: User) {
-    localStorage.connectedUser = JSON.stringify(user);
   }
 }
