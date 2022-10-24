@@ -5,15 +5,15 @@ import { Story } from '../../../shared/model/story/story.model';
 import { StoryService } from '../../../shared/service/story.service';
 import { ApiService } from '../../../shared/service/util/api.service';
 import { BreadcrumbService } from '../../../shared/service/util/breadcrumb/breadcrumb.service';
-import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
+//import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
 import { HtmlUtil } from '../../../shared/service/util/html-util.service';
 import { NotificationService } from '../../../shared/service/util/notification.service';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
-import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
-import GFMDataProcessor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/src/ckeditor5-markdown-gfm/gfmdataprocessor';
+// import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+//import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
+//import GFMDataProcessor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/src/ckeditor5-markdown-gfm/gfmdataprocessor';
 
 @Component({
   selector: 'app-edit-chapter',
@@ -25,10 +25,10 @@ export class EditChapterComponent implements OnInit, OnDestroy {
   story: Story;
   chapter: Chapter; // only set if we are editing an existing chapter, null if it is a creation
   chapterContentForm: FormGroup;
-  ckEditor = CustomEditor;
-  ckEditorConfig: any;
+  //ckEditor = CustomEditor;
+  //ckEditorConfig: any;
   @ViewChild('chapterTitle') chapterTitleElement: ElementRef;
-  @ViewChild('editor', { static: false }) editorComponent: CKEditorComponent;
+  //@ViewChild('editor', { static: false }) editorComponent: CKEditorComponent;
   chapterStats: ChapterStats = { words: 0, characters: 0 };
 
   constructor(
@@ -72,7 +72,7 @@ export class EditChapterComponent implements OnInit, OnDestroy {
     });
 
     this.initForm();
-    this.initCkEditor();
+    //this.initCkEditor();
 
   }
 
@@ -81,11 +81,11 @@ export class EditChapterComponent implements OnInit, OnDestroy {
     setTimeout(() => this.router.navigate(['/mon-compte/mes-histoires', this.story.id]), 1000);
   }
 
-  onEditorReady(event: any) {
+  /*onEditorReady(event: any) {
     // console.log('editorInstance:', event);
     // console.log(CustomEditor.builtinPlugins.map(plugin => plugin.pluginName));
     event.data.processor = new GFMDataProcessor(event.editing.view.document);
-  }
+  }*/
 
   onUpdateStats(stats: ChapterStats) {
     this.chapterStats = stats;
@@ -140,12 +140,12 @@ export class EditChapterComponent implements OnInit, OnDestroy {
     });
   }
 
-  private initCkEditor() {
+  /*private initCkEditor() {
     this.ckEditorConfig = CkeditorConfigUtil.getCkeditorConfig(EditorType.CHAPTER);
     this.ckEditorConfig.wordCount = {
       onUpdate: (stats: ChapterStats) => this.onUpdateStats(stats)
     };
-  }
+  }*/
 
   ngOnDestroy() {
     this.breadcrumbService.removeLastSegment();

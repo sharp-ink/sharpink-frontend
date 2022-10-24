@@ -1,9 +1,9 @@
-import { CkeditorConfigUtil, EditorType } from '../../../../shared/service/util/ckeditor-config-util.service';
+// import { CkeditorConfigUtil, EditorType } from '../../../../shared/service/util/ckeditor-config-util.service';
 import { CreateStoryService } from '../create-story.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
+// import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
 
 @Component({
   selector: 'app-step-summary',
@@ -12,8 +12,8 @@ import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom
 })
 export class StepSummaryComponent implements OnInit {
   stepSummaryForm: FormGroup;
-  ckEditor = CustomEditor;
-  ckEditorConfig: any;
+  //ckEditor = CustomEditor;
+  //ckEditorConfig: any;
 
   constructor(
     private createStoryService: CreateStoryService,
@@ -23,7 +23,7 @@ export class StepSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.initCkEditor();
+    //this.initCkEditor();
   }
 
   private initForm() {
@@ -33,9 +33,9 @@ export class StepSummaryComponent implements OnInit {
     });
   }
 
-  private initCkEditor() {
+  /*private initCkEditor() {
     this.ckEditorConfig = CkeditorConfigUtil.getCkeditorConfig(EditorType.SUMMARY);
-  }
+  }*/
 
   onNextStep() {
     this.createStoryService.completeStoryStepSummary(this.stepSummaryForm);
