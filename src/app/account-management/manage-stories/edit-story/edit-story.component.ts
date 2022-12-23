@@ -1,4 +1,10 @@
-import { EditStoryService } from './edit-story.service';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CKEditor5, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+import * as ClassicEditor from 'ckeditor5-custom-classic-editor/build/ckeditor';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+
 import { StoryStatusEnum } from '../../../shared/constant/story-status.enum';
 import { StoryTypeEnum } from '../../../shared/constant/story-type.enum';
 import { Chapter } from '../../../shared/model/story/chapter/chapter.model';
@@ -8,12 +14,8 @@ import { BreadcrumbService } from '../../../shared/service/util/breadcrumb/bread
 import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
 import { NotificationService } from '../../../shared/service/util/notification.service';
 import { ManageStoriesHomeService } from '../manage-stories-home/manage-stories-home.service';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
-import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
+import { EditStoryService } from './edit-story.service';
+import Config = CKEditor5.Config;
 
 @Component({
   selector: 'app-edit-story',
@@ -28,8 +30,8 @@ export class EditStoryComponent implements OnInit, OnDestroy {
   storyStatuses = new Array<{ name: string, label: string }>();
   storyInformationsForm: FormGroup;
   types = new Array<{ name: string, label: string }>();
-  ckEditor = CustomEditor;
-  ckEditorConfig: any;
+  classicEditor = ClassicEditor;
+  ckEditorConfig: Config;
   @ViewChild('summaryEditor', { static: false }) editorComponent: CKEditorComponent;
   @ViewChild('thumbnail') thumbnailElement: ElementRef;
   isCropperVisible = false;

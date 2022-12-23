@@ -1,15 +1,15 @@
 import { Message } from '../../../shared/model/forum/message.model';
 import { Thread } from '../../../shared/model/forum/thread.model';
 import { BreadcrumbService } from '../../../shared/service/util/breadcrumb/breadcrumb.service';
-import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
+//import { CkeditorConfigUtil, EditorType } from '../../../shared/service/util/ckeditor-config-util.service';
 import { ForumService } from '../forum.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+//import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 import { switchMap } from 'rxjs/operators';
-import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
-import GFMDataProcessor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/src/ckeditor5-markdown-gfm/gfmdataprocessor';
+//import * as CustomEditor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/build/ckeditor';
+//import GFMDataProcessor from 'src/ckeditor-custom-builds/ckeditor5-build-custom-editor/src/ckeditor5-markdown-gfm/gfmdataprocessor';
 declare const moment: any;
 
 @Component({
@@ -21,9 +21,9 @@ export class ReadThreadComponent implements OnInit {
   isLoading: boolean;
   thread: Thread;
   answerForm: FormGroup;
-  ckEditor = CustomEditor;
-  ckEditorConfig: any;
-  @ViewChild('editor', { static: false }) editorComponent: CKEditorComponent;
+  //ckEditor = CustomEditor;
+  //ckEditorConfig: any;
+  //@ViewChild('editor', { static: false }) editorComponent: CKEditorComponent;
 
   constructor(
     private forumService: ForumService,
@@ -43,12 +43,12 @@ export class ReadThreadComponent implements OnInit {
     });
 
     this.initForm();
-    this.initCkEditor();
+    //this.initCkEditor();
   }
 
-  onEditorReady($event: any) {
+  /*onEditorReady($event: any) {
     $event.data.processor = new GFMDataProcessor($event.editing.view.document);
-  }
+  }*/
 
   formatDate(date: string) {
     return moment(date, 'YYYYMMDD hh:mm:ss').fromNow();
@@ -82,7 +82,7 @@ export class ReadThreadComponent implements OnInit {
     });
   }
 
-  private initCkEditor() {
+  /*private initCkEditor() {
     this.ckEditorConfig = CkeditorConfigUtil.getCkeditorConfig(EditorType.FORUM_MESSAGE);
-  }
+  }*/
 }
