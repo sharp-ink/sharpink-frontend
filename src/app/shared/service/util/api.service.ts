@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import {environment} from "../../../../environments/environment";
 
 /**
  * Class handling communication with the RESTful API exposed by the backend.
@@ -9,9 +10,11 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class ApiService {
-    private readonly API = 'http://sharpink.io:8080/api';
+    private readonly API = environment.apiPath;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        console.log(`Initializing ApiService with API path [${this.API}]`);
+    }
 
     delete(endpoint: string, options?: any): Observable<any> {
         if (options) {
