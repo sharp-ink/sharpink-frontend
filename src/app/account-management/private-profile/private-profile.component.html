@@ -31,42 +31,49 @@
   </div>
 </div>
 
-<form [formGroup]="editProfileForm">
+<div class="row mb-3">
+    <div class="col-12">
+        <form [formGroup]="editProfileForm">
 
-  <div class="row form-group">
-    <label class="col-2 col-form-label text-right" for="nickname">Pseudo</label>
-    <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ user.nickname }}</label>
-    <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" formControlName="nickname" />
-    <div *ngIf="isEditingProfile" class="col-1 col-form-label mandatory-indicator">*</div>
-  </div>
+            <div class="row form-group">
+                <label class="col-2 col-form-label text-right" for="nickname">Pseudo</label>
+                <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ user.nickname }}</label>
+                <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" formControlName="nickname" id="nickname" />
+                <div *ngIf="isEditingProfile" class="col-1 col-form-label mandatory-indicator">*</div>
+            </div>
 
-  <div class="row form-group">
-    <label class="col-2 col-form-label text-right" for="email">Email</label>
-    <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ user.email }}</label>
-    <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" formControlName="email" id="email" />
-  </div>
+            <div class="row form-group">
+                <label class="col-2 col-form-label text-right" for="email">Email</label>
+                <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ user.email }}</label>
+                <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" formControlName="email" id="email" />
+            </div>
 
-  <div class="row form-group">
-    <label class="col-2 col-form-label text-right" for="firstName">Prénom</label>
-    <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ user.userDetails?.firstName }}</label>
-    <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" formControlName="firstName" id="firstName" />
-  </div>
+            <div class="row form-group">
+                <label class="col-2 col-form-label text-right" for="firstName">Prénom</label>
+                <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ user.userDetails?.firstName }}</label>
+                <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" formControlName="firstName" id="firstName" />
+            </div>
 
-  <div class="row form-group">
-    <label class="col-2 col-form-label text-right" for="lastName">Nom</label>
-    <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ user.userDetails?.lastName }}</label>
-    <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" formControlName="lastName" id="lastName" />
-  </div>
+            <div class="row form-group">
+                <label class="col-2 col-form-label text-right" for="lastName">Nom</label>
+                <label *ngIf="!isEditingProfile" class="col-2 offset-1 col-form-label">{{ user.userDetails?.lastName }}</label>
+                <input *ngIf="isEditingProfile" class="col-2 offset-1 form-control" formControlName="lastName" id="lastName" />
+            </div>
 
-  <div class="row form-group">
-    <label class="col-2 col-form-label text-right" for="picture">Image de profil</label>
-    <img *ngIf="user.userDetails?.profilePicture" class="col-2 offset-1 profile-picture"
-      [src]="user.userDetails.profilePicture" alt="Image non trouvée" />
-    <div *ngIf="!user.userDetails?.profilePicture" class="col-2 offset-1 col-form-label">Aucune image de profil
+            <div class="row form-group">
+                <label class="col-2 col-form-label text-right">Image de profil</label>
+                <img *ngIf="user.userDetails?.profilePicture" class="col-2 offset-1 profile-picture"
+                     [src]="user.userDetails.profilePicture" alt="Image non trouvée" />
+                <div *ngIf="!user.userDetails?.profilePicture" class="col-2 offset-1 col-form-label">Aucune image de profil</div>
+            </div>
+            <div *ngIf="isEditingProfile" class="row form-group">
+                <input type="file" class="offset-3" accept="image/*" (change)="onFileChange($event.target.files[0])" />
+            </div>
+            <div *ngIf="isEditingProfile" class="row form-group">
+                <input class="col-4 offset-3 form-control" formControlName="externalImageLink"
+                       placeholder=" ou bien indiquer un lien vers une URL externe..." />
+            </div>
+
+        </form>
     </div>
-  </div>
-  <div *ngIf="isEditingProfile" class="row form-group">
-    <input type="file" class="offset-3" accept="image/*" (change)="onFileChange($event.target.files[0])" />
-  </div>
-
-</form>
+</div>

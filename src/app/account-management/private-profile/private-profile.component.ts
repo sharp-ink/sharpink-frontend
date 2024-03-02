@@ -23,7 +23,7 @@ export class PrivateProfileComponent implements OnInit {
     private accountManagementService: AccountManagementService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.user = this.authService.connectedUser; // nécessairement renseigné puisqu'on a passé la guard
     this.initForm();
 
@@ -32,13 +32,14 @@ export class PrivateProfileComponent implements OnInit {
     }
   }
 
-  initForm() {
+  initForm(): void {
     this.editProfileForm = this.fb.group({
       'nickname': this.fb.control(this.user.nickname),
       'email': this.fb.control(this.user.email),
       'firstName': this.fb.control(this.user.userDetails ? this.user.userDetails.firstName : ''),
       'lastName': this.fb.control(this.user.userDetails ? this.user.userDetails.lastName : ''),
-      'profilePicture': this.fb.control('')
+      'profilePicture': this.fb.control(''),
+      'externalImageLink': this.fb.control(''),
     });
   }
 
@@ -46,7 +47,7 @@ export class PrivateProfileComponent implements OnInit {
     this.isEditingProfile = !this.isEditingProfile;
   }
 
-  onFileChange(file: File) {
+  onFileChange(file: File): void {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -59,6 +60,13 @@ export class PrivateProfileComponent implements OnInit {
   }
 
   updateProfile(): void {
+    // for profile picture, choose between uploaded image or external URL typed in input
+    if (this.editProfileForm.value.profilePicture === '' && this.editProfileForm.value.externalImageLink !== '') {
+      this.editProfileForm.patchValue({
+        profilePicture: this.editProfileForm.value.externalImageLink
+      });
+    }
+
     this.accountManagementService.updatePrivateProfile(this.user.id, this.editProfileForm).subscribe(
       updatedUser => {
         this.toggleEditingMode();
